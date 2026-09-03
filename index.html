@@ -1,125 +1,310 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AHEAD VIA SKILL HUB</title>
 
-<style>
-*{box-sizing:border-box}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#050b16;
-color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#050711;
+  color:#fff;
+  line-height:1.6;
 }
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(92,80,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 25%,rgba(0,210,255,.12),transparent 30%),
+    radial-gradient(circle at 50% 90%,rgba(170,70,255,.10),transparent 30%);
+  z-index:-1;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1150px,92%);margin:auto}
 
 header{
-padding:18px;
-text-align:center;
-background:#0b1628;
-border-bottom:1px solid #203452;
-position:sticky;
-top:0;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,7,17,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-
-header h2{
-margin:0;
-color:#38bdf8;
+.nav{
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-
-.container{
-max-width:900px;
-margin:auto;
-padding:25px 16px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+}
+.brand img{
+  width:46px;
+  height:46px;
+  object-fit:cover;
+  border-radius:13px;
+  background:#111827;
+}
+.brand span{font-size:17px}
+nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+nav a{
+  color:#aeb8cc;
+  font-size:14px;
+}
+nav a:hover{color:#fff}
+.admin{
+  background:#fff;
+  color:#050711!important;
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:700;
 }
 
 .hero{
-text-align:center;
-padding:50px 10px;
+  min-height:720px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-
-.hero img{
-width:150px;
-height:150px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #38bdf8;
-box-shadow:0 0 30px #38bdf855;
+.hero-inner{position:relative;z-index:2}
+.profile{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,.9);
+  box-shadow:0 0 55px rgba(105,95,255,.55);
+  background:#101522;
 }
-
 .hero h1{
-font-size:38px;
-margin:20px 0 10px;
-color:#38bdf8;
+  margin-top:25px;
+  font-size:clamp(35px,7vw,65px);
+  letter-spacing:-2px;
+}
+.hero h1 span{
+  background:linear-gradient(90deg,#fff,#a7a2ff,#67e8f9);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero .subtitle{
+  margin-top:8px;
+  font-size:20px;
+  font-weight:600;
+}
+.hero p{
+  max-width:720px;
+  margin:18px auto 0;
+  color:#aeb8cc;
+  font-size:16px;
+}
+.buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+.btn{
+  display:inline-block;
+  padding:13px 21px;
+  border-radius:12px;
+  background:#fff;
+  color:#060711;
+  font-weight:700;
+}
+.btn.secondary{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
 }
 
-.hero p{
-color:#aab8cc;
-font-size:17px;
-line-height:1.7;
+section{padding:90px 0}
+.section-title{
+  text-align:center;
+  margin-bottom:42px;
+}
+.section-title h2{font-size:34px}
+.section-title p{
+  color:#8f9aad;
+  margin-top:7px;
 }
 
 .card{
-background:#0d1b2e;
-border:1px solid #203452;
-border-radius:18px;
-padding:22px;
-margin:18px 0;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.075),
+    rgba(255,255,255,.025)
+  );
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:21px;
+  padding:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.22);
+}
+.card h3{margin-bottom:10px}
+.card p{color:#aeb8cc}
+
+.about{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
 }
 
-h2{
-color:#38bdf8;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
-.links{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-gap:12px;
+.learn{
+  transition:.25s;
+}
+.learn:hover{
+  transform:translateY(-6px);
+  border-color:rgba(120,110,255,.5);
+}
+.icon{
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:rgba(100,90,255,.14);
+  font-size:26px;
+  margin-bottom:18px;
 }
 
-.links a{
-text-decoration:none;
-color:white;
-background:#132640;
-padding:14px;
-border-radius:12px;
-text-align:center;
-border:1px solid #29415f;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
-
-.links a:hover{
-border-color:#38bdf8;
+.stat{text-align:center}
+.stat strong{
+  display:block;
+  font-size:35px;
 }
+.stat span{color:#8f9aad}
 
 .tutorial{
-margin-top:15px;
-padding:18px;
-background:#10233b;
-border-radius:14px;
+  padding:0;
+  overflow:hidden;
+}
+.tutorial img{
+  width:100%;
+  height:195px;
+  object-fit:cover;
+  background:#101522;
+}
+.tutorial-body{padding:22px}
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:rgba(100,90,255,.14);
+  color:#bcb8ff;
+  font-size:12px;
+  margin-bottom:10px;
 }
 
-.tutorial a{
-display:inline-block;
-margin-top:10px;
-padding:10px 15px;
-background:linear-gradient(135deg,#38bdf8,#8b5cf6);
-color:white;
-text-decoration:none;
-border-radius:9px;
+.platform{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+.platform img{
+  width:58px;
+  height:58px;
+  object-fit:cover;
+  border-radius:15px;
+  background:#111827;
+}
+.platform-info{flex:1}
+.platform-info p{
+  font-size:13px;
+  margin-top:3px;
+}
+.visit{
+  border:1px solid rgba(255,255,255,.12);
+  padding:9px 13px;
+  border-radius:10px;
+  font-size:13px;
+}
+
+.socials{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.social{
+  min-width:145px;
+  padding:17px;
+  text-align:center;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.2s;
+}
+.social:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,.09);
+}
+.social-icon{
+  font-size:28px;
+  display:block;
+  margin-bottom:5px;
+}
+.social small{
+  display:block;
+  color:#8f9aad;
+  margin-top:3px;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  color:#8792a6;
 }
 
 footer{
-text-align:center;
-padding:30px;
-color:#8393a8;
-border-top:1px solid #203452;
-margin-top:30px;
+  padding:32px 0;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#707b8e;
+  font-size:13px;
 }
 
-@media(max-width:600px){
-.hero h1{font-size:29px}
+@media(max-width:850px){
+  nav{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .about{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  section{padding:65px 0}
+  .hero{min-height:650px}
+  .brand span{font-size:14px}
 }
 </style>
 </head>
@@ -127,96 +312,456 @@ margin-top:30px;
 <body>
 
 <header>
-<h2>AHEAD VIA SKILL HUB</h2>
+  <div class="container nav">
+    <a href="#home" class="brand">
+      <img id="logo" src="https://via.placeholder.com/100" alt="Logo">
+      <span id="siteName">AHEAD VIA SKILL HUB</span>
+    </a>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#learn">Learn</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#social">Social</a>
+      <a href="admin.html" class="admin">Admin</a>
+    </nav>
+  </div>
 </header>
 
-<div class="container">
+<main>
 
-<section class="hero">
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <img id="profileImage"
+         class="profile"
+         src="https://via.placeholder.com/300"
+         alt="Profile">
 
-<img
-src="https://via.placeholder.com/300"
-alt="Profile Photo">
+    <h1><span id="heroName">AHEAD VIA SKILL HUB</span></h1>
 
-<h1>AHEAD VIA SKILL HUB</h1>
+    <div class="subtitle">Digital Creator • Online Skills • AI & Technology</div>
 
-<p>
-Welcome to AHEAD VIA SKILL HUB.
-<br>
-Learn, Explore & Grow With Us.
-</p>
+    <p id="heroAbout">
+      Learn useful digital skills, explore AI tools, create better content,
+      discover useful platforms and grow your online knowledge.
+    </p>
 
+    <div class="buttons">
+      <a class="btn" href="#tutorials">Explore Tutorials</a>
+      <a class="btn secondary" href="#contact">Contact Me</a>
+    </div>
+  </div>
 </section>
 
-<section class="card">
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>About Me</h2>
+      <p>Learn more about what I do</p>
+    </div>
 
-<h2>About Me</h2>
+    <div class="about">
+      <div class="card">
+        <h3>Who I Am</h3>
+        <p id="aboutText">
+          I work with various websites and online platforms, exploring
+          digital tools, AI technologies, content creation and online
+          services. I create informative videos and tutorials to share
+          practical knowledge and help others understand how different
+          tools and platforms work.
+        </p>
+      </div>
 
-<p>
-আমি AHEAD VIA SKILL HUB-এর মাধ্যমে
-অনলাইন স্কিল, টেকনোলজি, ওয়েবসাইট,
-টিউটোরিয়াল এবং বিভিন্ন প্রয়োজনীয়
-কনটেন্ট শেয়ার করি।
-</p>
-
+      <div class="card">
+        <h3>What I Do</h3>
+        <p>
+          I create video prompts, image prompts, captions, hashtags,
+          social media content, tutorials and useful guides. I regularly
+          research new apps, tools and techniques to learn, create and
+          share useful knowledge with others.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="card">
+<section id="learn">
+  <div class="container">
+    <div class="section-title">
+      <h2>What You Can Learn</h2>
+      <p>Practical digital skills and useful knowledge</p>
+    </div>
 
-<h2>Connect With Me</h2>
+    <div class="grid">
 
-<div class="links">
+      <div class="card learn">
+        <div class="icon">🎬</div>
+        <h3>Video Creation</h3>
+        <p>Video creation, editing, AI video tools, Reels, Shorts and video prompts.</p>
+      </div>
 
-<a href="#" target="_blank">WhatsApp</a>
+      <div class="card learn">
+        <div class="icon">🖼️</div>
+        <h3>Image Creation</h3>
+        <p>AI images, image prompts, posters, thumbnails and creative designs.</p>
+      </div>
 
-<a href="#" target="_blank">Telegram</a>
+      <div class="card learn">
+        <div class="icon">✍️</div>
+        <h3>Captions</h3>
+        <p>Learn how to create professional captions for social media content.</p>
+      </div>
 
-<a href="#" target="_blank">Telegram Group</a>
+      <div class="card learn">
+        <div class="icon">#️⃣</div>
+        <h3>Hashtags</h3>
+        <p>Learn how to prepare useful and relevant hashtags for your posts.</p>
+      </div>
 
-<a href="#" target="_blank">Telegram Channel</a>
+      <div class="card learn">
+        <div class="icon">📍</div>
+        <h3>Locations</h3>
+        <p>Learn how to use locations effectively for social media content.</p>
+      </div>
 
-<a href="#" target="_blank">Facebook</a>
+      <div class="card learn">
+        <div class="icon">🤖</div>
+        <h3>AI Tools & Apps</h3>
+        <p>Explore useful AI apps, websites, tools and prompt techniques.</p>
+      </div>
 
-<a href="#" target="_blank">YouTube</a>
+      <div class="card learn">
+        <div class="icon">📱</div>
+        <h3>Social Media</h3>
+        <p>Learn useful techniques for Facebook, Telegram, YouTube and Instagram.</p>
+      </div>
 
-<a href="#" target="_blank">Instagram</a>
+      <div class="card learn">
+        <div class="icon">💡</div>
+        <h3>Online Skills</h3>
+        <p>Discover practical online tools, services and digital workflows.</p>
+      </div>
 
-<a href="#" target="_blank">Twitter / X</a>
+      <div class="card learn">
+        <div class="icon">📚</div>
+        <h3>Step-by-Step Guides</h3>
+        <p>Simple tutorials and practical guides for learning new skills.</p>
+      </div>
 
-</div>
-
+    </div>
+  </div>
 </section>
 
-<section class="card">
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Community Statistics</h2>
+      <p>Current website information</p>
+    </div>
 
-<h2>Tutorials & Content</h2>
+    <div class="stats">
+      <div class="card stat">
+        <strong id="members">10K+</strong>
+        <span>Members</span>
+      </div>
 
-<div class="tutorial">
+      <div class="card stat">
+        <strong id="online">250+</strong>
+        <span>Online</span>
+      </div>
 
-<h3>Welcome Tutorial</h3>
+      <div class="card stat">
+        <strong id="learning">5K+</strong>
+        <span>Learning</span>
+      </div>
 
-<p>
-এখানে আপনার Tutorial, Video
-এবং প্রয়োজনীয় Content থাকবে।
-</p>
-
-<a href="#" target="_blank">
-Watch Tutorial
-</a>
-
-</div>
-
+      <div class="card stat">
+        <strong id="tutorialCount">0</strong>
+        <span>Tutorials</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-</div>
+<section id="tutorials">
+  <div class="container">
+    <div class="section-title">
+      <h2>Tutorials</h2>
+      <p>Learn step by step</p>
+    </div>
+
+    <div id="tutorialGrid" class="grid">
+      <div class="card empty">Loading tutorials...</div>
+    </div>
+  </div>
+</section>
+
+<section id="platforms">
+  <div class="container">
+    <div class="section-title">
+      <h2>Websites & Platforms I Work With</h2>
+      <p>Platforms and services I use and work with</p>
+    </div>
+
+    <div id="platformGrid" class="grid">
+      <div class="card empty">
+        Platforms will be added from the Admin Panel.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="social">
+  <div class="container">
+    <div class="section-title">
+      <h2>My Social Media</h2>
+      <p>Connect with me online</p>
+    </div>
+
+    <div class="socials" id="socialLinks"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="card" style="text-align:center">
+      <h2>Get In Touch</h2>
+      <p style="max-width:650px;margin:10px auto;color:#9aa5b8">
+        Have a question, want to learn something, or want to connect?
+        Contact me through my official social channels.
+      </p>
+
+      <div class="buttons">
+        <a id="contactButton" class="btn" href="#social">Contact Me</a>
+        <a class="btn secondary" href="#home">Back to Top</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-
-© 2026 AHEAD VIA SKILL HUB  
-<br>
-All Rights Reserved.
-
+  © <span id="year"></span> <span id="footerName">AHEAD VIA SKILL HUB</span>. All Rights Reserved.
 </footer>
 
+<script>
+const SUPABASE_URL = "https://wxqstcpjlzqdsgmovkey.supabase.co";
+const SUPABASE_KEY = "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const placeholder = "https://via.placeholder.com/600x350";
+
+function setText(id,value){
+  const el=document.getElementById(id);
+  if(el && value) el.textContent=value;
+}
+
+function setImage(id,value){
+  const el=document.getElementById(id);
+  if(el && value) el.src=value;
+}
+
+function safeUrl(url){
+  if(!url) return "#";
+  return url;
+}
+
+async function loadWebsite(){
+
+  const {data:settings,error:settingsError} =
+    await db
+      .from("site_settings")
+      .select("*")
+      .limit(1)
+      .maybeSingle();
+
+  if(settingsError){
+    console.error("Settings error:",settingsError);
+  }
+
+  if(settings){
+
+    document.title =
+      settings.site_name || "AHEAD VIA SKILL HUB";
+
+    setText(
+      "siteName",
+      settings.site_name || "AHEAD VIA SKILL HUB"
+    );
+
+    setText(
+      "heroName",
+      settings.site_name || "AHEAD VIA SKILL HUB"
+    );
+
+    setText(
+      "footerName",
+      settings.site_name || "AHEAD VIA SKILL HUB"
+    );
+
+    setText(
+      "aboutText",
+      settings.about_text || ""
+    );
+
+    setText(
+      "heroAbout",
+      settings.about_text ||
+      "Learn useful digital skills, explore AI tools, create better content, discover useful platforms and grow your online knowledge."
+    );
+
+    setImage(
+      "logo",
+      settings.logo_url
+    );
+
+    setImage(
+      "profileImage",
+      settings.profile_image_url
+    );
+
+    setText(
+      "members",
+      settings.members_count || "10K+"
+    );
+
+    setText(
+      "online",
+      settings.online_count || "250+"
+    );
+
+    setText(
+      "learning",
+      settings.learning_count || "5K+"
+    );
+
+    const contact =
+      settings.whatsapp ||
+      settings.contact_number ||
+      settings.telegram_personal;
+
+    const contactButton =
+      document.getElementById("contactButton");
+
+    if(contactButton && contact){
+      contactButton.href =
+        contact.startsWith("http")
+        ? contact
+        : "#social";
+    }
+
+    const socialData=[
+      ["✈️","Telegram","Official Channel",settings.telegram_channel],
+      ["👤","Telegram","Personal",settings.telegram_personal],
+      ["f","Facebook","Official Page",settings.facebook],
+      ["▶️","YouTube","Official Channel",settings.youtube],
+      ["◎","Instagram","Official Profile",settings.instagram],
+      ["𝕏","X / Twitter","Official Profile",settings.twitter],
+      ["💬","WhatsApp","Contact Me",settings.whatsapp]
+    ];
+
+    const socialBox =
+      document.getElementById("socialLinks");
+
+    socialBox.innerHTML="";
+
+    socialData.forEach(item=>{
+      if(item[3]){
+        socialBox.innerHTML += `
+          <a class="social"
+             href="${safeUrl(item[3])}"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span class="social-icon">${item[0]}</span>
+            <b>${item[1]}</b>
+            <small>${item[2]}</small>
+          </a>
+        `;
+      }
+    });
+  }
+
+  const {data:tutorials,error:tutorialError} =
+    await db
+      .from("tutorials")
+      .select("*")
+      .eq("published",true)
+      .order("created_at",{ascending:false});
+
+  if(tutorialError){
+    console.error("Tutorial error:",tutorialError);
+  }
+
+  const tutorialGrid =
+    document.getElementById("tutorialGrid");
+
+  if(tutorials && tutorials.length){
+
+    document.getElementById("tutorialCount")
+      .textContent=tutorials.length;
+
+    tutorialGrid.innerHTML="";
+
+    tutorials.forEach(t=>{
+      tutorialGrid.innerHTML += `
+        <article class="card tutorial">
+          <img
+            src="${t.thumbnail_url || placeholder}"
+            alt="${t.title || "Tutorial"}"
+            onerror="this.src='${placeholder}'"
+          >
+
+          <div class="tutorial-body">
+            <span class="tag">
+              ${t.category || "Tutorial"}
+            </span>
+
+            <h3>${t.title || "Untitled Tutorial"}</h3>
+
+            <p>
+              ${t.description || "Learn this topic step by step."}
+            </p>
+
+            ${
+              t.video_url
+              ? `
+                <div class="buttons"
+                     style="justify-content:flex-start">
+                  <a class="btn"
+                     href="${safeUrl(t.video_url)}"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    Watch Tutorial
+                  </a>
+                </div>
+              `
+              : ""
+            }
+          </div>
+        </article>
+      `;
+    });
+
+  }else{
+    tutorialGrid.innerHTML=`
+      <div class="card empty">
+        No published tutorials available yet.
+      </div>
+    `;
+  }
+
+  document.getElementById("year")
+    .textContent=new Date().getFullYear();
+}
+
+loadWebsite();
+</script>
+
 </body>
-</html>
+        </html>
