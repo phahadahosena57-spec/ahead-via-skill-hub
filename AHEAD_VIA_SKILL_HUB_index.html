@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHEAD VIA SKILL HUB</title>
+<style>
+:root{--bg:#07111f;--card:#0d1b2e;--card2:#10243c;--text:#eef6ff;--muted:#9eb0c7;--accent:#38bdf8;--accent2:#8b5cf6;--border:rgba(255,255,255,.09)}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#06101d,#0b1730);color:var(--text)}
+header{position:sticky;top:0;z-index:5;background:rgba(5,13,25,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover;background:#13253c}.brand span{font-size:18px}
+button,a.btn{border:0;border-radius:10px;padding:10px 15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white}.ghost{background:#14243a;color:white;border:1px solid var(--border)}
+main{max-width:1100px;margin:auto;padding:25px 18px 60px}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;padding:45px 0}
+.hero h1{font-size:clamp(34px,7vw,64px);margin:8px 0}.hero p{font-size:18px;line-height:1.7;color:var(--muted)}
+.profile{width:min(100%,310px);aspect-ratio:1;border-radius:28px;object-fit:cover;border:1px solid var(--border);box-shadow:0 20px 70px rgba(0,0,0,.35)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+section{margin-top:34px}.section-title{font-size:28px;margin-bottom:14px}
+.card{background:linear-gradient(145deg,rgba(16,36,60,.95),rgba(10,25,43,.95));border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.about{line-height:1.8;color:#c8d6e8}.socials{display:flex;flex-wrap:wrap;gap:10px}
+.tutorials{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}.tutorial img{width:100%;height:150px;object-fit:cover;border-radius:12px;background:#14243a}.tutorial h3{margin:13px 0 7px}.tutorial p{color:var(--muted);line-height:1.6}
+footer{text-align:center;padding:28px;color:var(--muted);border-top:1px solid var(--border)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modal.show{display:flex}.modal-box{width:min(620px,100%);max-height:90vh;overflow:auto;background:#0a1728;border:1px solid var(--border);border-radius:18px;padding:20px}
+input,textarea{width:100%;padding:12px;margin:7px 0 13px;border-radius:10px;border:1px solid #29415f;background:#071321;color:white}textarea{min-height:100px;resize:vertical}label{font-size:14px;color:#b9c9db}
+.admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.full{grid-column:1/-1}.admin-item{border:1px solid var(--border);padding:14px;border-radius:12px;margin:10px 0}
+.hidden{display:none!important}.status{padding:10px;border-radius:10px;background:#10243c;margin-bottom:12px;color:#bfe7ff}
+@media(max-width:750px){.hero{grid-template-columns:1fr;text-align:center}.hero .profile{margin:auto}.actions,.socials{justify-content:center}.admin-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="brand"><img id="logo" alt="Logo"><span id="brandName">AHEAD VIA SKILL HUB</span></div>
+<button class="ghost" id="adminBtn">Admin</button>
+</div></header>
+
+<main>
+<section class="hero">
+<div><div style="color:#67d5ff;font-weight:700">WELCOME TO</div><h1 id="heroName">AHEAD VIA SKILL HUB</h1><p id="heroAbout">Welcome to my personal skill hub. এখানে আমার পরিচিতি, যোগাযোগের মাধ্যম এবং শেখার কনটেন্ট পাওয়া যাবে।</p><div class="actions" id="mainLinks"></div></div>
+<img class="profile" id="profile" alt="Profile">
+</section>
+
+<section><h2 class="section-title">About Me</h2><div class="card about" id="about">Loading...</div></section>
+<section><h2 class="section-title">Connect With Me</h2><div class="card socials" id="socials"></div></section>
+<section><h2 class="section-title">Tutorials & Content</h2><div class="tutorials" id="tutorials"><div class="card">Loading tutorials...</div></div></section>
+</main>
+<footer>© <span id="year"></span> <span id="footerName">AHEAD VIA SKILL HUB</span> — All Rights Reserved</footer>
+
+<div class="modal" id="loginModal"><div class="modal-box">
+<h2>Admin Login</h2><p style="color:var(--muted)">শুধু অনুমোদিত Admin account দিয়ে লগইন করুন।</p>
+<input id="email" type="email" placeholder="Admin Email">
+<input id="password" type="password" placeholder="Password">
+<div class="actions"><button class="btn" id="loginBtn">Login</button><button class="ghost" onclick="closeModal('loginModal')">Close</button></div>
+<div class="status hidden" id="loginMsg"></div>
+</div></div>
+
+<div class="modal" id="adminModal"><div class="modal-box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Admin Panel</h2><button class="ghost" id="logoutBtn">Logout</button></div>
+<div class="status" id="adminStatus">Admin panel</div>
+<h3>Website Settings</h3>
+<div class="admin-grid">
+<div><label>Website Name</label><input id="s_site_name"></div>
+<div><label>Logo URL</label><input id="s_logo_url"></div>
+<div><label>Profile Image URL</label><input id="s_profile_image_url"></div>
+<div><label>WhatsApp</label><input id="s_whatsapp"></div>
+<div><label>Contact Number</label><input id="s_contact_number"></div>
+<div><label>Telegram Personal</label><input id="s_telegram_personal"></div>
+<div><label>Telegram Group</label><input id="s_telegram_group"></div>
+<div><label>Telegram Channel</label><input id="s_telegram_channel"></div>
+<div><label>Facebook</label><input id="s_facebook"></div>
+<div><label>YouTube</label><input id="s_youtube"></div>
+<div><label>Twitter/X</label><input id="s_twitter"></div>
+<div><label>Instagram</label><input id="s_instagram"></div>
+<div class="full"><label>About / Who I Am / What I Do</label><textarea id="s_about_text"></textarea></div>
+</div>
+<button class="btn" id="saveSettings">Save Website Settings</button>
+<hr style="border-color:var(--border);margin:25px 0">
+<h3>Add Tutorial</h3>
+<input id="t_title" placeholder="Tutorial title">
+<input id="t_thumbnail_url" placeholder="Thumbnail URL">
+<input id="t_video_url" placeholder="Video URL">
+<textarea id="t_description" placeholder="Description"></textarea>
+<textarea id="t_content" placeholder="Content"></textarea>
+<button class="btn" id="addTutorial">Add Tutorial</button>
+<div id="adminTutorials"></div>
+<div class="actions"><button class="ghost" onclick="closeModal('adminModal')">Close</button></div>
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://wxqstcpjlzqdsgmovkey.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+let settingsRow = null;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function closeModal(id){$(id).classList.remove("show")}
+function openModal(id){$(id).classList.add("show")}
+
+function validUrl(v){
+  if(!v) return "#";
+  if(/^https?:\/\//i.test(v)) return v;
+  if(/^wa\.me\//i.test(v)) return "https://"+v;
+  if(/^@/.test(v)) return "https://t.me/"+v.slice(1);
+  return v;
+}
+function link(label,url){if(!url)return "";return `<a class="btn ghost" target="_blank" rel="noopener" href="${esc(validUrl(url))}">${esc(label)}</a>`}
+
+async function loadSite(){
+  const {data,error}=await supabase.from("site_settings").select("*").limit(1).maybeSingle();
+  if(error){console.error(error);return}
+  settingsRow=data||{};
+  const name=settingsRow.site_name||"AHEAD VIA SKILL HUB";
+  $("brandName").textContent=name;$("heroName").textContent=name;$("footerName").textContent=name;
+  $("about").textContent=settingsRow.about_text||"আপনার নিজের পরিচিতি ও কাজের তথ্য এখানে দেখানো হবে।";
+  $("heroAbout").textContent=settingsRow.about_text||"Welcome to my personal skill hub.";
+  $("logo").src=settingsRow.logo_url||"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' rx='20' fill='%2310243c'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30'%3EA%3C/text%3E%3C/svg%3E";
+  $("profile").src=settingsRow.profile_image_url||$("logo").src;
+  $("mainLinks").innerHTML=[link("WhatsApp",settingsRow.whatsapp),link("Telegram",settingsRow.telegram_personal),link("Contact",settingsRow.contact_number)].join("");
+  $("socials").innerHTML=[["Facebook",settingsRow.facebook],["YouTube",settingsRow.youtube],["Twitter/X",settingsRow.twitter],["Instagram",settingsRow.instagram],["Telegram Group",settingsRow.telegram_group],["Telegram Channel",settingsRow.telegram_channel]].map(x=>link(x[0],x[1])).join("")||"<span style='color:var(--muted)'>Social links will appear here.</span>";
+  await loadTutorials();
+}
+async function loadTutorials(){
+  const {data,error}=await supabase.from("tutorials").select("*").eq("published",true).order("created_at",{ascending:false});
+  if(error){$("tutorials").innerHTML='<div class="card">Tutorials could not be loaded.</div>';return}
+  if(!data?.length){$("tutorials").innerHTML='<div class="card">এখনও কোনো tutorial যোগ করা হয়নি।</div>';return}
+  $("tutorials").innerHTML=data.map(t=>`<article class="card tutorial">${t.thumbnail_url?`<img src="${esc(t.thumbnail_url)}" alt="">`:""}<h3>${esc(t.title)}</h3><p>${esc(t.description||"")}</p>${t.video_url?link("Watch Video",t.video_url):""}</article>`).join("");
+}
+
+$("adminBtn").onclick=()=>openModal("loginModal");
+$("loginBtn").onclick=async()=>{
+  const msg=$("loginMsg");msg.classList.remove("hidden");msg.textContent="Logging in...";
+  const {error}=await supabase.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+  if(error){msg.textContent=error.message;return}
+  closeModal("loginModal");await openAdmin();
+};
+async function openAdmin(){
+  const {data:userData}=await supabase.auth.getUser();
+  if(!userData.user)return;
+  const {data:admin,error}=await supabase.from("admins").select("user_id").eq("user_id",userData.user.id).maybeSingle();
+  if(error||!admin){alert("এই account Admin হিসেবে অনুমোদিত নয়।");await supabase.auth.signOut();return}
+  const s=settingsRow||{};
+  ["site_name","logo_url","profile_image_url","about_text","whatsapp","contact_number","telegram_personal","telegram_group","telegram_channel","facebook","youtube","twitter","instagram"].forEach(k=>{if($("s_"+k))$("s_"+k).value=s[k]||""});
+  $("adminStatus").textContent="Logged in as: "+userData.user.email;
+  await renderAdminTutorials();openModal("adminModal");
+}
+$("saveSettings").onclick=async()=>{
+  const {data:userData}=await supabase.auth.getUser();if(!userData.user)return;
+  const obj={};["site_name","logo_url","profile_image_url","about_text","whatsapp","contact_number","telegram_personal","telegram_group","telegram_channel","facebook","youtube","twitter","instagram"].forEach(k=>obj[k]=$("s_"+k).value.trim());
+  const {error}=settingsRow?.id?await supabase.from("site_settings").update(obj).eq("id",settingsRow.id):await supabase.from("site_settings").insert(obj);
+  if(error){alert(error.message);return}alert("Website settings saved!");await loadSite();
+};
+$("addTutorial").onclick=async()=>{
+  const obj={title:$("t_title").value.trim(),thumbnail_url:$("t_thumbnail_url").value.trim(),video_url:$("t_video_url").value.trim(),description:$("t_description").value.trim(),content:$("t_content").value.trim(),published:true};
+  if(!obj.title){alert("Tutorial title দিন");return}
+  const {error}=await supabase.from("tutorials").insert(obj);
+  if(error){alert(error.message);return}
+  ["t_title","t_thumbnail_url","t_video_url","t_description","t_content"].forEach(k=>$(k).value="");
+  await loadTutorials();await renderAdminTutorials();alert("Tutorial added!");
+};
+async function renderAdminTutorials(){
+  const {data}=await supabase.from("tutorials").select("*").order("created_at",{ascending:false});
+  $("adminTutorials").innerHTML=(data||[]).map(t=>`<div class="admin-item"><b>${esc(t.title)}</b><br><small>${esc(t.description||"")}</small><br><button class="ghost" style="margin-top:8px" onclick="deleteTutorial(${t.id})">Delete</button></div>`).join("");
+}
+window.deleteTutorial=async id=>{if(!confirm("Delete this tutorial?"))return;const {error}=await supabase.from("tutorials").delete().eq("id",id);if(error){alert(error.message);return}await loadTutorials();await renderAdminTutorials()};
+$("logoutBtn").onclick=async()=>{await supabase.auth.signOut();closeModal("adminModal")};
+$("year").textContent=new Date().getFullYear();
+loadSite();
+</script>
+</body>
+</html>
