@@ -3,556 +3,466 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AHEAD VIA SKILL HUB — Admin Panel</title>
+<title>AHEAD VIA SKILL HUB — Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
-
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:
-      radial-gradient(circle at top left,#172554 0,#07111f 35%,#020617 75%);
-    color:#fff;
-    min-height:100vh;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#070b14;
+  color:#fff;
 }
-
 .container{
-    width:min(1100px,94%);
-    margin:30px auto;
+  width:min(1100px,94%);
+  margin:auto;
 }
-
-.header{
-    padding:24px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:22px;
-    background:rgba(15,23,42,.82);
-    backdrop-filter:blur(15px);
-    box-shadow:0 15px 50px rgba(0,0,0,.35);
-    margin-bottom:20px;
+header{
+  padding:22px 0;
+  border-bottom:1px solid #263044;
+  background:#0b1120;
 }
-
-.header h1{
-    margin:0 0 8px;
-    font-size:28px;
-}
-
-.header p{
-    margin:0;
-    color:#94a3b8;
-}
-
+h1{margin:0;font-size:25px}
+h2{margin-top:0}
 .card{
-    background:rgba(15,23,42,.88);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:22px;
-    padding:24px;
-    margin-bottom:20px;
-    box-shadow:0 15px 50px rgba(0,0,0,.25);
+  background:#0d1424;
+  border:1px solid #263044;
+  border-radius:18px;
+  padding:22px;
+  margin:20px 0;
 }
-
-h2{
-    margin-top:0;
-    font-size:21px;
-}
-
-h3{
-    font-size:17px;
-    margin-top:28px;
-    color:#cbd5e1;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-label{
-    display:block;
-    font-size:13px;
-    color:#94a3b8;
-    margin-bottom:7px;
-}
-
 input,textarea,select{
-    width:100%;
-    border:1px solid rgba(255,255,255,.12);
-    background:#020617;
-    color:#fff;
-    border-radius:13px;
-    padding:13px;
-    outline:none;
-    font-size:14px;
+  width:100%;
+  padding:13px;
+  margin:7px 0 14px;
+  border-radius:10px;
+  border:1px solid #33405a;
+  background:#080d18;
+  color:#fff;
+  outline:none;
 }
-
-textarea{
-    min-height:110px;
-    resize:vertical;
+textarea{min-height:120px;resize:vertical}
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 18px;
+  cursor:pointer;
+  background:#246bff;
+  color:#fff;
+  font-weight:bold;
+  margin:4px;
 }
-
-input:focus,textarea:focus,select:focus{
-    border-color:#38bdf8;
+button.danger{background:#d93636}
+button.secondary{background:#27334a}
+button.success{background:#16884b}
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:8px;
 }
-
-.btn{
-    border:0;
-    border-radius:13px;
-    padding:13px 18px;
-    background:linear-gradient(135deg,#06b6d4,#2563eb);
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:15px;
-}
-
-.btn:hover{
-    opacity:.9;
-}
-
-.danger{
-    background:linear-gradient(135deg,#ef4444,#b91c1c);
-}
-
-.secondary{
-    background:#1e293b;
-}
-
+.hidden{display:none}
 .status{
-    margin-top:12px;
-    padding:12px;
-    border-radius:12px;
-    background:#020617;
-    color:#94a3b8;
-    font-size:13px;
+  padding:12px;
+  border-radius:10px;
+  margin:10px 0;
+  background:#101a2d;
 }
-
-.hidden{
-    display:none;
+.filebox{
+  border:1px dashed #465675;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:10px;
 }
-
-.login{
-    max-width:500px;
-    margin:80px auto;
-}
-
-.small{
-    color:#64748b;
-    font-size:12px;
-    line-height:1.6;
-}
-
-.row{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.social-item{
-    padding:16px;
-    border:1px solid rgba(255,255,255,.10);
-    background:#020617;
-    border-radius:15px;
-    margin-top:12px;
-}
-
-.social-item strong{
-    display:block;
-    margin-bottom:8px;
-}
-
-.remove{
-    background:#7f1d1d;
-    border:0;
-    color:#fff;
-    padding:8px 12px;
-    border-radius:9px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
 .tutorial{
-    padding:17px;
-    border:1px solid rgba(255,255,255,.10);
-    background:#020617;
-    border-radius:15px;
-    margin-top:12px;
+  border:1px solid #263044;
+  padding:15px;
+  border-radius:12px;
+  margin-top:12px;
 }
-
-.tutorial strong{
-    font-size:16px;
+small{color:#9eabc2}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
 }
-
 @media(max-width:700px){
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .full{
-        grid-column:auto;
-    }
-
-    .container{
-        width:94%;
-    }
-
-    .card{
-        padding:18px;
-    }
-
-    .header h1{
-        font-size:23px;
-    }
+  .grid{grid-template-columns:1fr}
+}
+.preview{
+  max-width:180px;
+  max-height:120px;
+  border-radius:10px;
+  margin-top:8px;
 }
 </style>
 </head>
 
 <body>
 
+<header>
 <div class="container">
+<h1>AHEAD VIA SKILL HUB — Admin Panel</h1>
+</div>
+</header>
 
-    <div id="loginSection" class="card login">
-        <div class="header">
-            <h1>AHEAD VIA SKILL HUB</h1>
-            <p>Administrator Login</p>
-        </div>
+<main class="container">
 
-        <label>Email</label>
-        <input id="loginEmail" type="email" placeholder="Admin email">
+<!-- LOGIN -->
+<section id="loginBox" class="card">
+<h2>Admin Login</h2>
 
-        <label style="margin-top:14px;">Password</label>
-        <input id="loginPassword" type="password" placeholder="Password">
+<label>Email</label>
+<input id="email" type="email" placeholder="Admin email">
 
-        <button class="btn" id="loginBtn">Login</button>
+<label>Password</label>
+<input id="password" type="password" placeholder="Password">
 
-        <div id="loginStatus" class="status">
-            Please sign in with your authorized admin account.
-        </div>
-    </div>
+<button id="loginBtn">Login</button>
 
+<div id="loginStatus" class="status"></div>
+</section>
 
-    <div id="adminSection" class="hidden">
 
-        <div class="header">
-            <h1>Admin Control Center</h1>
-            <p>Manage your AHEAD VIA SKILL HUB website.</p>
+<!-- ADMIN -->
+<section id="adminPanel" class="hidden">
 
-            <div class="row">
-                <button class="btn secondary" id="logoutBtn">Logout</button>
-                <button class="btn secondary" onclick="window.location.href='index.html'">
-                    View Website
-                </button>
-            </div>
-        </div>
-
-
-        <!-- WEBSITE SETTINGS -->
-        <div class="card">
-
-            <h2>Website Settings</h2>
-
-            <div class="grid">
-
-                <div>
-                    <label>Website Name</label>
-                    <input id="site_name" placeholder="AHEAD VIA SKILL HUB">
-                </div>
-
-                <div>
-                    <label>Hero Introduction</label>
-                    <input id="hero_intro" placeholder="Learn. Create. Grow.">
-                </div>
-
-                <div class="full">
-                    <label>About Me</label>
-                    <textarea id="about_text"
-                    placeholder="Write your About Me information"></textarea>
-                </div>
-
-            </div>
-
-            <button class="btn" id="saveWebsite">
-                Save Website Settings
-            </button>
-
-            <div id="websiteStatus" class="status"></div>
-
-        </div>
-
-
-        <!-- CONTACT -->
-        <div class="card">
-
-            <h2>Contact Me</h2>
-
-            <div class="grid">
-
-                <div>
-                    <label>WhatsApp Number</label>
-                    <input id="whatsapp_number"
-                           placeholder="+8801XXXXXXXXX">
-                    <div class="small">
-                        Enter the number only. The website will create the WhatsApp link automatically.
-                    </div>
-                </div>
-
-                <div>
-                    <label>Contact Number</label>
-                    <input id="contact_number"
-                           placeholder="+8801XXXXXXXXX">
-                </div>
-
-                <div>
-                    <label>Telegram User ID / Username</label>
-                    <input id="telegram_personal"
-                           placeholder="@username or user ID">
-                </div>
-
-            </div>
-
-            <button class="btn" id="saveContact">
-                Save Contact Information
-            </button>
-
-            <div id="contactStatus" class="status"></div>
-
-        </div>
-
-
-        <!-- SOCIAL MEDIA -->
-        <div class="card">
-
-            <h2>Social Media</h2>
-
-            <div class="grid">
-
-                <div>
-                    <label>TikTok Username / ID</label>
-                    <input id="tiktok"
-                           placeholder="@username">
-                </div>
-
-                <div>
-                    <label>Telegram Username / ID</label>
-                    <input id="telegram_social"
-                           placeholder="@username">
-                </div>
-
-                <div>
-                    <label>Instagram Username / ID</label>
-                    <input id="instagram"
-                           placeholder="@username">
-                </div>
-
-                <div>
-                    <label>Twitter / X Username</label>
-                    <input id="twitter"
-                           placeholder="@username">
-                </div>
-
-                <div>
-                    <label>YouTube Channel Name / ID</label>
-                    <input id="youtube"
-                           placeholder="Channel name or ID">
-                </div>
-
-                <div>
-                    <label>Facebook Page Name / ID</label>
-                    <input id="facebook"
-                           placeholder="Page name or ID">
-                </div>
-
-            </div>
-
-            <h3>Other Social Media</h3>
-
-            <div class="grid">
-
-                <div>
-                    <label>Platform Name</label>
-                    <input id="other_platform"
-                           placeholder="Discord / LinkedIn / Pinterest">
-                </div>
-
-                <div>
-                    <label>Username / ID</label>
-                    <input id="other_username"
-                           placeholder="Username or ID">
-                </div>
-
-            </div>
-
-            <button class="btn" id="addOther">
-                Add Other Social Media
-            </button>
-
-            <div id="otherList"></div>
-
-            <button class="btn" id="saveSocial">
-                Save Social Media
-            </button>
-
-            <div id="socialStatus" class="status"></div>
-
-        </div>
-
-
-        <!-- COMMUNITY STATISTICS -->
-        <div class="card">
-
-            <h2>Community Statistics</h2>
-
-            <div class="grid">
-
-                <div>
-                    <label>Community Members Base</label>
-                    <input id="members_count"
-                           type="number"
-                           value="1000000">
-                    <div class="small">
-                        Actual registered members can be added to this base later.
-                    </div>
-                </div>
-
-                <div>
-                    <label>Online Members</label>
-                    <input id="online_count"
-                           type="number"
-                           value="0">
-                </div>
-
-                <div>
-                    <label>Currently Learning</label>
-                    <input id="learning_count"
-                           type="number"
-                           value="0">
-                </div>
-
-            </div>
-
-            <button class="btn" id="saveStats">
-                Save Statistics
-            </button>
-
-            <div id="statsStatus" class="status"></div>
-
-        </div>
-
-
-        <!-- TUTORIALS -->
-        <div class="card">
-
-            <h2>Tutorial Management</h2>
-
-            <div class="grid">
-
-                <div>
-                    <label>Tutorial Title</label>
-                    <input id="tutorial_title"
-                           placeholder="Tutorial title">
-                </div>
-
-                <div>
-                    <label>Category</label>
-                    <input id="tutorial_category"
-                           placeholder="AI / Video / Website / Social Media">
-                </div>
-
-                <div>
-                    <label>Thumbnail</label>
-                    <input id="tutorial_thumbnail"
-                           type="file"
-                           accept="image/*">
-                    <div class="small">
-                        File upload system will be connected to storage.
-                    </div>
-                </div>
-
-                <div>
-                    <label>Video</label>
-                    <input id="tutorial_video"
-                           type="file"
-                           accept="video/*">
-                </div>
-
-                <div class="full">
-                    <label>Short Description</label>
-                    <textarea id="tutorial_description"
-                    placeholder="Short tutorial description"></textarea>
-                </div>
-
-                <div class="full">
-                    <label>Tutorial Content</label>
-                    <textarea id="tutorial_content"
-                    placeholder="Full tutorial content"></textarea>
-                </div>
-
-            </div>
-
-            <button class="btn" id="addTutorial">
-                Add Tutorial
-            </button>
-
-            <div id="tutorialStatus" class="status"></div>
-
-            <h3>Existing Tutorials</h3>
-
-            <div id="tutorialList"></div>
-
-        </div>
-
-
-        <!-- ADMIN INFORMATION -->
-        <div class="card">
-
-            <h2>Admin Information</h2>
-
-            <p class="small">
-                Your Member ID and administrator authorization are controlled by the system.
-                Regular users will not be able to change administrator settings.
-            </p>
-
-        </div>
-
-    </div>
-
+<div class="card">
+<h2>Admin Dashboard</h2>
+<div id="adminStatus" class="status">
+Logged in successfully.
+</div>
+<button id="logoutBtn" class="secondary">Logout</button>
 </div>
 
 
-<script>
+<!-- SITE SETTINGS -->
+<div class="card">
+<h2>Website Settings</h2>
 
+<label>Website Name</label>
+<input id="siteName" placeholder="AHEAD VIA SKILL HUB">
+
+<label>Hero Intro</label>
+<input id="heroIntro" placeholder="Learn. Create. Explore. Share.">
+
+<label>About Me</label>
+<textarea id="aboutText"></textarea>
+
+<label>Logo</label>
+<div class="filebox">
+<input id="logoFile" type="file" accept="image/*">
+<img id="logoPreview" class="preview hidden">
+</div>
+
+<label>Profile Photo</label>
+<div class="filebox">
+<input id="profileFile" type="file" accept="image/*">
+<img id="profilePreview" class="preview hidden">
+</div>
+
+<button id="saveSettingsBtn" class="success">
+Save Website Settings
+</button>
+</div>
+
+
+<!-- CONTACT -->
+<div class="card">
+<h2>Contact Me</h2>
+
+<label>WhatsApp Number</label>
+<input id="whatsappNumber" placeholder="+8801XXXXXXXXX">
+
+<label>Contact Number</label>
+<input id="contactNumber" placeholder="+8801XXXXXXXXX">
+
+<label>Telegram User ID / Username</label>
+<input id="telegramPersonal" placeholder="@username">
+
+<button id="saveContactBtn" class="success">
+Save Contact Information
+</button>
+</div>
+
+
+<!-- SOCIAL -->
+<div class="card">
+<h2>Social Media</h2>
+
+<label>TikTok</label>
+<input id="tiktok" placeholder="@username">
+
+<label>Telegram</label>
+<input id="telegramSocial" placeholder="@username">
+
+<label>Instagram</label>
+<input id="instagram" placeholder="@username">
+
+<label>Twitter / X</label>
+<input id="twitter" placeholder="@username">
+
+<label>YouTube</label>
+<input id="youtube" placeholder="@username or channel">
+
+<label>Facebook</label>
+<input id="facebook" placeholder="@username">
+
+<h3>Other Social Media</h3>
+
+<div id="otherSocialContainer"></div>
+
+<button id="addSocialBtn" class="secondary">
++ Add Other Social Media
+</button>
+
+<br>
+
+<button id="saveSocialBtn" class="success">
+Save Social Media
+</button>
+</div>
+
+
+<!-- STATISTICS -->
+<div class="card">
+<h2>Community Statistics</h2>
+
+<div class="grid">
+
+<div>
+<label>Community Members Base</label>
+<input id="membersCount" type="number" value="1000000">
+</div>
+
+<div>
+<label>Online Members</label>
+<input id="onlineCount" type="number" value="0">
+</div>
+
+<div>
+<label>Learning Now</label>
+<input id="learningCount" type="number" value="0">
+</div>
+
+</div>
+
+<button id="saveStatsBtn" class="success">
+Save Statistics
+</button>
+</div>
+
+
+<!-- TUTORIAL -->
+<div class="card">
+<h2>Add Tutorial</h2>
+
+<label>Title</label>
+<input id="tutorialTitle" placeholder="Tutorial title">
+
+<label>Category</label>
+<input id="tutorialCategory" placeholder="AI / Video / Image / Website">
+
+<label>Description</label>
+<textarea id="tutorialDescription"></textarea>
+
+<label>Full Content</label>
+<textarea id="tutorialContent"></textarea>
+
+<label>Caption</label>
+<textarea id="tutorialCaption"></textarea>
+
+<label>Hashtags</label>
+<input id="tutorialHashtags" placeholder="#AI #Tutorial #AHEADVIASKILLHUB">
+
+<label>Location</label>
+<input id="tutorialLocation" placeholder="Location">
+
+<div class="filebox">
+<label>Thumbnail</label>
+<input id="thumbnailFile" type="file" accept="image/*">
+</div>
+
+<div class="filebox">
+<label>Video</label>
+<input id="videoFile" type="file" accept="video/*">
+</div>
+
+<label>
+<input id="tutorialPublished" type="checkbox">
+ Published
+</label>
+
+<label>
+<input id="tutorialFeatured" type="checkbox">
+ Featured Tutorial
+</label>
+
+<button id="addTutorialBtn" class="success">
+Add Tutorial
+</button>
+
+<div id="tutorialStatus" class="status"></div>
+</div>
+
+
+<!-- TUTORIAL LIST -->
+<div class="card">
+<h2>Existing Tutorials</h2>
+<div id="tutorialList"></div>
+</div>
+
+
+<!-- PLATFORMS -->
+<div class="card">
+<h2>Websites & Platforms I Work With</h2>
+
+<label>Platform Name</label>
+<input id="platformName" placeholder="Platform name">
+
+<label>Username / ID</label>
+<input id="platformUsername" placeholder="@username">
+
+<label>Official Website URL</label>
+<input id="platformWebsite" placeholder="https://example.com">
+
+<div class="filebox">
+<label>Platform Logo</label>
+<input id="platformLogo" type="file" accept="image/*">
+</div>
+
+<button id="addPlatformBtn" class="success">
+Add Platform
+</button>
+
+<div id="platformList"></div>
+</div>
+
+
+<!-- FAQ -->
+<div class="card">
+<h2>FAQ</h2>
+
+<label>Question</label>
+<input id="faqQuestion">
+
+<label>Answer</label>
+<textarea id="faqAnswer"></textarea>
+
+<button id="addFaqBtn" class="success">
+Add FAQ
+</button>
+
+<div id="faqList"></div>
+</div>
+
+
+<!-- ANNOUNCEMENTS -->
+<div class="card">
+<h2>Announcements</h2>
+
+<label>Title</label>
+<input id="announcementTitle">
+
+<label>Message</label>
+<textarea id="announcementMessage"></textarea>
+
+<button id="addAnnouncementBtn" class="success">
+Add Announcement
+</button>
+
+<div id="announcementList"></div>
+</div>
+
+</section>
+
+</main>
+
+
+<script>
 const SUPABASE_URL =
 "https://wxqstcpjlzqdsgmovkey.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
 "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
 
-const supabase =
+const supabaseClient =
 window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-let settingsRow = null;
-let otherSocials = [];
+let currentUser = null;
+let otherSocial = [];
 
+
+/* =========================
+   HELPERS
+========================= */
 
 function $(id){
-    return document.getElementById(id);
+  return document.getElementById(id);
+}
+
+function show(id){
+  $(id).classList.remove("hidden");
+}
+
+function hide(id){
+  $(id).classList.add("hidden");
+}
+
+function status(id,message){
+  $(id).textContent = message;
 }
 
 
-function status(id,message){
-    if($(id)){
-        $(id).textContent = message;
-    }
+/* =========================
+   ADMIN CHECK
+========================= */
+
+async function checkAdmin(){
+
+  const {
+    data:{user}
+  } = await supabaseClient.auth.getUser();
+
+  if(!user){
+    show("loginBox");
+    hide("adminPanel");
+    return;
+  }
+
+  const {data,error} =
+    await supabaseClient
+      .from("admins")
+      .select("user_id")
+      .eq("user_id",user.id)
+      .maybeSingle();
+
+  if(error || !data){
+
+    await supabaseClient.auth.signOut();
+
+    show("loginBox");
+    hide("adminPanel");
+
+    status(
+      "loginStatus",
+      "This account is not authorized as an admin."
+    );
+
+    return;
+  }
+
+  currentUser = user;
+
+  hide("loginBox");
+  show("adminPanel");
+
+  await loadEverything();
 }
 
 
@@ -560,84 +470,105 @@ function status(id,message){
    LOGIN
 ========================= */
 
-$("loginBtn").onclick = async function(){
+$("loginBtn").onclick = async ()=>{
 
-    const email = $("loginEmail").value.trim();
-    const password = $("loginPassword").value;
+  const email = $("email").value.trim();
+  const password = $("password").value;
 
-    if(!email || !password){
-        status("loginStatus","Please enter email and password.");
-        return;
-    }
+  if(!email || !password){
+    status(
+      "loginStatus",
+      "Please enter your email and password."
+    );
+    return;
+  }
 
-    status("loginStatus","Signing in...");
+  status(
+    "loginStatus",
+    "Logging in..."
+  );
 
-    const {data,error} =
-        await supabase.auth.signInWithPassword({
-            email,
-            password
-        });
+  const {error} =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
 
-    if(error){
-        status("loginStatus",error.message);
-        return;
-    }
+  if(error){
 
-    await checkAdmin(data.user);
+    status(
+      "loginStatus",
+      error.message
+    );
+
+    return;
+  }
+
+  status(
+    "loginStatus",
+    "Login successful."
+  );
+
+  await checkAdmin();
 };
-
-
-async function checkAdmin(user){
-
-    if(!user){
-        return;
-    }
-
-    const {data:admin,error} =
-        await supabase
-        .from("admins")
-        .select("user_id")
-        .eq("user_id",user.id)
-        .maybeSingle();
-
-    if(error){
-        status("loginStatus",error.message);
-        return;
-    }
-
-    if(!admin){
-
-        status(
-            "loginStatus",
-            "This account is not authorized as an administrator."
-        );
-
-        await supabase.auth.signOut();
-        return;
-    }
-
-    $("loginSection").classList.add("hidden");
-    $("adminSection").classList.remove("hidden");
-
-    await loadSettings();
-    await loadTutorials();
-}
 
 
 /* =========================
    LOGOUT
 ========================= */
 
-$("logoutBtn").onclick = async function(){
+$("logoutBtn").onclick = async ()=>{
+  await supabaseClient.auth.signOut();
 
-    await supabase.auth.signOut();
+  currentUser = null;
 
-    $("adminSection").classList.add("hidden");
-    $("loginSection").classList.remove("hidden");
+  hide("adminPanel");
+  show("loginBox");
 
-    $("loginPassword").value = "";
-
+  status(
+    "loginStatus",
+    "Logged out."
+  );
 };
+
+
+/* =========================
+   FILE UPLOAD
+========================= */
+
+async function uploadFile(file,folder){
+
+  if(!file) return null;
+
+  const extension =
+    file.name.split(".").pop();
+
+  const fileName =
+    folder + "/" +
+    crypto.randomUUID() +
+    "." +
+    extension;
+
+  const {error} =
+    await supabaseClient
+      .storage
+      .from("site-assets")
+      .upload(fileName,file,{
+        upsert:false
+      });
+
+  if(error){
+    throw error;
+  }
+
+  const {data} =
+    supabaseClient
+      .storage
+      .from("site-assets")
+      .getPublicUrl(fileName);
+
+  return data.publicUrl;
+}
 
 
 /* =========================
@@ -646,301 +577,255 @@ $("logoutBtn").onclick = async function(){
 
 async function loadSettings(){
 
-    const {data,error} =
-        await supabase
-        .from("site_settings")
-        .select("*")
-        .order("id",{ascending:true})
-        .limit(1)
-        .maybeSingle();
+  const {data,error} =
+    await supabaseClient
+      .from("site_settings")
+      .select("*")
+      .limit(1)
+      .maybeSingle();
 
-    if(error){
-        console.log(error);
-        return;
-    }
+  if(error){
+    console.error(error);
+    return;
+  }
 
-    settingsRow = data;
+  if(!data) return;
 
-    if(!data){
-        return;
-    }
+  $("siteName").value =
+    data.site_name || "";
 
-    $("site_name").value =
-        data.site_name || "";
+  $("heroIntro").value =
+    data.hero_intro || "";
 
-    $("hero_intro").value =
-        data.hero_intro || "";
+  $("aboutText").value =
+    data.about_text || "";
 
-    $("about_text").value =
-        data.about_text || "";
+  $("whatsappNumber").value =
+    data.whatsapp_number || data.whatsapp || "";
 
-    $("whatsapp_number").value =
-        data.whatsapp_number ||
-        data.whatsapp ||
-        "";
+  $("contactNumber").value =
+    data.contact_number || "";
 
-    $("contact_number").value =
-        data.contact_number || "";
+  $("telegramPersonal").value =
+    data.telegram_personal || "";
 
-    $("telegram_personal").value =
-        data.telegram_personal || "";
+  $("tiktok").value =
+    data.tiktok || "";
 
-    $("tiktok").value =
-        data.tiktok || "";
+  $("telegramSocial").value =
+    data.telegram_social || "";
 
-    $("telegram_social").value =
-        data.telegram_social || "";
+  $("instagram").value =
+    data.instagram || "";
 
-    $("instagram").value =
-        data.instagram || "";
+  $("twitter").value =
+    data.twitter || "";
 
-    $("twitter").value =
-        data.twitter || "";
+  $("youtube").value =
+    data.youtube || "";
 
-    $("youtube").value =
-        data.youtube || "";
+  $("facebook").value =
+    data.facebook || "";
 
-    $("facebook").value =
-        data.facebook || "";
+  $("membersCount").value =
+    data.members_count ?? 1000000;
 
-    $("members_count").value =
-        data.members_count ?? 1000000;
+  $("onlineCount").value =
+    data.online_count ?? 0;
 
-    $("online_count").value =
-        data.online_count ?? 0;
+  $("learningCount").value =
+    data.learning_count ?? 0;
 
-    $("learning_count").value =
-        data.learning_count ?? 0;
+  try{
+    otherSocial =
+      data.other_social
+      ? JSON.parse(data.other_social)
+      : [];
+  }catch{
+    otherSocial = [];
+  }
 
-    if(data.other_social){
-        try{
-            otherSocials =
-                typeof data.other_social === "string"
-                ? JSON.parse(data.other_social)
-                : data.other_social;
-        }catch(e){
-            otherSocials = [];
-        }
-    }
-
-    renderOtherSocials();
-
+  renderOtherSocial();
 }
 
 
 /* =========================
-   SAVE WEBSITE
+   SAVE SETTINGS
 ========================= */
 
-$("saveWebsite").onclick = async function(){
+async function saveSettings(){
 
-    if(!settingsRow?.id){
-        status(
-            "websiteStatus",
-            "Website settings row was not found."
+  status(
+    "adminStatus",
+    "Saving website settings..."
+  );
+
+  let logoUrl = null;
+  let profileUrl = null;
+
+  try{
+
+    if($("logoFile").files[0]){
+      logoUrl =
+        await uploadFile(
+          $("logoFile").files[0],
+          "logo"
         );
-        return;
     }
 
-    const update = {
-        site_name:$("site_name").value.trim(),
-        hero_intro:$("hero_intro").value.trim(),
-        about_text:$("about_text").value.trim()
-    };
-
-    const {error} =
-        await supabase
-        .from("site_settings")
-        .update(update)
-        .eq("id",settingsRow.id);
-
-    if(error){
-        status("websiteStatus",error.message);
-        return;
+    if($("profileFile").files[0]){
+      profileUrl =
+        await uploadFile(
+          $("profileFile").files[0],
+          "profile"
+        );
     }
+
+  }catch(error){
 
     status(
-        "websiteStatus",
-        "Website settings saved successfully."
+      "adminStatus",
+      "Upload failed: " + error.message
     );
 
-    await loadSettings();
-};
+    return;
+  }
+
+
+  const {data:existing} =
+    await supabaseClient
+      .from("site_settings")
+      .select("id,logo_url,profile_image_url")
+      .limit(1)
+      .maybeSingle();
+
+
+  const payload = {
+
+    site_name:
+      $("siteName").value.trim(),
+
+    hero_intro:
+      $("heroIntro").value.trim(),
+
+    about_text:
+      $("aboutText").value.trim(),
+
+    whatsapp_number:
+      $("whatsappNumber").value.trim(),
+
+    contact_number:
+      $("contactNumber").value.trim(),
+
+    telegram_personal:
+      $("telegramPersonal").value.trim(),
+
+    tiktok:
+      $("tiktok").value.trim(),
+
+    telegram_social:
+      $("telegramSocial").value.trim(),
+
+    instagram:
+      $("instagram").value.trim(),
+
+    twitter:
+      $("twitter").value.trim(),
+
+    youtube:
+      $("youtube").value.trim(),
+
+    facebook:
+      $("facebook").value.trim(),
+
+    other_social:
+      JSON.stringify(otherSocial),
+
+    updated_at:
+      new Date().toISOString()
+  };
+
+
+  if(logoUrl)
+    payload.logo_url = logoUrl;
+
+  if(profileUrl)
+    payload.profile_image_url = profileUrl;
+
+
+  let result;
+
+  if(existing){
+
+    result =
+      await supabaseClient
+        .from("site_settings")
+        .update(payload)
+        .eq("id",existing.id);
+
+  }else{
+
+    result =
+      await supabaseClient
+        .from("site_settings")
+        .insert(payload);
+
+  }
+
+
+  if(result.error){
+
+    status(
+      "adminStatus",
+      "Save failed: " + result.error.message
+    );
+
+    return;
+  }
+
+  status(
+    "adminStatus",
+    "Website settings saved successfully."
+  );
+
+  $("logoFile").value = "";
+  $("profileFile").value = "";
+}
 
 
 /* =========================
    SAVE CONTACT
 ========================= */
 
-$("saveContact").onclick = async function(){
+$("saveContactBtn").onclick =
+async ()=>{
 
-    if(!settingsRow?.id){
-        status(
-            "contactStatus",
-            "Settings row was not found."
-        );
-        return;
-    }
-
-    const whatsapp =
-        $("whatsapp_number").value.trim();
-
-    const update = {
-        whatsapp_number:whatsapp,
-        whatsapp:whatsapp,
-        contact_number:
-            $("contact_number").value.trim(),
-        telegram_personal:
-            $("telegram_personal").value.trim()
-    };
-
-    const {error} =
-        await supabase
-        .from("site_settings")
-        .update(update)
-        .eq("id",settingsRow.id);
-
-    if(error){
-        status("contactStatus",error.message);
-        return;
-    }
-
-    status(
-        "contactStatus",
-        "Contact information saved successfully."
-    );
-
-    await loadSettings();
-};
-
-
-/* =========================
-   OTHER SOCIAL MEDIA
-========================= */
-
-$("addOther").onclick = function(){
-
-    const platform =
-        $("other_platform").value.trim();
-
-    const username =
-        $("other_username").value.trim();
-
-    if(!platform || !username){
-        status(
-            "socialStatus",
-            "Enter both platform name and username/ID."
-        );
-        return;
-    }
-
-    otherSocials.push({
-        platform,
-        username
-    });
-
-    $("other_platform").value = "";
-    $("other_username").value = "";
-
-    renderOtherSocials();
-
-};
-
-
-function renderOtherSocials(){
-
-    const box = $("otherList");
-
-    box.innerHTML = "";
-
-    otherSocials.forEach((item,index)=>{
-
-        const div =
-            document.createElement("div");
-
-        div.className = "social-item";
-
-        div.innerHTML = `
-            <strong>${escapeHtml(item.platform)}</strong>
-            <div>${escapeHtml(item.username)}</div>
-            <button class="remove"
-                    onclick="removeOther(${index})">
-                Remove
-            </button>
-        `;
-
-        box.appendChild(div);
-
-    });
-
-}
-
-
-window.removeOther = function(index){
-
-    otherSocials.splice(index,1);
-
-    renderOtherSocials();
+  await saveSettings();
 
 };
 
 
 /* =========================
-   SAVE SOCIAL MEDIA
+   SAVE WEBSITE
 ========================= */
 
-$("saveSocial").onclick = async function(){
+$("saveSettingsBtn").onclick =
+async ()=>{
 
-    if(!settingsRow?.id){
-        status(
-            "socialStatus",
-            "Settings row was not found."
-        );
-        return;
-    }
+  await saveSettings();
 
-    const update = {
+};
 
-        tiktok:
-            $("tiktok").value.trim(),
 
-        telegram_social:
-            $("telegram_social").value.trim(),
+/* =========================
+   SAVE SOCIAL
+========================= */
 
-        instagram:
-            $("instagram").value.trim(),
+$("saveSocialBtn").onclick =
+async ()=>{
 
-        twitter:
-            $("twitter").value.trim(),
+  await saveSettings();
 
-        youtube:
-            $("youtube").value.trim(),
-
-        facebook:
-            $("facebook").value.trim(),
-
-        other_social:
-            JSON.stringify(otherSocials)
-
-    };
-
-    const {error} =
-        await supabase
-        .from("site_settings")
-        .update(update)
-        .eq("id",settingsRow.id);
-
-    if(error){
-        status("socialStatus",error.message);
-        return;
-    }
-
-    status(
-        "socialStatus",
-        "Social media settings saved successfully."
-    );
-
-    await loadSettings();
 };
 
 
@@ -948,46 +833,142 @@ $("saveSocial").onclick = async function(){
    SAVE STATISTICS
 ========================= */
 
-$("saveStats").onclick = async function(){
+$("saveStatsBtn").onclick =
+async ()=>{
 
-    if(!settingsRow?.id){
-        status(
-            "statsStatus",
-            "Settings row was not found."
-        );
-        return;
-    }
+  const {data} =
+    await supabaseClient
+      .from("site_settings")
+      .select("id")
+      .limit(1)
+      .maybeSingle();
 
-    const update = {
+  if(!data){
+    status(
+      "adminStatus",
+      "Website settings record not found."
+    );
+    return;
+  }
+
+  const {error} =
+    await supabaseClient
+      .from("site_settings")
+      .update({
 
         members_count:
-            Number($("members_count").value) || 0,
+          Number($("membersCount").value) || 0,
 
         online_count:
-            Number($("online_count").value) || 0,
+          Number($("onlineCount").value) || 0,
 
         learning_count:
-            Number($("learning_count").value) || 0
+          Number($("learningCount").value) || 0,
 
-    };
+        updated_at:
+          new Date().toISOString()
 
-    const {error} =
-        await supabase
-        .from("site_settings")
-        .update(update)
-        .eq("id",settingsRow.id);
+      })
+      .eq("id",data.id);
 
-    if(error){
-        status("statsStatus",error.message);
-        return;
-    }
+  if(error){
 
     status(
-        "statsStatus",
-        "Community statistics saved successfully."
+      "adminStatus",
+      "Statistics save failed: " + error.message
     );
 
-    await loadSettings();
+  }else{
+
+    status(
+      "adminStatus",
+      "Statistics saved successfully."
+    );
+
+  }
+
+};
+
+
+/* =========================
+   OTHER SOCIAL
+========================= */
+
+function renderOtherSocial(){
+
+  const box =
+    $("otherSocialContainer");
+
+  box.innerHTML = "";
+
+  otherSocial.forEach((item,index)=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "tutorial";
+
+    div.innerHTML = `
+
+      <label>Platform Name</label>
+
+      <input
+        value="${escapeHtml(item.name || "")}"
+        oninput="otherSocial[${index}].name=this.value"
+      >
+
+      <label>Username / ID</label>
+
+      <input
+        value="${escapeHtml(item.username || "")}"
+        oninput="otherSocial[${index}].username=this.value"
+      >
+
+      <button
+        class="danger"
+        onclick="removeSocial(${index})"
+      >
+        Remove
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+
+}
+
+
+window.removeSocial = function(index){
+
+  otherSocial.splice(index,1);
+
+  renderOtherSocial();
+
+};
+
+
+$("addSocialBtn").onclick = ()=>{
+
+  otherSocial.push({
+    name:"",
+    username:""
+  });
+
+  renderOtherSocial();
+
 };
 
 
@@ -995,64 +976,139 @@ $("saveStats").onclick = async function(){
    TUTORIALS
 ========================= */
 
-$("addTutorial").onclick = async function(){
+$("addTutorialBtn").onclick =
+async ()=>{
 
-    const title =
-        $("tutorial_title").value.trim();
+  const title =
+    $("tutorialTitle").value.trim();
 
-    const category =
-        $("tutorial_category").value.trim();
-
-    const description =
-        $("tutorial_description").value.trim();
-
-    const content =
-        $("tutorial_content").value.trim();
-
-    if(!title){
-        status(
-            "tutorialStatus",
-            "Tutorial title is required."
-        );
-        return;
-    }
-
-    const insert = {
-
-        title,
-        category,
-        description,
-        content,
-        thumbnail_url:"",
-        video_url:"",
-        published:true,
-        featured:false
-
-    };
-
-    const {error} =
-        await supabase
-        .from("tutorials")
-        .insert(insert);
-
-    if(error){
-        status("tutorialStatus",error.message);
-        return;
-    }
+  if(!title){
 
     status(
-        "tutorialStatus",
-        "Tutorial added successfully."
+      "tutorialStatus",
+      "Tutorial title is required."
     );
 
-    $("tutorial_title").value = "";
-    $("tutorial_category").value = "";
-    $("tutorial_description").value = "";
-    $("tutorial_content").value = "";
-    $("tutorial_thumbnail").value = "";
-    $("tutorial_video").value = "";
+    return;
+  }
 
-    await loadTutorials();
+  status(
+    "tutorialStatus",
+    "Uploading files..."
+  );
+
+
+  let thumbnailUrl = null;
+  let videoUrl = null;
+
+  try{
+
+    if($("thumbnailFile").files[0]){
+
+      thumbnailUrl =
+        await uploadFile(
+          $("thumbnailFile").files[0],
+          "thumbnails"
+        );
+
+    }
+
+    if($("videoFile").files[0]){
+
+      videoUrl =
+        await uploadFile(
+          $("videoFile").files[0],
+          "videos"
+        );
+
+    }
+
+  }catch(error){
+
+    status(
+      "tutorialStatus",
+      "File upload failed: " + error.message
+    );
+
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("tutorials")
+      .insert({
+
+        title,
+
+        category:
+          $("tutorialCategory").value.trim(),
+
+        description:
+          $("tutorialDescription").value.trim(),
+
+        content:
+          $("tutorialContent").value.trim(),
+
+        caption:
+          $("tutorialCaption").value.trim(),
+
+        hashtags:
+          $("tutorialHashtags").value.trim(),
+
+        location:
+          $("tutorialLocation").value.trim(),
+
+        thumbnail_url:
+          thumbnailUrl || "",
+
+        video_url:
+          videoUrl || "",
+
+        published:
+          $("tutorialPublished").checked,
+
+        featured:
+          $("tutorialFeatured").checked
+
+      });
+
+
+  if(error){
+
+    status(
+      "tutorialStatus",
+      "Tutorial save failed: " + error.message
+    );
+
+    return;
+  }
+
+
+  status(
+    "tutorialStatus",
+    "Tutorial added successfully."
+  );
+
+
+  [
+    "tutorialTitle",
+    "tutorialCategory",
+    "tutorialDescription",
+    "tutorialContent",
+    "tutorialCaption",
+    "tutorialHashtags",
+    "tutorialLocation"
+  ].forEach(id=>{
+    $(id).value="";
+  });
+
+  $("thumbnailFile").value="";
+  $("videoFile").value="";
+  $("tutorialPublished").checked=false;
+  $("tutorialFeatured").checked=false;
+
+  await loadTutorials();
 
 };
 
@@ -1063,154 +1119,540 @@ $("addTutorial").onclick = async function(){
 
 async function loadTutorials(){
 
-    const {data,error} =
-        await supabase
-        .from("tutorials")
-        .select("*")
-        .order("id",{ascending:false});
+  const {data,error} =
+    await supabaseClient
+      .from("tutorials")
+      .select("*")
+      .order("created_at",{ascending:false});
 
-    if(error){
-        console.log(error);
-        return;
-    }
+  if(error){
 
-    const box = $("tutorialList");
+    $("tutorialList").innerHTML =
+      "<p>Could not load tutorials.</p>";
 
-    box.innerHTML = "";
+    return;
+  }
 
-    if(!data || data.length === 0){
 
-        box.innerHTML =
-            `<div class="status">
-                No tutorials found.
-            </div>`;
+  const box =
+    $("tutorialList");
 
-        return;
-    }
+  box.innerHTML = "";
 
-    data.forEach(t=>{
 
-        const div =
-            document.createElement("div");
+  if(!data || data.length===0){
 
-        div.className = "tutorial";
+    box.innerHTML =
+      "<small>No tutorials yet.</small>";
 
-        div.innerHTML = `
-            <strong>${escapeHtml(t.title || "Untitled Tutorial")}</strong>
+    return;
+  }
 
-            <div class="small">
-                Category:
-                ${escapeHtml(t.category || "General")}
-            </div>
 
-            <p>
-                ${escapeHtml(t.description || "")}
-            </p>
+  data.forEach(t=>{
 
-            <div class="row">
+    const div =
+      document.createElement("div");
 
-                <button class="btn secondary"
-                        onclick="toggleTutorial(${t.id},${t.published ? "false" : "true"})">
-                    ${t.published ? "Unpublish" : "Publish"}
-                </button>
+    div.className =
+      "tutorial";
 
-                <button class="btn danger"
-                        onclick="deleteTutorial(${t.id})">
-                    Delete
-                </button>
+    div.innerHTML = `
 
-            </div>
-        `;
+      <h3>${escapeHtml(t.title || "")}</h3>
 
-        box.appendChild(div);
+      <small>
+        ${escapeHtml(t.category || "")}
+      </small>
 
-    });
+      <p>
+        ${escapeHtml(t.description || "")}
+      </p>
+
+      <p>
+        Status:
+        ${t.published ? "Published" : "Unpublished"}
+      </p>
+
+      <button
+        onclick="toggleTutorial(${t.id},${!t.published})"
+      >
+        ${t.published ? "Unpublish" : "Publish"}
+      </button>
+
+      <button
+        class="danger"
+        onclick="deleteTutorial(${t.id})"
+      >
+        Delete
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
 
 }
 
 
-window.toggleTutorial = async function(id,value){
+window.toggleTutorial =
+async function(id,value){
 
-    const {error} =
-        await supabase
-        .from("tutorials")
-        .update({
-            published:value
-        })
-        .eq("id",id);
+  const {error} =
+    await supabaseClient
+      .from("tutorials")
+      .update({
+        published:value,
+        updated_at:new Date().toISOString()
+      })
+      .eq("id",id);
 
-    if(error){
-        alert(error.message);
-        return;
-    }
+  if(error){
 
-    await loadTutorials();
+    alert(error.message);
+
+    return;
+  }
+
+  await loadTutorials();
 
 };
 
 
-window.deleteTutorial = async function(id){
+window.deleteTutorial =
+async function(id){
 
-    const ok =
-        confirm(
-            "Are you sure you want to delete this tutorial?"
+  if(!confirm("Delete this tutorial?"))
+    return;
+
+  const {error} =
+    await supabaseClient
+      .from("tutorials")
+      .delete()
+      .eq("id",id);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  await loadTutorials();
+
+};
+
+
+/* =========================
+   PLATFORMS
+========================= */
+
+$("addPlatformBtn").onclick =
+async ()=>{
+
+  const name =
+    $("platformName").value.trim();
+
+  if(!name){
+
+    alert("Platform name is required.");
+
+    return;
+  }
+
+
+  let logoUrl = null;
+
+
+  try{
+
+    if($("platformLogo").files[0]){
+
+      logoUrl =
+        await uploadFile(
+          $("platformLogo").files[0],
+          "platforms"
         );
 
-    if(!ok){
-        return;
     }
 
-    const {error} =
-        await supabase
-        .from("tutorials")
-        .delete()
-        .eq("id",id);
+  }catch(error){
 
-    if(error){
-        alert(error.message);
-        return;
-    }
+    alert(
+      "Logo upload failed: " +
+      error.message
+    );
 
-    await loadTutorials();
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("platforms")
+      .insert({
+
+        name,
+
+        username:
+          $("platformUsername").value.trim(),
+
+        website_url:
+          $("platformWebsite").value.trim(),
+
+        logo_url:
+          logoUrl || ""
+
+      });
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  $("platformName").value="";
+  $("platformUsername").value="";
+  $("platformWebsite").value="";
+  $("platformLogo").value="";
+
+  await loadPlatforms();
+
+};
+
+
+async function loadPlatforms(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("platforms")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  const box =
+    $("platformList");
+
+  box.innerHTML="";
+
+
+  if(error){
+
+    box.innerHTML =
+      "<p>Could not load platforms.</p>";
+
+    return;
+  }
+
+
+  if(!data.length){
+
+    box.innerHTML =
+      "<small>No platforms added yet.</small>";
+
+    return;
+  }
+
+
+  data.forEach(p=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className="tutorial";
+
+    div.innerHTML = `
+
+      <strong>${escapeHtml(p.name)}</strong>
+
+      <p>
+        ${escapeHtml(p.username || "")}
+      </p>
+
+      <button
+        class="danger"
+        onclick="deletePlatform(${p.id})"
+      >
+        Delete
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+window.deletePlatform =
+async function(id){
+
+  if(!confirm("Delete this platform?"))
+    return;
+
+  const {error} =
+    await supabaseClient
+      .from("platforms")
+      .delete()
+      .eq("id",id);
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  await loadPlatforms();
 
 };
 
 
 /* =========================
-   SECURITY HELPERS
+   FAQ
 ========================= */
 
-function escapeHtml(value){
+$("addFaqBtn").onclick =
+async ()=>{
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+  const question =
+    $("faqQuestion").value.trim();
+
+  const answer =
+    $("faqAnswer").value.trim();
+
+  if(!question || !answer){
+
+    alert("Question and answer are required.");
+
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("faq")
+      .insert({
+        question,
+        answer,
+        published:true
+      });
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  $("faqQuestion").value="";
+  $("faqAnswer").value="";
+
+  await loadFaq();
+
+};
+
+
+async function loadFaq(){
+
+  const {data} =
+    await supabaseClient
+      .from("faq")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  const box =
+    $("faqList");
+
+  box.innerHTML="";
+
+
+  (data || []).forEach(item=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className="tutorial";
+
+    div.innerHTML = `
+
+      <strong>${escapeHtml(item.question)}</strong>
+
+      <p>${escapeHtml(item.answer)}</p>
+
+      <button
+        class="danger"
+        onclick="deleteFaq(${item.id})"
+      >
+        Delete
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+window.deleteFaq =
+async function(id){
+
+  if(!confirm("Delete this FAQ?"))
+    return;
+
+  await supabaseClient
+    .from("faq")
+    .delete()
+    .eq("id",id);
+
+  await loadFaq();
+
+};
+
+
+/* =========================
+   ANNOUNCEMENTS
+========================= */
+
+$("addAnnouncementBtn").onclick =
+async ()=>{
+
+  const title =
+    $("announcementTitle").value.trim();
+
+  const message =
+    $("announcementMessage").value.trim();
+
+  if(!title || !message){
+
+    alert("Title and message are required.");
+
+    return;
+  }
+
+
+  const {error} =
+    await supabaseClient
+      .from("announcements")
+      .insert({
+        title,
+        message,
+        published:true
+      });
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  $("announcementTitle").value="";
+  $("announcementMessage").value="";
+
+  await loadAnnouncements();
+
+};
+
+
+async function loadAnnouncements(){
+
+  const {data} =
+    await supabaseClient
+      .from("announcements")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+
+  const box =
+    $("announcementList");
+
+  box.innerHTML="";
+
+
+  (data || []).forEach(item=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className="tutorial";
+
+    div.innerHTML = `
+
+      <strong>${escapeHtml(item.title)}</strong>
+
+      <p>${escapeHtml(item.message)}</p>
+
+      <button
+        class="danger"
+        onclick="deleteAnnouncement(${item.id})"
+      >
+        Delete
+      </button>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+
+window.deleteAnnouncement =
+async function(id){
+
+  if(!confirm("Delete this announcement?"))
+    return;
+
+  await supabaseClient
+    .from("announcements")
+    .delete()
+    .eq("id",id);
+
+  await loadAnnouncements();
+
+};
+
+
+/* =========================
+   LOAD EVERYTHING
+========================= */
+
+async function loadEverything(){
+
+  await loadSettings();
+  await loadTutorials();
+  await loadPlatforms();
+  await loadFaq();
+  await loadAnnouncements();
 
 }
 
 
 /* =========================
-   SESSION CHECK
+   START
 ========================= */
 
-async function checkSession(){
+supabaseClient.auth.onAuthStateChange(
+  async ()=>{
+    await checkAdmin();
+  }
+);
 
-    const {data} =
-        await supabase.auth.getSession();
-
-    if(data.session?.user){
-
-        await checkAdmin(data.session.user);
-
-    }
-
-}
-
-
-checkSession();
+checkAdmin();
 
 </script>
 
