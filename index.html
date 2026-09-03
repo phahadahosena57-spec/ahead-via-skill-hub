@@ -3,424 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AHEAD VIA SKILL HUB</title>
+<title>AHEAD VIA SKILL HUB — Admin Panel</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
+    margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    color:#fff;
     background:
-        radial-gradient(circle at 15% 20%,rgba(0,255,255,.12),transparent 30%),
-        radial-gradient(circle at 85% 10%,rgba(120,0,255,.18),transparent 35%),
-        linear-gradient(135deg,#050816,#090d24 50%,#03040c);
+      radial-gradient(circle at top left,#172554 0,#07111f 35%,#020617 75%);
+    color:#fff;
     min-height:100vh;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
 .container{
-    width:min(1150px,92%);
-    margin:auto;
+    width:min(1100px,94%);
+    margin:30px auto;
 }
 
-/* HEADER */
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(3,5,18,.82);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid rgba(255,255,255,.08);
+.header{
+    padding:24px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    background:rgba(15,23,42,.82);
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+    margin-bottom:20px;
 }
 
-.nav{
-    min-height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+.header h1{
+    margin:0 0 8px;
+    font-size:28px;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-size:18px;
-    font-weight:800;
-    letter-spacing:.5px;
-}
-
-.logo{
-    width:44px;
-    height:44px;
-    border-radius:13px;
-    object-fit:cover;
-    border:1px solid rgba(255,255,255,.2);
-    box-shadow:0 0 25px rgba(0,255,255,.18);
-}
-
-nav{
-    display:flex;
-    gap:22px;
-    flex-wrap:wrap;
-}
-
-nav a{
-    color:#b9c1d9;
-    font-size:14px;
-    transition:.25s;
-}
-
-nav a:hover{
-    color:#fff;
-}
-
-/* HERO */
-.hero{
-    padding:75px 0 55px;
-}
-
-.hero-box{
-    display:grid;
-    grid-template-columns:1.25fr .75fr;
-    align-items:center;
-    gap:45px;
-    padding:45px;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:30px;
-    background:rgba(255,255,255,.035);
-    box-shadow:0 25px 80px rgba(0,0,0,.35);
-}
-
-.badge{
-    display:inline-block;
-    padding:8px 14px;
-    border-radius:30px;
-    font-size:12px;
-    color:#bffcff;
-    border:1px solid rgba(0,255,255,.25);
-    background:rgba(0,255,255,.06);
-    margin-bottom:18px;
-}
-
-.hero h1{
-    font-size:clamp(30px,5vw,48px);
-    line-height:1.1;
-    margin-bottom:18px;
-}
-
-.hero h1 span{
-    color:#62f5ff;
-    text-shadow:0 0 25px rgba(98,245,255,.35);
-}
-
-.hero p{
-    color:#aeb7d0;
-    line-height:1.8;
-    font-size:15px;
-    max-width:680px;
-}
-
-.profile-wrap{
-    display:flex;
-    justify-content:center;
-}
-
-.profile{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid rgba(255,255,255,.12);
-    box-shadow:
-        0 0 0 10px rgba(0,255,255,.04),
-        0 0 60px rgba(0,220,255,.22);
-}
-
-/* SECTION */
-section{
-    padding:35px 0;
-}
-
-.section-title{
-    font-size:23px;
-    margin-bottom:10px;
-}
-
-.section-subtitle{
-    color:#8993ad;
-    font-size:13px;
-    margin-bottom:25px;
-}
-
-/* CARDS */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+.header p{
+    margin:0;
+    color:#94a3b8;
 }
 
 .card{
-    padding:23px;
-    border-radius:20px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.09);
-    transition:.3s;
+    background:rgba(15,23,42,.88);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:rgba(0,255,255,.28);
-    box-shadow:0 15px 45px rgba(0,0,0,.3);
+h2{
+    margin-top:0;
+    font-size:21px;
 }
 
-.icon{
-    width:46px;
-    height:46px;
-    display:grid;
-    place-items:center;
-    border-radius:14px;
-    background:rgba(0,255,255,.08);
-    font-size:22px;
-    margin-bottom:16px;
-}
-
-.card h3{
+h3{
     font-size:17px;
-    margin-bottom:9px;
+    margin-top:28px;
+    color:#cbd5e1;
 }
 
-.card p{
-    color:#8e98b2;
-    font-size:13px;
-    line-height:1.7;
-}
-
-/* ABOUT */
-.about{
-    padding:30px;
-    border-radius:24px;
-    background:linear-gradient(
-        135deg,
-        rgba(0,255,255,.06),
-        rgba(120,0,255,.06)
-    );
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.about p{
-    color:#aab3ca;
-    font-size:14px;
-    line-height:1.9;
-}
-
-/* TUTORIAL */
-.tutorial-card{
-    overflow:hidden;
-    padding:0;
-}
-
-.thumbnail{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-    background:#101426;
-}
-
-.tutorial-content{
-    padding:20px;
-}
-
-.tag{
-    display:inline-block;
-    font-size:11px;
-    padding:6px 9px;
-    border-radius:20px;
-    background:rgba(98,245,255,.08);
-    color:#72eff8;
-    margin-bottom:10px;
-}
-
-.tutorial-content h3{
-    margin-bottom:8px;
-}
-
-.tutorial-content p{
-    margin-bottom:15px;
-}
-
-.watch{
-    display:inline-block;
-    padding:10px 15px;
-    border-radius:10px;
-    background:#ffffff;
-    color:#080b18;
-    font-size:12px;
-    font-weight:700;
-}
-
-/* SOCIAL */
-.social-grid{
+.grid{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:12px;
-}
-
-.social{
-    padding:18px 10px;
-    text-align:center;
-    border-radius:16px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.08);
-    transition:.25s;
-}
-
-.social:hover{
-    transform:translateY(-4px);
-    background:rgba(255,255,255,.08);
-}
-
-.social-icon{
-    font-size:25px;
-    margin-bottom:8px;
-}
-
-.social span{
-    display:block;
-    font-size:11px;
-    color:#aeb7cf;
-}
-
-/* STATS */
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
 
-.stat{
-    text-align:center;
-    padding:24px 10px;
-    border-radius:18px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
+.full{
+    grid-column:1/-1;
 }
 
-.stat strong{
+label{
     display:block;
-    font-size:25px;
+    font-size:13px;
+    color:#94a3b8;
     margin-bottom:7px;
 }
 
-.stat span{
-    color:#858fa8;
-    font-size:11px;
-}
-
-/* FAQ */
-.faq{
-    display:grid;
-    gap:10px;
-}
-
-details{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:15px;
-    padding:16px 18px;
-}
-
-summary{
-    cursor:pointer;
+input,textarea,select{
+    width:100%;
+    border:1px solid rgba(255,255,255,.12);
+    background:#020617;
+    color:#fff;
+    border-radius:13px;
+    padding:13px;
+    outline:none;
     font-size:14px;
-    font-weight:600;
 }
 
-details p{
-    color:#929cb5;
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+    border-color:#38bdf8;
+}
+
+.btn{
+    border:0;
+    border-radius:13px;
+    padding:13px 18px;
+    background:linear-gradient(135deg,#06b6d4,#2563eb);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.danger{
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.secondary{
+    background:#1e293b;
+}
+
+.status{
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:#020617;
+    color:#94a3b8;
     font-size:13px;
-    line-height:1.7;
+}
+
+.hidden{
+    display:none;
+}
+
+.login{
+    max-width:500px;
+    margin:80px auto;
+}
+
+.small{
+    color:#64748b;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.social-item{
+    padding:16px;
+    border:1px solid rgba(255,255,255,.10);
+    background:#020617;
+    border-radius:15px;
     margin-top:12px;
 }
 
-/* FOOTER */
-footer{
-    margin-top:50px;
-    padding:35px 0;
-    border-top:1px solid rgba(255,255,255,.08);
-    text-align:center;
-}
-
-footer h3{
-    font-size:16px;
+.social-item strong{
+    display:block;
     margin-bottom:8px;
 }
 
-footer p{
-    color:#727c96;
-    font-size:12px;
+.remove{
+    background:#7f1d1d;
+    border:0;
+    color:#fff;
+    padding:8px 12px;
+    border-radius:9px;
+    cursor:pointer;
+    margin-top:10px;
 }
 
-/* MOBILE */
-@media(max-width:850px){
-
-    nav{
-        display:none;
-    }
-
-    .hero-box{
-        grid-template-columns:1fr;
-        text-align:center;
-        padding:30px 20px;
-    }
-
-    .hero p{
-        margin:auto;
-    }
-
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .social-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
+.tutorial{
+    padding:17px;
+    border:1px solid rgba(255,255,255,.10);
+    background:#020617;
+    border-radius:15px;
+    margin-top:12px;
 }
 
-@media(max-width:560px){
+.tutorial strong{
+    font-size:16px;
+}
 
-    .hero{
-        padding-top:35px;
-    }
-
-    .hero-box{
-        border-radius:22px;
-    }
-
+@media(max-width:700px){
     .grid{
         grid-template-columns:1fr;
     }
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
+    .full{
+        grid-column:auto;
     }
 
-    .social-grid{
-        grid-template-columns:repeat(2,1fr);
+    .container{
+        width:94%;
     }
 
-    .profile{
-        width:145px;
-        height:145px;
+    .card{
+        padding:18px;
+    }
+
+    .header h1{
+        font-size:23px;
     }
 }
 </style>
@@ -428,635 +215,1004 @@ footer p{
 
 <body>
 
-<header>
-    <div class="container nav">
+<div class="container">
 
-        <a href="#" class="brand">
-            <img id="siteLogo" class="logo" src="" alt="Logo">
-            <span id="siteName">AHEAD VIA SKILL HUB</span>
-        </a>
+    <div id="loginSection" class="card login">
+        <div class="header">
+            <h1>AHEAD VIA SKILL HUB</h1>
+            <p>Administrator Login</p>
+        </div>
 
-        <nav>
-            <a href="#about">About</a>
-            <a href="#learn">Learn</a>
-            <a href="#tutorials">Tutorials</a>
-            <a href="#tools">Tools</a>
-            <a href="#social">Social</a>
-            <a href="#faq">FAQ</a>
-        </nav>
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="Admin email">
 
+        <label style="margin-top:14px;">Password</label>
+        <input id="loginPassword" type="password" placeholder="Password">
+
+        <button class="btn" id="loginBtn">Login</button>
+
+        <div id="loginStatus" class="status">
+            Please sign in with your authorized admin account.
+        </div>
     </div>
-</header>
 
 
-<main>
+    <div id="adminSection" class="hidden">
 
-<!-- HERO -->
-<section class="hero">
-    <div class="container">
+        <div class="header">
+            <h1>Admin Control Center</h1>
+            <p>Manage your AHEAD VIA SKILL HUB website.</p>
 
-        <div class="hero-box">
+            <div class="row">
+                <button class="btn secondary" id="logoutBtn">Logout</button>
+                <button class="btn secondary" onclick="window.location.href='index.html'">
+                    View Website
+                </button>
+            </div>
+        </div>
 
-            <div>
-                <span class="badge">LEARN • CREATE • GROW</span>
 
-                <h1>
-                    Welcome to
-                    <span>AHEAD VIA SKILL HUB</span>
-                </h1>
+        <!-- WEBSITE SETTINGS -->
+        <div class="card">
 
-                <p id="heroIntro">
-                    Learn practical digital skills, discover useful tools,
-                    explore AI technologies, create better content and grow
-                    your online knowledge step by step.
-                </p>
+            <h2>Website Settings</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label>Website Name</label>
+                    <input id="site_name" placeholder="AHEAD VIA SKILL HUB">
+                </div>
+
+                <div>
+                    <label>Hero Introduction</label>
+                    <input id="hero_intro" placeholder="Learn. Create. Grow.">
+                </div>
+
+                <div class="full">
+                    <label>About Me</label>
+                    <textarea id="about_text"
+                    placeholder="Write your About Me information"></textarea>
+                </div>
+
             </div>
 
-            <div class="profile-wrap">
-                <img
-                    id="profileImage"
-                    class="profile"
-                    src=""
-                    alt="Profile">
-            </div>
+            <button class="btn" id="saveWebsite">
+                Save Website Settings
+            </button>
+
+            <div id="websiteStatus" class="status"></div>
 
         </div>
 
-    </div>
-</section>
+
+        <!-- CONTACT -->
+        <div class="card">
+
+            <h2>Contact Me</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label>WhatsApp Number</label>
+                    <input id="whatsapp_number"
+                           placeholder="+8801XXXXXXXXX">
+                    <div class="small">
+                        Enter the number only. The website will create the WhatsApp link automatically.
+                    </div>
+                </div>
+
+                <div>
+                    <label>Contact Number</label>
+                    <input id="contact_number"
+                           placeholder="+8801XXXXXXXXX">
+                </div>
+
+                <div>
+                    <label>Telegram User ID / Username</label>
+                    <input id="telegram_personal"
+                           placeholder="@username or user ID">
+                </div>
+
+            </div>
+
+            <button class="btn" id="saveContact">
+                Save Contact Information
+            </button>
+
+            <div id="contactStatus" class="status"></div>
+
+        </div>
 
 
-<!-- ABOUT -->
-<section id="about">
-    <div class="container">
+        <!-- SOCIAL MEDIA -->
+        <div class="card">
 
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">
-            Learn more about my work, experience and digital activities.
-        </p>
+            <h2>Social Media</h2>
 
-        <div class="about">
-            <p id="aboutText">
-                I work with various websites and online platforms, exploring
-                digital tools, AI technologies, content creation and online
-                services. I create informative videos and tutorials to share
-                practical knowledge and help others understand how different
-                tools and platforms work. I create video prompts, image
-                prompts, captions, hashtags, social media content, tutorials
-                and useful guides. I regularly research new apps, tools and
-                techniques to learn, create and share useful knowledge with
-                others.
+            <div class="grid">
+
+                <div>
+                    <label>TikTok Username / ID</label>
+                    <input id="tiktok"
+                           placeholder="@username">
+                </div>
+
+                <div>
+                    <label>Telegram Username / ID</label>
+                    <input id="telegram_social"
+                           placeholder="@username">
+                </div>
+
+                <div>
+                    <label>Instagram Username / ID</label>
+                    <input id="instagram"
+                           placeholder="@username">
+                </div>
+
+                <div>
+                    <label>Twitter / X Username</label>
+                    <input id="twitter"
+                           placeholder="@username">
+                </div>
+
+                <div>
+                    <label>YouTube Channel Name / ID</label>
+                    <input id="youtube"
+                           placeholder="Channel name or ID">
+                </div>
+
+                <div>
+                    <label>Facebook Page Name / ID</label>
+                    <input id="facebook"
+                           placeholder="Page name or ID">
+                </div>
+
+            </div>
+
+            <h3>Other Social Media</h3>
+
+            <div class="grid">
+
+                <div>
+                    <label>Platform Name</label>
+                    <input id="other_platform"
+                           placeholder="Discord / LinkedIn / Pinterest">
+                </div>
+
+                <div>
+                    <label>Username / ID</label>
+                    <input id="other_username"
+                           placeholder="Username or ID">
+                </div>
+
+            </div>
+
+            <button class="btn" id="addOther">
+                Add Other Social Media
+            </button>
+
+            <div id="otherList"></div>
+
+            <button class="btn" id="saveSocial">
+                Save Social Media
+            </button>
+
+            <div id="socialStatus" class="status"></div>
+
+        </div>
+
+
+        <!-- COMMUNITY STATISTICS -->
+        <div class="card">
+
+            <h2>Community Statistics</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label>Community Members Base</label>
+                    <input id="members_count"
+                           type="number"
+                           value="1000000">
+                    <div class="small">
+                        Actual registered members can be added to this base later.
+                    </div>
+                </div>
+
+                <div>
+                    <label>Online Members</label>
+                    <input id="online_count"
+                           type="number"
+                           value="0">
+                </div>
+
+                <div>
+                    <label>Currently Learning</label>
+                    <input id="learning_count"
+                           type="number"
+                           value="0">
+                </div>
+
+            </div>
+
+            <button class="btn" id="saveStats">
+                Save Statistics
+            </button>
+
+            <div id="statsStatus" class="status"></div>
+
+        </div>
+
+
+        <!-- TUTORIALS -->
+        <div class="card">
+
+            <h2>Tutorial Management</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label>Tutorial Title</label>
+                    <input id="tutorial_title"
+                           placeholder="Tutorial title">
+                </div>
+
+                <div>
+                    <label>Category</label>
+                    <input id="tutorial_category"
+                           placeholder="AI / Video / Website / Social Media">
+                </div>
+
+                <div>
+                    <label>Thumbnail</label>
+                    <input id="tutorial_thumbnail"
+                           type="file"
+                           accept="image/*">
+                    <div class="small">
+                        File upload system will be connected to storage.
+                    </div>
+                </div>
+
+                <div>
+                    <label>Video</label>
+                    <input id="tutorial_video"
+                           type="file"
+                           accept="video/*">
+                </div>
+
+                <div class="full">
+                    <label>Short Description</label>
+                    <textarea id="tutorial_description"
+                    placeholder="Short tutorial description"></textarea>
+                </div>
+
+                <div class="full">
+                    <label>Tutorial Content</label>
+                    <textarea id="tutorial_content"
+                    placeholder="Full tutorial content"></textarea>
+                </div>
+
+            </div>
+
+            <button class="btn" id="addTutorial">
+                Add Tutorial
+            </button>
+
+            <div id="tutorialStatus" class="status"></div>
+
+            <h3>Existing Tutorials</h3>
+
+            <div id="tutorialList"></div>
+
+        </div>
+
+
+        <!-- ADMIN INFORMATION -->
+        <div class="card">
+
+            <h2>Admin Information</h2>
+
+            <p class="small">
+                Your Member ID and administrator authorization are controlled by the system.
+                Regular users will not be able to change administrator settings.
             </p>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- WHAT YOU CAN LEARN -->
-<section id="learn">
-    <div class="container">
-
-        <h2 class="section-title">What You Can Learn</h2>
-        <p class="section-subtitle">
-            Practical digital knowledge and useful skills.
-        </p>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="icon">🎬</div>
-                <h3>Video Creation</h3>
-                <p>
-                    Learn video creation, editing ideas, concepts,
-                    prompts and useful techniques.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🖼️</div>
-                <h3>Image Creation</h3>
-                <p>
-                    Explore image prompts, creative concepts,
-                    designs and AI image workflows.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🤖</div>
-                <h3>AI Tools</h3>
-                <p>
-                    Discover useful AI tools, platforms and practical
-                    ways to use modern AI technology.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">💻</div>
-                <h3>Website Skills</h3>
-                <p>
-                    Learn HTML, CSS, JavaScript and useful website
-                    development concepts.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">📱</div>
-                <h3>Social Media</h3>
-                <p>
-                    Learn social media content creation, captions,
-                    hashtags and publishing ideas.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🔎</div>
-                <h3>Research & Resources</h3>
-                <p>
-                    Find useful websites, apps, tools and online
-                    resources for learning and creating.
-                </p>
-            </div>
 
         </div>
 
     </div>
-</section>
 
-
-<!-- TUTORIALS -->
-<section id="tutorials">
-    <div class="container">
-
-        <h2 class="section-title">Latest Tutorials</h2>
-        <p class="section-subtitle">
-            Step-by-step tutorials and useful guides.
-        </p>
-
-        <div id="tutorialGrid" class="grid">
-
-            <div class="card">
-                <div class="icon">📚</div>
-                <h3>Loading Tutorials...</h3>
-                <p>
-                    Tutorials will appear here when they are published.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- TOOLS -->
-<section id="tools">
-    <div class="container">
-
-        <h2 class="section-title">Useful Apps & Tools</h2>
-        <p class="section-subtitle">
-            Useful resources for digital work and content creation.
-        </p>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="icon">✨</div>
-                <h3>AI Tools</h3>
-                <p>
-                    Useful AI platforms for writing, images, videos,
-                    research and creative work.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🎨</div>
-                <h3>Design Tools</h3>
-                <p>
-                    Explore creative tools for posters, graphics,
-                    social media designs and more.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🛠️</div>
-                <h3>Online Tools</h3>
-                <p>
-                    Helpful websites and services for everyday
-                    digital activities.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- PROMPTS -->
-<section>
-    <div class="container">
-
-        <h2 class="section-title">Prompt Library</h2>
-        <p class="section-subtitle">
-            Ready-to-use creative prompt categories.
-        </p>
-
-        <div class="grid">
-
-            <div class="card">
-                <div class="icon">🖼️</div>
-                <h3>Image Prompts</h3>
-                <p>
-                    Creative prompts for AI image generation,
-                    posters and social media graphics.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">🎥</div>
-                <h3>Video Prompts</h3>
-                <p>
-                    Video concepts and prompts for creating
-                    engaging digital content.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="icon">✍️</div>
-                <h3>Content Prompts</h3>
-                <p>
-                    Ideas for captions, posts, descriptions,
-                    hashtags and online content.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- STATS -->
-<section>
-    <div class="container">
-
-        <h2 class="section-title">Community</h2>
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong id="membersCount">0</strong>
-                <span>Members</span>
-            </div>
-
-            <div class="stat">
-                <strong id="onlineCount">0</strong>
-                <span>Online</span>
-            </div>
-
-            <div class="stat">
-                <strong id="learningCount">0</strong>
-                <span>Learning</span>
-            </div>
-
-            <div class="stat">
-                <strong id="tutorialCount">0</strong>
-                <span>Tutorials</span>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- SOCIAL -->
-<section id="social">
-    <div class="container">
-
-        <h2 class="section-title">Connect With Me</h2>
-        <p class="section-subtitle">
-            Follow the official social channels.
-        </p>
-
-        <div class="social-grid">
-
-            <a id="telegramPersonal" class="social" href="#" target="_blank">
-                <div class="social-icon">✈️</div>
-                <span>Telegram</span>
-            </a>
-
-            <a id="telegramGroup" class="social" href="#" target="_blank">
-                <div class="social-icon">👥</div>
-                <span>Telegram Group</span>
-            </a>
-
-            <a id="telegramChannel" class="social" href="#" target="_blank">
-                <div class="social-icon">📢</div>
-                <span>Channel</span>
-            </a>
-
-            <a id="facebook" class="social" href="#" target="_blank">
-                <div class="social-icon">ⓕ</div>
-                <span>Facebook</span>
-            </a>
-
-            <a id="youtube" class="social" href="#" target="_blank">
-                <div class="social-icon">▶️</div>
-                <span>YouTube</span>
-            </a>
-
-            <a id="instagram" class="social" href="#" target="_blank">
-                <div class="social-icon">◎</div>
-                <span>Instagram</span>
-            </a>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- FAQ -->
-<section id="faq">
-    <div class="container">
-
-        <h2 class="section-title">Frequently Asked Questions</h2>
-
-        <div class="faq">
-
-            <details>
-                <summary>What can I learn here?</summary>
-                <p>
-                    You can learn about digital tools, AI, content
-                    creation, websites, social media and useful online skills.
-                </p>
-            </details>
-
-            <details>
-                <summary>Are tutorials added regularly?</summary>
-                <p>
-                    New tutorials can be published through the website
-                    management system.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can I learn from mobile?</summary>
-                <p>
-                    Yes. The website is designed to work on mobile,
-                    tablet and desktop devices.
-                </p>
-            </details>
-
-        </div>
-
-    </div>
-</section>
-
-</main>
-
-
-<footer>
-    <div class="container">
-        <h3 id="footerSiteName">AHEAD VIA SKILL HUB</h3>
-        <p>
-            Learn • Create • Grow
-        </p>
-        <p style="margin-top:10px;">
-            © <span id="year"></span> AHEAD VIA SKILL HUB. All rights reserved.
-        </p>
-    </div>
-</footer>
+</div>
 
 
 <script>
+
 const SUPABASE_URL =
-    "https://wxqstcpjlzqdsgmovkey.supabase.co";
+"https://wxqstcpjlzqdsgmovkey.supabase.co";
 
-const SUPABASE_KEY =
-    "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+
+const supabase =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
 
 
-async function loadSite(){
+let settingsRow = null;
+let otherSocials = [];
 
-    try{
 
-        const settingsResponse = await fetch(
-            SUPABASE_URL +
-            "/rest/v1/site_settings?select=*&limit=1",
-            {
-                headers:{
-                    apikey:SUPABASE_KEY,
-                    Authorization:"Bearer " + SUPABASE_KEY
-                }
-            }
+function $(id){
+    return document.getElementById(id);
+}
+
+
+function status(id,message){
+    if($(id)){
+        $(id).textContent = message;
+    }
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+$("loginBtn").onclick = async function(){
+
+    const email = $("loginEmail").value.trim();
+    const password = $("loginPassword").value;
+
+    if(!email || !password){
+        status("loginStatus","Please enter email and password.");
+        return;
+    }
+
+    status("loginStatus","Signing in...");
+
+    const {data,error} =
+        await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+
+    if(error){
+        status("loginStatus",error.message);
+        return;
+    }
+
+    await checkAdmin(data.user);
+};
+
+
+async function checkAdmin(user){
+
+    if(!user){
+        return;
+    }
+
+    const {data:admin,error} =
+        await supabase
+        .from("admins")
+        .select("user_id")
+        .eq("user_id",user.id)
+        .maybeSingle();
+
+    if(error){
+        status("loginStatus",error.message);
+        return;
+    }
+
+    if(!admin){
+
+        status(
+            "loginStatus",
+            "This account is not authorized as an administrator."
         );
 
-        const settings = await settingsResponse.json();
+        await supabase.auth.signOut();
+        return;
+    }
 
-        if(settings && settings.length){
+    $("loginSection").classList.add("hidden");
+    $("adminSection").classList.remove("hidden");
 
-            const s = settings[0];
+    await loadSettings();
+    await loadTutorials();
+}
 
-            if(s.site_name){
-                document.getElementById("siteName").textContent =
-                    s.site_name;
 
-                document.getElementById("footerSiteName").textContent =
-                    s.site_name;
+/* =========================
+   LOGOUT
+========================= */
 
-                document.title = s.site_name;
-            }
+$("logoutBtn").onclick = async function(){
 
-            if(s.logo_url){
-                document.getElementById("siteLogo").src =
-                    s.logo_url;
-            }
+    await supabase.auth.signOut();
 
-            if(s.profile_image_url){
-                document.getElementById("profileImage").src =
-                    s.profile_image_url;
-            }
+    $("adminSection").classList.add("hidden");
+    $("loginSection").classList.remove("hidden");
 
-            if(s.about_text){
-                document.getElementById("aboutText").textContent =
-                    s.about_text;
-            }
+    $("loginPassword").value = "";
 
-            if(s.hero_intro){
-                document.getElementById("heroIntro").textContent =
-                    s.hero_intro;
-            }
+};
 
-            setLink("telegramPersonal",s.telegram_personal);
-            setLink("telegramGroup",s.telegram_group);
-            setLink("telegramChannel",s.telegram_channel);
-            setLink("facebook",s.facebook);
-            setLink("youtube",s.youtube);
-            setLink("instagram",s.instagram);
 
-            if(s.members_count !== undefined)
-                document.getElementById("membersCount").textContent =
-                    formatNumber(s.members_count);
+/* =========================
+   LOAD SETTINGS
+========================= */
 
-            if(s.online_count !== undefined)
-                document.getElementById("onlineCount").textContent =
-                    formatNumber(s.online_count);
+async function loadSettings(){
 
-            if(s.learning_count !== undefined)
-                document.getElementById("learningCount").textContent =
-                    formatNumber(s.learning_count);
+    const {data,error} =
+        await supabase
+        .from("site_settings")
+        .select("*")
+        .order("id",{ascending:true})
+        .limit(1)
+        .maybeSingle();
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+    settingsRow = data;
+
+    if(!data){
+        return;
+    }
+
+    $("site_name").value =
+        data.site_name || "";
+
+    $("hero_intro").value =
+        data.hero_intro || "";
+
+    $("about_text").value =
+        data.about_text || "";
+
+    $("whatsapp_number").value =
+        data.whatsapp_number ||
+        data.whatsapp ||
+        "";
+
+    $("contact_number").value =
+        data.contact_number || "";
+
+    $("telegram_personal").value =
+        data.telegram_personal || "";
+
+    $("tiktok").value =
+        data.tiktok || "";
+
+    $("telegram_social").value =
+        data.telegram_social || "";
+
+    $("instagram").value =
+        data.instagram || "";
+
+    $("twitter").value =
+        data.twitter || "";
+
+    $("youtube").value =
+        data.youtube || "";
+
+    $("facebook").value =
+        data.facebook || "";
+
+    $("members_count").value =
+        data.members_count ?? 1000000;
+
+    $("online_count").value =
+        data.online_count ?? 0;
+
+    $("learning_count").value =
+        data.learning_count ?? 0;
+
+    if(data.other_social){
+        try{
+            otherSocials =
+                typeof data.other_social === "string"
+                ? JSON.parse(data.other_social)
+                : data.other_social;
+        }catch(e){
+            otherSocials = [];
         }
+    }
+
+    renderOtherSocials();
+
+}
 
 
-        const tutorialResponse = await fetch(
-            SUPABASE_URL +
-            "/rest/v1/tutorials?select=*&published=eq.true&order=created_at.desc",
-            {
-                headers:{
-                    apikey:SUPABASE_KEY,
-                    Authorization:"Bearer " + SUPABASE_KEY
-                }
-            }
+/* =========================
+   SAVE WEBSITE
+========================= */
+
+$("saveWebsite").onclick = async function(){
+
+    if(!settingsRow?.id){
+        status(
+            "websiteStatus",
+            "Website settings row was not found."
+        );
+        return;
+    }
+
+    const update = {
+        site_name:$("site_name").value.trim(),
+        hero_intro:$("hero_intro").value.trim(),
+        about_text:$("about_text").value.trim()
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("websiteStatus",error.message);
+        return;
+    }
+
+    status(
+        "websiteStatus",
+        "Website settings saved successfully."
+    );
+
+    await loadSettings();
+};
+
+
+/* =========================
+   SAVE CONTACT
+========================= */
+
+$("saveContact").onclick = async function(){
+
+    if(!settingsRow?.id){
+        status(
+            "contactStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
+
+    const whatsapp =
+        $("whatsapp_number").value.trim();
+
+    const update = {
+        whatsapp_number:whatsapp,
+        whatsapp:whatsapp,
+        contact_number:
+            $("contact_number").value.trim(),
+        telegram_personal:
+            $("telegram_personal").value.trim()
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("contactStatus",error.message);
+        return;
+    }
+
+    status(
+        "contactStatus",
+        "Contact information saved successfully."
+    );
+
+    await loadSettings();
+};
+
+
+/* =========================
+   OTHER SOCIAL MEDIA
+========================= */
+
+$("addOther").onclick = function(){
+
+    const platform =
+        $("other_platform").value.trim();
+
+    const username =
+        $("other_username").value.trim();
+
+    if(!platform || !username){
+        status(
+            "socialStatus",
+            "Enter both platform name and username/ID."
+        );
+        return;
+    }
+
+    otherSocials.push({
+        platform,
+        username
+    });
+
+    $("other_platform").value = "";
+    $("other_username").value = "";
+
+    renderOtherSocials();
+
+};
+
+
+function renderOtherSocials(){
+
+    const box = $("otherList");
+
+    box.innerHTML = "";
+
+    otherSocials.forEach((item,index)=>{
+
+        const div =
+            document.createElement("div");
+
+        div.className = "social-item";
+
+        div.innerHTML = `
+            <strong>${escapeHtml(item.platform)}</strong>
+            <div>${escapeHtml(item.username)}</div>
+            <button class="remove"
+                    onclick="removeOther(${index})">
+                Remove
+            </button>
+        `;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+window.removeOther = function(index){
+
+    otherSocials.splice(index,1);
+
+    renderOtherSocials();
+
+};
+
+
+/* =========================
+   SAVE SOCIAL MEDIA
+========================= */
+
+$("saveSocial").onclick = async function(){
+
+    if(!settingsRow?.id){
+        status(
+            "socialStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
+
+    const update = {
+
+        tiktok:
+            $("tiktok").value.trim(),
+
+        telegram_social:
+            $("telegram_social").value.trim(),
+
+        instagram:
+            $("instagram").value.trim(),
+
+        twitter:
+            $("twitter").value.trim(),
+
+        youtube:
+            $("youtube").value.trim(),
+
+        facebook:
+            $("facebook").value.trim(),
+
+        other_social:
+            JSON.stringify(otherSocials)
+
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("socialStatus",error.message);
+        return;
+    }
+
+    status(
+        "socialStatus",
+        "Social media settings saved successfully."
+    );
+
+    await loadSettings();
+};
+
+
+/* =========================
+   SAVE STATISTICS
+========================= */
+
+$("saveStats").onclick = async function(){
+
+    if(!settingsRow?.id){
+        status(
+            "statsStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
+
+    const update = {
+
+        members_count:
+            Number($("members_count").value) || 0,
+
+        online_count:
+            Number($("online_count").value) || 0,
+
+        learning_count:
+            Number($("learning_count").value) || 0
+
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("statsStatus",error.message);
+        return;
+    }
+
+    status(
+        "statsStatus",
+        "Community statistics saved successfully."
+    );
+
+    await loadSettings();
+};
+
+
+/* =========================
+   TUTORIALS
+========================= */
+
+$("addTutorial").onclick = async function(){
+
+    const title =
+        $("tutorial_title").value.trim();
+
+    const category =
+        $("tutorial_category").value.trim();
+
+    const description =
+        $("tutorial_description").value.trim();
+
+    const content =
+        $("tutorial_content").value.trim();
+
+    if(!title){
+        status(
+            "tutorialStatus",
+            "Tutorial title is required."
+        );
+        return;
+    }
+
+    const insert = {
+
+        title,
+        category,
+        description,
+        content,
+        thumbnail_url:"",
+        video_url:"",
+        published:true,
+        featured:false
+
+    };
+
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .insert(insert);
+
+    if(error){
+        status("tutorialStatus",error.message);
+        return;
+    }
+
+    status(
+        "tutorialStatus",
+        "Tutorial added successfully."
+    );
+
+    $("tutorial_title").value = "";
+    $("tutorial_category").value = "";
+    $("tutorial_description").value = "";
+    $("tutorial_content").value = "";
+    $("tutorial_thumbnail").value = "";
+    $("tutorial_video").value = "";
+
+    await loadTutorials();
+
+};
+
+
+/* =========================
+   LOAD TUTORIALS
+========================= */
+
+async function loadTutorials(){
+
+    const {data,error} =
+        await supabase
+        .from("tutorials")
+        .select("*")
+        .order("id",{ascending:false});
+
+    if(error){
+        console.log(error);
+        return;
+    }
+
+    const box = $("tutorialList");
+
+    box.innerHTML = "";
+
+    if(!data || data.length === 0){
+
+        box.innerHTML =
+            `<div class="status">
+                No tutorials found.
+            </div>`;
+
+        return;
+    }
+
+    data.forEach(t=>{
+
+        const div =
+            document.createElement("div");
+
+        div.className = "tutorial";
+
+        div.innerHTML = `
+            <strong>${escapeHtml(t.title || "Untitled Tutorial")}</strong>
+
+            <div class="small">
+                Category:
+                ${escapeHtml(t.category || "General")}
+            </div>
+
+            <p>
+                ${escapeHtml(t.description || "")}
+            </p>
+
+            <div class="row">
+
+                <button class="btn secondary"
+                        onclick="toggleTutorial(${t.id},${t.published ? "false" : "true"})">
+                    ${t.published ? "Unpublish" : "Publish"}
+                </button>
+
+                <button class="btn danger"
+                        onclick="deleteTutorial(${t.id})">
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+window.toggleTutorial = async function(id,value){
+
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .update({
+            published:value
+        })
+        .eq("id",id);
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    await loadTutorials();
+
+};
+
+
+window.deleteTutorial = async function(id){
+
+    const ok =
+        confirm(
+            "Are you sure you want to delete this tutorial?"
         );
 
-        const tutorials = await tutorialResponse.json();
+    if(!ok){
+        return;
+    }
 
-        const grid =
-            document.getElementById("tutorialGrid");
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .delete()
+        .eq("id",id);
 
-        if(Array.isArray(tutorials)){
+    if(error){
+        alert(error.message);
+        return;
+    }
 
-            document.getElementById("tutorialCount").textContent =
-                tutorials.length;
+    await loadTutorials();
 
-            if(tutorials.length){
+};
 
-                grid.innerHTML = "";
 
-                tutorials.forEach(t => {
+/* =========================
+   SECURITY HELPERS
+========================= */
 
-                    const card =
-                        document.createElement("div");
+function escapeHtml(value){
 
-                    card.className =
-                        "card tutorial-card";
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-                    card.innerHTML = `
+}
 
-                        ${
-                            t.thumbnail_url
-                            ?
-                            `<img class="thumbnail"
-                                  src="${escapeHTML(t.thumbnail_url)}"
-                                  alt="Tutorial thumbnail">`
-                            :
-                            `<div class="thumbnail"></div>`
-                        }
 
-                        <div class="tutorial-content">
+/* =========================
+   SESSION CHECK
+========================= */
 
-                            <span class="tag">
-                                ${escapeHTML(t.category || "Tutorial")}
-                            </span>
+async function checkSession(){
 
-                            <h3>
-                                ${escapeHTML(t.title || "Tutorial")}
-                            </h3>
+    const {data} =
+        await supabase.auth.getSession();
 
-                            <p>
-                                ${escapeHTML(
-                                    t.description ||
-                                    "Learn this topic step by step."
-                                )}
-                            </p>
+    if(data.session?.user){
 
-                            ${
-                                t.video_url
-                                ?
-                                `<a class="watch"
-                                   href="${escapeHTML(t.video_url)}"
-                                   target="_blank">
-                                   Watch Tutorial
-                                 </a>`
-                                :
-                                ""
-                            }
-
-                        </div>
-                    `;
-
-                    grid.appendChild(card);
-
-                });
-
-            }
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Unable to load website data:",
-            error
-        );
+        await checkAdmin(data.session.user);
 
     }
 
 }
 
 
-function setLink(id,url){
+checkSession();
 
-    const el =
-        document.getElementById(id);
-
-    if(!el) return;
-
-    if(url){
-        el.href = url;
-        el.style.display = "block";
-    }else{
-        el.href = "#";
-    }
-}
-
-
-function formatNumber(number){
-
-    if(number === null ||
-       number === undefined ||
-       number === "")
-        return "0";
-
-    const n = Number(number);
-
-    if(Number.isNaN(n))
-        return "0";
-
-    return n.toLocaleString();
-}
-
-
-function escapeHTML(value){
-
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-}
-
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-
-loadSite();
 </script>
 
 </body>
-  </html>
+                </html>
