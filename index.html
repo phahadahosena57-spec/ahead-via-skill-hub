@@ -6,668 +6,422 @@
 <title>AHEAD VIA SKILL HUB</title>
 
 <style>
-:root{
-  --bg:#050816;
-  --bg2:#0b1230;
-  --card:rgba(15,24,52,.72);
-  --card2:rgba(22,33,70,.72);
-  --text:#f8fbff;
-  --muted:#9caac5;
-  --cyan:#38ddff;
-  --blue:#527cff;
-  --purple:#a86cff;
-  --green:#38e0ae;
-  --border:rgba(255,255,255,.10);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
 
 body{
-  margin:0;
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 10% 5%,rgba(56,221,255,.20),transparent 32%),
-    radial-gradient(circle at 90% 10%,rgba(168,108,255,.20),transparent 32%),
-    radial-gradient(circle at 50% 90%,rgba(56,224,174,.10),transparent 35%),
-    linear-gradient(135deg,#040713,#0b1230 50%,#08051d);
-  background-attachment:fixed;
-  overflow-x:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(0,255,255,.12),transparent 30%),
+        radial-gradient(circle at 85% 10%,rgba(120,0,255,.18),transparent 35%),
+        linear-gradient(135deg,#050816,#090d24 50%,#03040c);
+    min-height:100vh;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  width:350px;
-  height:350px;
-  left:-180px;
-  top:35%;
-  border-radius:50%;
-  background:rgba(56,221,255,.12);
-  filter:blur(90px);
-  pointer-events:none;
-  z-index:-1;
+a{
+    color:inherit;
+    text-decoration:none;
 }
-
-body:after{
-  content:"";
-  position:fixed;
-  width:350px;
-  height:350px;
-  right:-180px;
-  bottom:10%;
-  border-radius:50%;
-  background:rgba(168,108,255,.13);
-  filter:blur(90px);
-  pointer-events:none;
-  z-index:-1;
-}
-
-a{text-decoration:none;color:inherit}
 
 .container{
-  width:min(1180px,92%);
-  margin:auto;
+    width:min(1150px,92%);
+    margin:auto;
 }
 
 /* HEADER */
-
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(4,7,20,.72);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(3,5,18,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .nav{
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:900;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:18px;
+    font-weight:800;
+    letter-spacing:.5px;
 }
 
 .logo{
-  width:46px;
-  height:46px;
-  border-radius:14px;
-  object-fit:cover;
-  border:1px solid var(--border);
-  box-shadow:0 0 30px rgba(56,221,255,.20);
+    width:44px;
+    height:44px;
+    border-radius:13px;
+    object-fit:cover;
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 0 25px rgba(0,255,255,.18);
 }
 
-.brand-name{
-  font-size:16px;
+nav{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
 }
 
-.navlinks{
-  display:flex;
-  gap:5px;
+nav a{
+    color:#b9c1d9;
+    font-size:14px;
+    transition:.25s;
 }
 
-.navlinks a{
-  padding:10px 12px;
-  color:#c8d3e8;
-  font-size:13px;
-  border-radius:10px;
-}
-
-.navlinks a:hover{
-  background:rgba(255,255,255,.06);
-  color:#fff;
-}
-
-.admin-btn,
-.primary{
-  border:0;
-  color:#fff;
-  cursor:pointer;
-  padding:11px 17px;
-  border-radius:12px;
-  font-weight:800;
-  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
-  box-shadow:0 10px 35px rgba(82,124,255,.25);
+nav a:hover{
+    color:#fff;
 }
 
 /* HERO */
-
 .hero{
-  min-height:680px;
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  align-items:center;
-  gap:50px;
-  padding:75px 0;
+    padding:75px 0 55px;
+}
+
+.hero-box{
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    align-items:center;
+    gap:45px;
+    padding:45px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:30px;
+    background:rgba(255,255,255,.035);
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 13px;
-  border-radius:999px;
-  background:rgba(56,221,255,.07);
-  border:1px solid rgba(56,221,255,.20);
-  color:#8cecff;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1.3px;
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:12px;
+    color:#bffcff;
+    border:1px solid rgba(0,255,255,.25);
+    background:rgba(0,255,255,.06);
+    margin-bottom:18px;
 }
 
-.live-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 15px var(--green);
+.hero h1{
+    font-size:clamp(30px,5vw,48px);
+    line-height:1.1;
+    margin-bottom:18px;
 }
 
-h1{
-  font-size:clamp(42px,7vw,78px);
-  line-height:1.02;
-  letter-spacing:-3px;
-  margin:20px 0;
-}
-
-.gradient{
-  background:linear-gradient(100deg,#fff,#62e7ff,#aa7dff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+.hero h1 span{
+    color:#62f5ff;
+    text-shadow:0 0 25px rgba(98,245,255,.35);
 }
 
 .hero p{
-  max-width:680px;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.8;
-}
-
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:28px;
-}
-
-.secondary{
-  padding:11px 17px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:rgba(255,255,255,.045);
-  color:#fff;
-  font-weight:800;
+    color:#aeb7d0;
+    line-height:1.8;
+    font-size:15px;
+    max-width:680px;
 }
 
 .profile-wrap{
-  position:relative;
-  display:flex;
-  justify-content:center;
-}
-
-.profile-ring{
-  width:min(390px,80vw);
-  aspect-ratio:1;
-  padding:9px;
-  border-radius:35%;
-  background:linear-gradient(145deg,var(--cyan),var(--blue),var(--purple));
-  box-shadow:
-    0 0 80px rgba(82,124,255,.22),
-    0 30px 80px rgba(0,0,0,.45);
-  transform:rotate(3deg);
+    display:flex;
+    justify-content:center;
 }
 
 .profile{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:32%;
-  background:#101938;
-  transform:rotate(-3deg);
-  border:2px solid rgba(255,255,255,.12);
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid rgba(255,255,255,.12);
+    box-shadow:
+        0 0 0 10px rgba(0,255,255,.04),
+        0 0 60px rgba(0,220,255,.22);
 }
 
-.float-card{
-  position:absolute;
-  right:-5px;
-  bottom:30px;
-  padding:15px 18px;
-  min-width:190px;
-  border-radius:17px;
-  background:rgba(8,13,34,.84);
-  backdrop-filter:blur(18px);
-  border:1px solid var(--border);
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-
-.float-card strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-.float-card span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* SECTIONS */
-
+/* SECTION */
 section{
-  padding:70px 0;
+    padding:35px 0;
 }
 
-.section-head{
-  margin-bottom:25px;
+.section-title{
+    font-size:23px;
+    margin-bottom:10px;
 }
 
-.kicker{
-  color:#78eaff;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1.7px;
-  text-transform:uppercase;
+.section-subtitle{
+    color:#8993ad;
+    font-size:13px;
+    margin-bottom:25px;
 }
 
-h2{
-  margin:7px 0 0;
-  font-size:clamp(29px,4vw,43px);
-  letter-spacing:-1px;
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-.section-desc{
-  color:var(--muted);
-  line-height:1.7;
-  max-width:680px;
+.card{
+    padding:23px;
+    border-radius:20px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    transition:.3s;
 }
 
-.glass{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(22,34,72,.76),
-      rgba(8,14,35,.76)
-    );
-  border:1px solid var(--border);
-  border-radius:24px;
-  box-shadow:0 25px 80px rgba(0,0,0,.30);
-  backdrop-filter:blur(18px);
-}
-
-/* ABOUT */
-
-.about-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:18px;
-}
-
-.about-card{
-  padding:30px;
-}
-
-.about-card p{
-  margin:0;
-  color:#c8d3e7;
-  line-height:1.9;
-}
-
-.feature-list{
-  display:grid;
-  gap:12px;
-}
-
-.feature{
-  padding:19px;
-  display:flex;
-  gap:13px;
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(0,255,255,.28);
+    box-shadow:0 15px 45px rgba(0,0,0,.3);
 }
 
 .icon{
-  width:40px;
-  height:40px;
-  flex-shrink:0;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
-  background:rgba(56,221,255,.08);
-  border:1px solid rgba(56,221,255,.13);
+    width:46px;
+    height:46px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:rgba(0,255,255,.08);
+    font-size:22px;
+    margin-bottom:16px;
 }
 
-.feature strong{
-  display:block;
-  margin-bottom:5px;
+.card h3{
+    font-size:17px;
+    margin-bottom:9px;
 }
 
-.feature span{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
+.card p{
+    color:#8e98b2;
+    font-size:13px;
+    line-height:1.7;
 }
 
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
+/* ABOUT */
+.about{
+    padding:30px;
+    border-radius:24px;
+    background:linear-gradient(
+        135deg,
+        rgba(0,255,255,.06),
+        rgba(120,0,255,.06)
+    );
+    border:1px solid rgba(255,255,255,.08);
 }
 
-.stat{
-  padding:25px;
-  text-align:center;
+.about p{
+    color:#aab3ca;
+    font-size:14px;
+    line-height:1.9;
 }
 
-.stat b{
-  display:block;
-  font-size:34px;
-  margin-bottom:7px;
-  background:linear-gradient(90deg,#fff,#6fe9ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* LEARNING */
-
-.learn-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.learn-card{
-  padding:24px;
-  transition:.25s;
-}
-
-.learn-card:hover,
-.tutorial-card:hover,
-.platform-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(56,221,255,.28);
-}
-
-.big-icon{
-  font-size:30px;
-  margin-bottom:17px;
-}
-
-.learn-card h3,
-.tutorial-card h3,
-.platform-card h3{
-  margin:0 0 8px;
-  font-size:18px;
-}
-
-.learn-card p,
-.tutorial-card p,
-.platform-card p{
-  color:var(--muted);
-  line-height:1.65;
-  font-size:14px;
-}
-
-/* TUTORIALS */
-
-.tutorial-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
+/* TUTORIAL */
 .tutorial-card{
-  padding:20px;
-  transition:.25s;
+    overflow:hidden;
+    padding:0;
 }
 
-.tutorial-thumb{
-  width:100%;
-  height:190px;
-  object-fit:cover;
-  border-radius:16px;
-  margin-bottom:16px;
-  background:#111936;
-  border:1px solid var(--border);
+.thumbnail{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    background:#101426;
+}
+
+.tutorial-content{
+    padding:20px;
 }
 
 .tag{
-  display:inline-block;
-  padding:6px 9px;
-  border-radius:999px;
-  color:#8cecff;
-  background:rgba(56,221,255,.07);
-  border:1px solid rgba(56,221,255,.13);
-  font-size:10px;
-  font-weight:900;
+    display:inline-block;
+    font-size:11px;
+    padding:6px 9px;
+    border-radius:20px;
+    background:rgba(98,245,255,.08);
+    color:#72eff8;
+    margin-bottom:10px;
+}
+
+.tutorial-content h3{
+    margin-bottom:8px;
+}
+
+.tutorial-content p{
+    margin-bottom:15px;
 }
 
 .watch{
-  display:inline-block;
-  margin-top:14px;
-  color:#78eaff;
-  font-size:13px;
-  font-weight:900;
-}
-
-/* PROMPT */
-
-.prompt{
-  padding:28px;
-  overflow:hidden;
-}
-
-.prompt-code{
-  padding:20px;
-  border-radius:16px;
-  background:rgba(0,0,0,.22);
-  border:1px solid var(--border);
-  color:#d9e5fa;
-  line-height:1.75;
-  font-size:14px;
-}
-
-/* PLATFORMS */
-
-.platform-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.platform-card{
-  padding:22px;
-  display:flex;
-  gap:15px;
-  transition:.25s;
-}
-
-.platform-logo{
-  width:50px;
-  height:50px;
-  object-fit:cover;
-  border-radius:14px;
-  background:#111936;
-  border:1px solid var(--border);
+    display:inline-block;
+    padding:10px 15px;
+    border-radius:10px;
+    background:#ffffff;
+    color:#080b18;
+    font-size:12px;
+    font-weight:700;
 }
 
 /* SOCIAL */
-
-.social-box{
-  padding:25px;
-}
-
 .social-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
 }
 
 .social{
-  padding:12px 16px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  font-size:13px;
-  font-weight:800;
+    padding:18px 10px;
+    text-align:center;
+    border-radius:16px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.25s;
 }
 
 .social:hover{
-  border-color:rgba(56,221,255,.30);
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.08);
+}
+
+.social-icon{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.social span{
+    display:block;
+    font-size:11px;
+    color:#aeb7cf;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    text-align:center;
+    padding:24px 10px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.stat span{
+    color:#858fa8;
+    font-size:11px;
+}
+
+/* FAQ */
+.faq{
+    display:grid;
+    gap:10px;
+}
+
+details{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+    padding:16px 18px;
+}
+
+summary{
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+details p{
+    color:#929cb5;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:12px;
 }
 
 /* FOOTER */
-
 footer{
-  padding:38px 0;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  border-top:1px solid var(--border);
+    margin-top:50px;
+    padding:35px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    text-align:center;
 }
 
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.75);
-  z-index:200;
+footer h3{
+    font-size:16px;
+    margin-bottom:8px;
 }
 
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(500px,100%);
-  padding:25px;
-  background:#0b1230;
-  border:1px solid var(--border);
-  border-radius:22px;
-  box-shadow:0 30px 100px rgba(0,0,0,.55);
-}
-
-.modal-box h2{
-  margin-top:0;
-}
-
-.input{
-  width:100%;
-  padding:13px;
-  margin:7px 0 12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#070d22;
-  color:#fff;
-  outline:none;
-}
-
-.modal-actions{
-  display:flex;
-  gap:10px;
-}
-
-.close{
-  padding:11px 17px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.05);
-  color:#fff;
-  cursor:pointer;
-}
-
-.msg{
-  margin-top:12px;
-  color:#7deaff;
-  font-size:13px;
+footer p{
+    color:#727c96;
+    font-size:12px;
 }
 
 /* MOBILE */
+@media(max-width:850px){
 
-@media(max-width:900px){
+    nav{
+        display:none;
+    }
 
-  .hero,
-  .about-grid{
-    grid-template-columns:1fr;
-  }
+    .hero-box{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding:30px 20px;
+    }
 
-  .hero{
-    text-align:center;
-    padding-top:55px;
-  }
+    .hero p{
+        margin:auto;
+    }
 
-  .hero p{
-    margin-left:auto;
-    margin-right:auto;
-  }
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .hero-actions{
-    justify-content:center;
-  }
-
-  .profile-wrap{
-    order:-1;
-  }
-
-  .learn-grid,
-  .tutorial-grid,
-  .platform-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .navlinks{
-    display:none;
-  }
+    .social-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
 @media(max-width:560px){
 
-  h1{
-    letter-spacing:-2px;
-  }
+    .hero{
+        padding-top:35px;
+    }
 
-  section{
-    padding:52px 0;
-  }
+    .hero-box{
+        border-radius:22px;
+    }
 
-  .learn-grid,
-  .tutorial-grid,
-  .platform-grid{
-    grid-template-columns:1fr;
-  }
+    .grid{
+        grid-template-columns:1fr;
+    }
 
-  .float-card{
-    right:0;
-  }
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .brand-name{
-    font-size:13px;
-  }
+    .social-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .profile{
+        width:145px;
+        height:145px;
+    }
 }
 </style>
 </head>
@@ -675,636 +429,634 @@ footer{
 <body>
 
 <header>
-<div class="container nav">
+    <div class="container nav">
 
-<a class="brand" href="#home">
-<img class="logo" id="logo" alt="Logo">
-<span class="brand-name" id="brandName">AHEAD VIA SKILL HUB</span>
-</a>
+        <a href="#" class="brand">
+            <img id="siteLogo" class="logo" src="" alt="Logo">
+            <span id="siteName">AHEAD VIA SKILL HUB</span>
+        </a>
 
-<nav class="navlinks">
-<a href="#about">About</a>
-<a href="#learn">Learn</a>
-<a href="#tutorials">Tutorials</a>
-<a href="#platforms">Platforms</a>
-<a href="#connect">Connect</a>
-</nav>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#learn">Learn</a>
+            <a href="#tutorials">Tutorials</a>
+            <a href="#tools">Tools</a>
+            <a href="#social">Social</a>
+            <a href="#faq">FAQ</a>
+        </nav>
 
-<button class="admin-btn" id="adminBtn">Admin</button>
-
-</div>
+    </div>
 </header>
 
-<main id="home">
+
+<main>
 
 <!-- HERO -->
+<section class="hero">
+    <div class="container">
 
-<section>
-<div class="container hero">
+        <div class="hero-box">
 
-<div>
+            <div>
+                <span class="badge">LEARN • CREATE • GROW</span>
 
-<span class="badge">
-<i class="live-dot"></i>
-DIGITAL SKILLS • AI • ONLINE RESOURCES
-</span>
+                <h1>
+                    Welcome to
+                    <span>AHEAD VIA SKILL HUB</span>
+                </h1>
 
-<h1>
-<span class="gradient" id="heroName">
-AHEAD VIA SKILL HUB
-</span>
-</h1>
+                <p id="heroIntro">
+                    Learn practical digital skills, discover useful tools,
+                    explore AI technologies, create better content and grow
+                    your online knowledge step by step.
+                </p>
+            </div>
 
-<p id="heroAbout">
-A premium learning hub for practical digital skills, AI tools,
-prompts, tutorials, content creation and useful online resources.
-</p>
+            <div class="profile-wrap">
+                <img
+                    id="profileImage"
+                    class="profile"
+                    src=""
+                    alt="Profile">
+            </div>
 
-<div class="hero-actions" id="mainLinks"></div>
+        </div>
 
-</div>
-
-<div class="profile-wrap">
-
-<div class="profile-ring">
-<img class="profile" id="profile" alt="Profile">
-</div>
-
-<div class="float-card">
-<strong>Learn • Create • Grow</strong>
-<span>Practical knowledge and digital skills</span>
-</div>
-
-</div>
-
-</div>
+    </div>
 </section>
+
 
 <!-- ABOUT -->
-
 <section id="about">
-<div class="container">
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">ABOUT</div>
-<h2>About Me</h2>
-</div>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">
+            Learn more about my work, experience and digital activities.
+        </p>
 
-<div class="about-grid">
+        <div class="about">
+            <p id="aboutText">
+                I work with various websites and online platforms, exploring
+                digital tools, AI technologies, content creation and online
+                services. I create informative videos and tutorials to share
+                practical knowledge and help others understand how different
+                tools and platforms work. I create video prompts, image
+                prompts, captions, hashtags, social media content, tutorials
+                and useful guides. I regularly research new apps, tools and
+                techniques to learn, create and share useful knowledge with
+                others.
+            </p>
+        </div>
 
-<div class="glass about-card">
-<p id="aboutText">
-I work with various websites and online platforms, exploring
-digital tools, AI technologies, content creation and online
-services. I create informative videos and tutorials to share
-practical knowledge and help others understand how different
-tools and platforms work. I create video prompts, image prompts,
-captions, hashtags, social media content, tutorials and useful
-guides. I regularly research new apps, tools and techniques to
-learn, create and share useful knowledge with others.
-</p>
-</div>
-
-<div class="feature-list">
-
-<div class="glass feature">
-<div class="icon">⚡</div>
-<div>
-<strong>Practical Learning</strong>
-<span>Simple and useful step-by-step digital knowledge.</span>
-</div>
-</div>
-
-<div class="glass feature">
-<div class="icon">✦</div>
-<div>
-<strong>AI & Creative Tools</strong>
-<span>AI tools, prompts, images, videos and creative workflows.</span>
-</div>
-</div>
-
-<div class="glass feature">
-<div class="icon">◎</div>
-<div>
-<strong>Online Skills</strong>
-<span>Websites, platforms, social media and digital resources.</span>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
+    </div>
 </section>
 
-<!-- STATS -->
 
-<section>
-<div class="container">
-
-<div class="stats">
-
-<div class="glass stat">
-<b id="membersCount">—</b>
-<span>Members</span>
-</div>
-
-<div class="glass stat">
-<b id="onlineCount">—</b>
-<span>Online</span>
-</div>
-
-<div class="glass stat">
-<b id="learningCount">—</b>
-<span>Learning</span>
-</div>
-
-<div class="glass stat">
-<b id="tutorialCount">0</b>
-<span>Tutorials</span>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- LEARN -->
-
+<!-- WHAT YOU CAN LEARN -->
 <section id="learn">
-<div class="container">
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">WHAT YOU CAN LEARN</div>
-<h2>Build Real Digital Skills</h2>
-<p class="section-desc">
-Explore practical topics around modern online work,
-AI, content creation and digital learning.
-</p>
-</div>
+        <h2 class="section-title">What You Can Learn</h2>
+        <p class="section-subtitle">
+            Practical digital knowledge and useful skills.
+        </p>
 
-<div class="learn-grid">
+        <div class="grid">
 
-<div class="glass learn-card">
-<div class="big-icon">🎬</div>
-<h3>Video Creation</h3>
-<p>Video ideas, editing workflows, prompts and creation tips.</p>
-</div>
+            <div class="card">
+                <div class="icon">🎬</div>
+                <h3>Video Creation</h3>
+                <p>
+                    Learn video creation, editing ideas, concepts,
+                    prompts and useful techniques.
+                </p>
+            </div>
 
-<div class="glass learn-card">
-<div class="big-icon">🖼️</div>
-<h3>Image Creation</h3>
-<p>Image prompts, posters, visual concepts and creative workflows.</p>
-</div>
+            <div class="card">
+                <div class="icon">🖼️</div>
+                <h3>Image Creation</h3>
+                <p>
+                    Explore image prompts, creative concepts,
+                    designs and AI image workflows.
+                </p>
+            </div>
 
-<div class="glass learn-card">
-<div class="big-icon">🤖</div>
-<h3>AI Tools</h3>
-<p>Useful AI tools, prompts, workflows and practical techniques.</p>
-</div>
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h3>AI Tools</h3>
+                <p>
+                    Discover useful AI tools, platforms and practical
+                    ways to use modern AI technology.
+                </p>
+            </div>
 
-<div class="glass learn-card">
-<div class="big-icon">🌐</div>
-<h3>Web & Online Skills</h3>
-<p>Websites, online platforms and digital services.</p>
-</div>
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>Website Skills</h3>
+                <p>
+                    Learn HTML, CSS, JavaScript and useful website
+                    development concepts.
+                </p>
+            </div>
 
-<div class="glass learn-card">
-<div class="big-icon">📱</div>
-<h3>Social Media</h3>
-<p>Captions, hashtags, content ideas and social media tips.</p>
-</div>
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Social Media</h3>
+                <p>
+                    Learn social media content creation, captions,
+                    hashtags and publishing ideas.
+                </p>
+            </div>
 
-<div class="glass learn-card">
-<div class="big-icon">💡</div>
-<h3>Tips & Research</h3>
-<p>Useful discoveries, apps, techniques and online resources.</p>
-</div>
+            <div class="card">
+                <div class="icon">🔎</div>
+                <h3>Research & Resources</h3>
+                <p>
+                    Find useful websites, apps, tools and online
+                    resources for learning and creating.
+                </p>
+            </div>
 
-</div>
-</div>
+        </div>
+
+    </div>
 </section>
+
 
 <!-- TUTORIALS -->
-
 <section id="tutorials">
-<div class="container">
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">LATEST CONTENT</div>
-<h2>Tutorials & Guides</h2>
-<p class="section-desc">
-New tutorials published from the Admin Panel will appear here.
-</p>
-</div>
+        <h2 class="section-title">Latest Tutorials</h2>
+        <p class="section-subtitle">
+            Step-by-step tutorials and useful guides.
+        </p>
 
-<div class="tutorial-grid" id="tutorialList">
-<div class="glass" style="padding:30px;text-align:center;color:var(--muted)">
-Loading tutorials...
-</div>
-</div>
+        <div id="tutorialGrid" class="grid">
 
-</div>
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>Loading Tutorials...</h3>
+                <p>
+                    Tutorials will appear here when they are published.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
 </section>
+
+
+<!-- TOOLS -->
+<section id="tools">
+    <div class="container">
+
+        <h2 class="section-title">Useful Apps & Tools</h2>
+        <p class="section-subtitle">
+            Useful resources for digital work and content creation.
+        </p>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon">✨</div>
+                <h3>AI Tools</h3>
+                <p>
+                    Useful AI platforms for writing, images, videos,
+                    research and creative work.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎨</div>
+                <h3>Design Tools</h3>
+                <p>
+                    Explore creative tools for posters, graphics,
+                    social media designs and more.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🛠️</div>
+                <h3>Online Tools</h3>
+                <p>
+                    Helpful websites and services for everyday
+                    digital activities.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
 
 <!-- PROMPTS -->
-
 <section>
-<div class="container">
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">PROMPT LIBRARY</div>
-<h2>Ready-to-Use Prompt Ideas</h2>
-</div>
+        <h2 class="section-title">Prompt Library</h2>
+        <p class="section-subtitle">
+            Ready-to-use creative prompt categories.
+        </p>
 
-<div class="glass prompt">
+        <div class="grid">
 
-<div class="prompt-code">
-Create a premium modern digital learning visual for AHEAD VIA
-SKILL HUB, futuristic dark background, elegant cyan and purple
-glow, clean glassmorphism cards, professional lighting,
-high detail, sharp typography area and mobile-friendly composition.
-</div>
+            <div class="card">
+                <div class="icon">🖼️</div>
+                <h3>Image Prompts</h3>
+                <p>
+                    Creative prompts for AI image generation,
+                    posters and social media graphics.
+                </p>
+            </div>
 
-</div>
-</div>
+            <div class="card">
+                <div class="icon">🎥</div>
+                <h3>Video Prompts</h3>
+                <p>
+                    Video concepts and prompts for creating
+                    engaging digital content.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">✍️</div>
+                <h3>Content Prompts</h3>
+                <p>
+                    Ideas for captions, posts, descriptions,
+                    hashtags and online content.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
-<!-- PLATFORMS -->
 
-<section id="platforms">
-<div class="container">
+<!-- STATS -->
+<section>
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">WORK & RESOURCES</div>
-<h2>Websites & Platforms I Work With</h2>
-</div>
+        <h2 class="section-title">Community</h2>
 
-<div class="platform-grid" id="platformList">
+        <div class="stats">
 
-<div class="glass" style="padding:30px;text-align:center;color:var(--muted)">
-Platforms will be added from the Admin Panel.
-</div>
+            <div class="stat">
+                <strong id="membersCount">0</strong>
+                <span>Members</span>
+            </div>
 
-</div>
+            <div class="stat">
+                <strong id="onlineCount">0</strong>
+                <span>Online</span>
+            </div>
 
-</div>
+            <div class="stat">
+                <strong id="learningCount">0</strong>
+                <span>Learning</span>
+            </div>
+
+            <div class="stat">
+                <strong id="tutorialCount">0</strong>
+                <span>Tutorials</span>
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
-<!-- CONNECT -->
 
-<section id="connect">
-<div class="container">
+<!-- SOCIAL -->
+<section id="social">
+    <div class="container">
 
-<div class="section-head">
-<div class="kicker">STAY CONNECTED</div>
-<h2>Connect With Me</h2>
-</div>
+        <h2 class="section-title">Connect With Me</h2>
+        <p class="section-subtitle">
+            Follow the official social channels.
+        </p>
 
-<div class="glass social-box">
-<div class="social-grid" id="socials"></div>
-</div>
+        <div class="social-grid">
 
-</div>
+            <a id="telegramPersonal" class="social" href="#" target="_blank">
+                <div class="social-icon">✈️</div>
+                <span>Telegram</span>
+            </a>
+
+            <a id="telegramGroup" class="social" href="#" target="_blank">
+                <div class="social-icon">👥</div>
+                <span>Telegram Group</span>
+            </a>
+
+            <a id="telegramChannel" class="social" href="#" target="_blank">
+                <div class="social-icon">📢</div>
+                <span>Channel</span>
+            </a>
+
+            <a id="facebook" class="social" href="#" target="_blank">
+                <div class="social-icon">ⓕ</div>
+                <span>Facebook</span>
+            </a>
+
+            <a id="youtube" class="social" href="#" target="_blank">
+                <div class="social-icon">▶️</div>
+                <span>YouTube</span>
+            </a>
+
+            <a id="instagram" class="social" href="#" target="_blank">
+                <div class="social-icon">◎</div>
+                <span>Instagram</span>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="faq">
+
+            <details>
+                <summary>What can I learn here?</summary>
+                <p>
+                    You can learn about digital tools, AI, content
+                    creation, websites, social media and useful online skills.
+                </p>
+            </details>
+
+            <details>
+                <summary>Are tutorials added regularly?</summary>
+                <p>
+                    New tutorials can be published through the website
+                    management system.
+                </p>
+            </details>
+
+            <details>
+                <summary>Can I learn from mobile?</summary>
+                <p>
+                    Yes. The website is designed to work on mobile,
+                    tablet and desktop devices.
+                </p>
+            </details>
+
+        </div>
+
+    </div>
 </section>
 
 </main>
 
+
 <footer>
-© <span id="year"></span>
-<span id="footerName">AHEAD VIA SKILL HUB</span>
-— All Rights Reserved
+    <div class="container">
+        <h3 id="footerSiteName">AHEAD VIA SKILL HUB</h3>
+        <p>
+            Learn • Create • Grow
+        </p>
+        <p style="margin-top:10px;">
+            © <span id="year"></span> AHEAD VIA SKILL HUB. All rights reserved.
+        </p>
+    </div>
 </footer>
 
-<!-- ADMIN LOGIN -->
-
-<div class="modal" id="loginModal">
-
-<div class="modal-box">
-
-<h2>Admin Login</h2>
-
-<p style="color:var(--muted)">
-Sign in with your authorized administrator account.
-</p>
-
-<input
-class="input"
-id="email"
-type="email"
-placeholder="Admin Email">
-
-<input
-class="input"
-id="password"
-type="password"
-placeholder="Password">
-
-<div class="modal-actions">
-
-<button class="primary" id="loginBtn">
-Login
-</button>
-
-<button class="close" id="closeBtn">
-Close
-</button>
-
-</div>
-
-<div class="msg" id="loginMsg"></div>
-
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 const SUPABASE_URL =
-"https://wxqstcpjlzqdsgmovkey.supabase.co";
+    "https://wxqstcpjlzqdsgmovkey.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+const SUPABASE_KEY =
+    "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
 
-const supabase =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_PUBLISHABLE_KEY
-);
-
-const $ = id => document.getElementById(id);
-
-const esc = value =>
-String(value ?? "")
-.replace(/[&<>"']/g,m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m]));
-
-function validUrl(value){
-
-if(!value)return "#";
-
-if(/^https?:\/\//i.test(value))
-return value;
-
-if(/^@/.test(value))
-return "https://t.me/"+value.slice(1);
-
-if(/^wa\.me\//i.test(value))
-return "https://"+value;
-
-return value;
-}
-
-function makeLink(label,url){
-
-if(!url)return "";
-
-return `
-<a
-class="social"
-target="_blank"
-rel="noopener"
-href="${esc(validUrl(url))}">
-${esc(label)}
-</a>`;
-}
-
-/* LOGIN */
-
-$("adminBtn").onclick=()=>{
-$("loginModal").classList.add("show");
-};
-
-$("closeBtn").onclick=()=>{
-$("loginModal").classList.remove("show");
-};
-
-async function login(){
-
-const msg=$("loginMsg");
-
-msg.textContent="Signing in...";
-
-const {data,error} =
-await supabase.auth.signInWithPassword({
-
-email:$("email").value.trim(),
-password:$("password").value
-
-});
-
-if(error){
-
-msg.textContent=error.message;
-return;
-
-}
-
-const {data:admin,error:adminError} =
-await supabase
-.from("admins")
-.select("user_id")
-.eq("user_id",data.user.id)
-.maybeSingle();
-
-if(adminError || !admin){
-
-await supabase.auth.signOut();
-
-msg.textContent=
-"This account is not authorized as an admin.";
-
-return;
-}
-
-msg.textContent="Login successful...";
-
-setTimeout(()=>{
-location.href="admin.html";
-},500);
-
-}
-
-$("loginBtn").onclick=login;
-
-$("password").addEventListener(
-"keydown",
-event=>{
-if(event.key==="Enter")login();
-}
-);
-
-/* LOAD WEBSITE */
 
 async function loadSite(){
 
-const {data,error} =
-await supabase
-.from("site_settings")
-.select("*")
-.limit(1)
-.maybeSingle();
+    try{
 
-if(error){
+        const settingsResponse = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/site_settings?select=*&limit=1",
+            {
+                headers:{
+                    apikey:SUPABASE_KEY,
+                    Authorization:"Bearer " + SUPABASE_KEY
+                }
+            }
+        );
 
-console.error(error);
-return;
+        const settings = await settingsResponse.json();
+
+        if(settings && settings.length){
+
+            const s = settings[0];
+
+            if(s.site_name){
+                document.getElementById("siteName").textContent =
+                    s.site_name;
+
+                document.getElementById("footerSiteName").textContent =
+                    s.site_name;
+
+                document.title = s.site_name;
+            }
+
+            if(s.logo_url){
+                document.getElementById("siteLogo").src =
+                    s.logo_url;
+            }
+
+            if(s.profile_image_url){
+                document.getElementById("profileImage").src =
+                    s.profile_image_url;
+            }
+
+            if(s.about_text){
+                document.getElementById("aboutText").textContent =
+                    s.about_text;
+            }
+
+            if(s.hero_intro){
+                document.getElementById("heroIntro").textContent =
+                    s.hero_intro;
+            }
+
+            setLink("telegramPersonal",s.telegram_personal);
+            setLink("telegramGroup",s.telegram_group);
+            setLink("telegramChannel",s.telegram_channel);
+            setLink("facebook",s.facebook);
+            setLink("youtube",s.youtube);
+            setLink("instagram",s.instagram);
+
+            if(s.members_count !== undefined)
+                document.getElementById("membersCount").textContent =
+                    formatNumber(s.members_count);
+
+            if(s.online_count !== undefined)
+                document.getElementById("onlineCount").textContent =
+                    formatNumber(s.online_count);
+
+            if(s.learning_count !== undefined)
+                document.getElementById("learningCount").textContent =
+                    formatNumber(s.learning_count);
+        }
+
+
+        const tutorialResponse = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/tutorials?select=*&published=eq.true&order=created_at.desc",
+            {
+                headers:{
+                    apikey:SUPABASE_KEY,
+                    Authorization:"Bearer " + SUPABASE_KEY
+                }
+            }
+        );
+
+        const tutorials = await tutorialResponse.json();
+
+        const grid =
+            document.getElementById("tutorialGrid");
+
+        if(Array.isArray(tutorials)){
+
+            document.getElementById("tutorialCount").textContent =
+                tutorials.length;
+
+            if(tutorials.length){
+
+                grid.innerHTML = "";
+
+                tutorials.forEach(t => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "card tutorial-card";
+
+                    card.innerHTML = `
+
+                        ${
+                            t.thumbnail_url
+                            ?
+                            `<img class="thumbnail"
+                                  src="${escapeHTML(t.thumbnail_url)}"
+                                  alt="Tutorial thumbnail">`
+                            :
+                            `<div class="thumbnail"></div>`
+                        }
+
+                        <div class="tutorial-content">
+
+                            <span class="tag">
+                                ${escapeHTML(t.category || "Tutorial")}
+                            </span>
+
+                            <h3>
+                                ${escapeHTML(t.title || "Tutorial")}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(
+                                    t.description ||
+                                    "Learn this topic step by step."
+                                )}
+                            </p>
+
+                            ${
+                                t.video_url
+                                ?
+                                `<a class="watch"
+                                   href="${escapeHTML(t.video_url)}"
+                                   target="_blank">
+                                   Watch Tutorial
+                                 </a>`
+                                :
+                                ""
+                            }
+
+                        </div>
+                    `;
+
+                    grid.appendChild(card);
+
+                });
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Unable to load website data:",
+            error
+        );
+
+    }
 
 }
 
-const settings=data || {};
 
-const name =
-settings.site_name ||
-"AHEAD VIA SKILL HUB";
+function setLink(id,url){
 
-$("brandName").textContent=name;
-$("heroName").textContent=name;
-$("footerName").textContent=name;
+    const el =
+        document.getElementById(id);
 
-if(settings.about_text){
+    if(!el) return;
 
-$("aboutText").textContent=
-settings.about_text;
-
-$("heroAbout").textContent=
-settings.about_text;
-
+    if(url){
+        el.href = url;
+        el.style.display = "block";
+    }else{
+        el.href = "#";
+    }
 }
 
-const fallback =
-"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Crect width='500' height='500' fill='%230d1533'/%3E%3Ccircle cx='250' cy='210' r='90' fill='%2338ddff' opacity='.2'/%3E%3Ctext x='250' y='330' text-anchor='middle' fill='white' font-size='58' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E";
 
-$("logo").src =
-settings.logo_url || fallback;
+function formatNumber(number){
 
-$("profile").src =
-settings.profile_image_url ||
-settings.logo_url ||
-fallback;
+    if(number === null ||
+       number === undefined ||
+       number === "")
+        return "0";
 
-$("mainLinks").innerHTML =
-[
-makeLink("WhatsApp",settings.whatsapp),
-makeLink("Telegram",settings.telegram_personal),
-makeLink("Contact",settings.contact_number)
-].join("");
+    const n = Number(number);
 
-$("socials").innerHTML =
-[
-["Facebook",settings.facebook],
-["YouTube",settings.youtube],
-["Instagram",settings.instagram],
-["X / Twitter",settings.twitter],
-["Telegram Group",settings.telegram_group],
-["Telegram Channel",settings.telegram_channel]
-]
-.map(item=>makeLink(item[0],item[1]))
-.join("");
+    if(Number.isNaN(n))
+        return "0";
 
-if(!$("socials").innerHTML){
-
-$("socials").innerHTML =
-'<span style="color:var(--muted)">Social links will appear here.</span>';
-
+    return n.toLocaleString();
 }
 
-if(settings.members_count != null)
-$("membersCount").textContent=settings.members_count;
 
-if(settings.online_count != null)
-$("onlineCount").textContent=settings.online_count;
+function escapeHTML(value){
 
-if(settings.learning_count != null)
-$("learningCount").textContent=settings.learning_count;
-
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
-/* LOAD TUTORIALS */
 
-async function loadTutorials(){
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-const {data,error} =
-await supabase
-.from("tutorials")
-.select("*")
-.eq("published",true)
-.order("created_at",{ascending:false});
-
-if(error){
-
-console.error(error);
-
-$("tutorialList").innerHTML =
-'<div class="glass" style="padding:30px;text-align:center;color:var(--muted)">Tutorials could not be loaded.</div>';
-
-return;
-}
-
-$("tutorialCount").textContent =
-data ? data.length : 0;
-
-if(!data || !data.length){
-
-$("tutorialList").innerHTML =
-'<div class="glass" style="padding:30px;text-align:center;color:var(--muted)">No tutorials have been published yet.</div>';
-
-return;
-}
-
-$("tutorialList").innerHTML =
-data.map(t=>`
-
-<article class="glass tutorial-card">
-
-${t.thumbnail_url
-?`<img
-class="tutorial-thumb"
-src="${esc(t.thumbnail_url)}"
-alt="">`
-:""}
-
-<span class="tag">
-${esc(t.category || "Tutorial")}
-</span>
-
-<h3>
-${esc(t.title)}
-</h3>
-
-<p>
-${esc(t.description || "Practical tutorial and guide.")}
-</p>
-
-${t.video_url
-?`<a
-class="watch"
-target="_blank"
-rel="noopener"
-href="${esc(validUrl(t.video_url))}">
-Watch Tutorial →
-</a>`
-:""}
-
-</article>
-
-`).join("");
-
-}
-
-$("year").textContent =
-new Date().getFullYear();
 
 loadSite();
-loadTutorials();
-
 </script>
 
 </body>
   </html>
- 
