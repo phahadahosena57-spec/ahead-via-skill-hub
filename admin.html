@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AHEAD VIA SKILL HUB - Admin</title>
+<title>AHEAD VIA SKILL HUB — Admin Panel</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -11,1054 +11,1208 @@
 *{box-sizing:border-box}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#050b16;
-color:#fff;
-}
-
-header{
-background:#0b1628;
-border-bottom:1px solid #203452;
-padding:16px;
-}
-
-.header{
-max-width:1000px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.brand{
-color:#38bdf8;
-font-weight:800;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+      radial-gradient(circle at top left,#172554 0,#07111f 35%,#020617 75%);
+    color:#fff;
+    min-height:100vh;
 }
 
 .container{
-max-width:1000px;
-margin:auto;
-padding:25px 15px 50px;
+    width:min(1100px,94%);
+    margin:30px auto;
+}
+
+.header{
+    padding:24px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    background:rgba(15,23,42,.82);
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+    margin-bottom:20px;
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.header p{
+    margin:0;
+    color:#94a3b8;
 }
 
 .card{
-background:#0d1b2e;
-border:1px solid #203452;
-border-radius:18px;
-padding:20px;
-margin-bottom:18px;
+    background:rgba(15,23,42,.88);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
 }
 
-h1,h2,h3{margin-top:0}
-h2,h3{color:#38bdf8}
+h2{
+    margin-top:0;
+    font-size:21px;
+}
+
+h3{
+    font-size:17px;
+    margin-top:28px;
+    color:#cbd5e1;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.full{
+    grid-column:1/-1;
+}
 
 label{
-display:block;
-color:#b8c6d8;
-font-size:14px;
-margin:12px 0 6px;
+    display:block;
+    font-size:13px;
+    color:#94a3b8;
+    margin-bottom:7px;
 }
 
 input,textarea,select{
-width:100%;
-padding:13px;
-border-radius:10px;
-border:1px solid #29415f;
-background:#07111f;
-color:white;
-outline:none;
+    width:100%;
+    border:1px solid rgba(255,255,255,.12);
+    background:#020617;
+    color:#fff;
+    border-radius:13px;
+    padding:13px;
+    outline:none;
+    font-size:14px;
 }
 
 textarea{
-min-height:120px;
-resize:vertical;
+    min-height:110px;
+    resize:vertical;
 }
 
-select{
-cursor:pointer;
+input:focus,textarea:focus,select:focus{
+    border-color:#38bdf8;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:14px;
+.btn{
+    border:0;
+    border-radius:13px;
+    padding:13px 18px;
+    background:linear-gradient(135deg,#06b6d4,#2563eb);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:15px;
 }
 
-.full{
-grid-column:1/-1;
-}
-
-button{
-border:0;
-border-radius:10px;
-padding:12px 16px;
-color:white;
-font-weight:700;
-cursor:pointer;
-margin-top:12px;
-background:linear-gradient(135deg,#38bdf8,#8b5cf6);
-}
-
-.secondary{
-background:#17283e;
+.btn:hover{
+    opacity:.9;
 }
 
 .danger{
-background:#9f1239;
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.secondary{
+    background:#1e293b;
 }
 
 .status{
-display:none;
-padding:12px;
-margin:12px 0;
-border-radius:10px;
-background:#132640;
-color:#e4eef9;
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:#020617;
+    color:#94a3b8;
+    font-size:13px;
 }
 
-.status.show{
-display:block;
+.hidden{
+    display:none;
 }
 
-#adminSection{
-display:none;
-}
-
-.tutorial{
-border:1px solid #29415f;
-border-radius:14px;
-padding:16px;
-margin-top:12px;
+.login{
+    max-width:500px;
+    margin:80px auto;
 }
 
 .small{
-color:#91a4bb;
-font-size:13px;
+    color:#64748b;
+    font-size:12px;
+    line-height:1.6;
 }
 
-hr{
-border:0;
-border-top:1px solid #203452;
-margin:28px 0;
+.row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.social-item{
+    padding:16px;
+    border:1px solid rgba(255,255,255,.10);
+    background:#020617;
+    border-radius:15px;
+    margin-top:12px;
+}
+
+.social-item strong{
+    display:block;
+    margin-bottom:8px;
+}
+
+.remove{
+    background:#7f1d1d;
+    border:0;
+    color:#fff;
+    padding:8px 12px;
+    border-radius:9px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.tutorial{
+    padding:17px;
+    border:1px solid rgba(255,255,255,.10);
+    background:#020617;
+    border-radius:15px;
+    margin-top:12px;
+}
+
+.tutorial strong{
+    font-size:16px;
 }
 
 @media(max-width:700px){
-.grid{
-grid-template-columns:1fr;
-}
-.full{
-grid-column:auto;
-}
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="header">
-
-<div class="brand">
-AHEAD VIA SKILL HUB — ADMIN
-</div>
-
-<button id="logoutBtn"
-class="secondary"
-style="display:none"
-onclick="logout()">
-Logout
-</button>
-
-</div>
-</header>
-
-
 <div class="container">
 
-<!-- LOGIN -->
+    <div id="loginSection" class="card login">
+        <div class="header">
+            <h1>AHEAD VIA SKILL HUB</h1>
+            <p>Administrator Login</p>
+        </div>
 
-<section id="loginSection" class="card">
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="Admin email">
 
-<h1>Admin Login</h1>
+        <label style="margin-top:14px;">Password</label>
+        <input id="loginPassword" type="password" placeholder="Password">
 
-<p class="small">
-শুধুমাত্র অনুমোদিত Admin account দিয়ে প্রবেশ করুন।
-</p>
+        <button class="btn" id="loginBtn">Login</button>
 
-<div id="loginStatus" class="status"></div>
+        <div id="loginStatus" class="status">
+            Please sign in with your authorized admin account.
+        </div>
+    </div>
 
-<label>Email</label>
 
-<input
-id="email"
-type="email"
-placeholder="Admin Email"
-autocomplete="email">
+    <div id="adminSection" class="hidden">
 
+        <div class="header">
+            <h1>Admin Control Center</h1>
+            <p>Manage your AHEAD VIA SKILL HUB website.</p>
 
-<label>Password</label>
+            <div class="row">
+                <button class="btn secondary" id="logoutBtn">Logout</button>
+                <button class="btn secondary" onclick="window.location.href='index.html'">
+                    View Website
+                </button>
+            </div>
+        </div>
 
-<input
-id="password"
-type="password"
-placeholder="Password"
-autocomplete="current-password">
 
+        <!-- WEBSITE SETTINGS -->
+        <div class="card">
 
-<button onclick="login()">
-Login
-</button>
+            <h2>Website Settings</h2>
 
-</section>
+            <div class="grid">
 
+                <div>
+                    <label>Website Name</label>
+                    <input id="site_name" placeholder="AHEAD VIA SKILL HUB">
+                </div>
 
-<!-- ADMIN PANEL -->
+                <div>
+                    <label>Hero Introduction</label>
+                    <input id="hero_intro" placeholder="Learn. Create. Grow.">
+                </div>
 
-<section id="adminSection">
+                <div class="full">
+                    <label>About Me</label>
+                    <textarea id="about_text"
+                    placeholder="Write your About Me information"></textarea>
+                </div>
 
-<div class="card">
+            </div>
 
-<h1>Admin Panel</h1>
+            <button class="btn" id="saveWebsite">
+                Save Website Settings
+            </button>
 
-<p class="small">
-এখান থেকে Website-এর তথ্য পরিবর্তন করতে পারবেন।
-</p>
+            <div id="websiteStatus" class="status"></div>
 
-<div id="adminStatus" class="status"></div>
+        </div>
 
-</div>
 
+        <!-- CONTACT -->
+        <div class="card">
 
-<!-- LANGUAGE -->
+            <h2>Contact Me</h2>
 
-<div class="card">
+            <div class="grid">
 
-<h2>Website Language</h2>
+                <div>
+                    <label>WhatsApp Number</label>
+                    <input id="whatsapp_number"
+                           placeholder="+8801XXXXXXXXX">
+                    <div class="small">
+                        Enter the number only. The website will create the WhatsApp link automatically.
+                    </div>
+                </div>
 
-<label>Choose Language</label>
+                <div>
+                    <label>Contact Number</label>
+                    <input id="contact_number"
+                           placeholder="+8801XXXXXXXXX">
+                </div>
 
-<select id="language">
+                <div>
+                    <label>Telegram User ID / Username</label>
+                    <input id="telegram_personal"
+                           placeholder="@username or user ID">
+                </div>
 
-<option value="bn">
-🇧🇩 বাংলা
-</option>
+            </div>
 
-<option value="en">
-🇬🇧 English
-</option>
+            <button class="btn" id="saveContact">
+                Save Contact Information
+            </button>
 
-</select>
+            <div id="contactStatus" class="status"></div>
 
-<button onclick="saveLanguage()">
-Save Language
-</button>
+        </div>
 
-</div>
 
+        <!-- SOCIAL MEDIA -->
+        <div class="card">
 
-<!-- WEBSITE SETTINGS -->
+            <h2>Social Media</h2>
 
-<div class="card">
+            <div class="grid">
 
-<h2>Website Settings</h2>
+                <div>
+                    <label>TikTok Username / ID</label>
+                    <input id="tiktok"
+                           placeholder="@username">
+                </div>
 
-<div class="grid">
+                <div>
+                    <label>Telegram Username / ID</label>
+                    <input id="telegram_social"
+                           placeholder="@username">
+                </div>
 
-<div class="full">
+                <div>
+                    <label>Instagram Username / ID</label>
+                    <input id="instagram"
+                           placeholder="@username">
+                </div>
 
-<label>Website Name</label>
+                <div>
+                    <label>Twitter / X Username</label>
+                    <input id="twitter"
+                           placeholder="@username">
+                </div>
 
-<input
-id="site_name"
-placeholder="AHEAD VIA SKILL HUB">
+                <div>
+                    <label>YouTube Channel Name / ID</label>
+                    <input id="youtube"
+                           placeholder="Channel name or ID">
+                </div>
 
-</div>
+                <div>
+                    <label>Facebook Page Name / ID</label>
+                    <input id="facebook"
+                           placeholder="Page name or ID">
+                </div>
 
+            </div>
 
-<div class="full">
+            <h3>Other Social Media</h3>
 
-<label>Logo Image URL</label>
+            <div class="grid">
 
-<input
-id="logo_url"
-placeholder="https://...">
+                <div>
+                    <label>Platform Name</label>
+                    <input id="other_platform"
+                           placeholder="Discord / LinkedIn / Pinterest">
+                </div>
 
-</div>
+                <div>
+                    <label>Username / ID</label>
+                    <input id="other_username"
+                           placeholder="Username or ID">
+                </div>
 
+            </div>
 
-<div class="full">
+            <button class="btn" id="addOther">
+                Add Other Social Media
+            </button>
 
-<label>Profile Image URL</label>
+            <div id="otherList"></div>
 
-<input
-id="profile_image_url"
-placeholder="https://...">
+            <button class="btn" id="saveSocial">
+                Save Social Media
+            </button>
 
-</div>
+            <div id="socialStatus" class="status"></div>
 
+        </div>
 
-<div class="full">
 
-<label>About / Who I Am / What I Do</label>
+        <!-- COMMUNITY STATISTICS -->
+        <div class="card">
 
-<textarea
-id="about_text"
-placeholder="আপনার সম্পর্কে লিখুন..."></textarea>
+            <h2>Community Statistics</h2>
 
-</div>
+            <div class="grid">
 
+                <div>
+                    <label>Community Members Base</label>
+                    <input id="members_count"
+                           type="number"
+                           value="1000000">
+                    <div class="small">
+                        Actual registered members can be added to this base later.
+                    </div>
+                </div>
 
-<div>
+                <div>
+                    <label>Online Members</label>
+                    <input id="online_count"
+                           type="number"
+                           value="0">
+                </div>
 
-<label>WhatsApp Number</label>
+                <div>
+                    <label>Currently Learning</label>
+                    <input id="learning_count"
+                           type="number"
+                           value="0">
+                </div>
 
-<input
-id="whatsapp"
-placeholder="8801XXXXXXXXX">
+            </div>
 
-</div>
+            <button class="btn" id="saveStats">
+                Save Statistics
+            </button>
 
+            <div id="statsStatus" class="status"></div>
 
-<div>
+        </div>
 
-<label>Contact Number</label>
 
-<input
-id="contact_number"
-placeholder="+8801XXXXXXXXX">
+        <!-- TUTORIALS -->
+        <div class="card">
 
-</div>
+            <h2>Tutorial Management</h2>
 
+            <div class="grid">
 
-<div>
+                <div>
+                    <label>Tutorial Title</label>
+                    <input id="tutorial_title"
+                           placeholder="Tutorial title">
+                </div>
 
-<label>Telegram Personal</label>
+                <div>
+                    <label>Category</label>
+                    <input id="tutorial_category"
+                           placeholder="AI / Video / Website / Social Media">
+                </div>
 
-<input
-id="telegram_personal"
-placeholder="https://t.me/username">
+                <div>
+                    <label>Thumbnail</label>
+                    <input id="tutorial_thumbnail"
+                           type="file"
+                           accept="image/*">
+                    <div class="small">
+                        File upload system will be connected to storage.
+                    </div>
+                </div>
 
-</div>
+                <div>
+                    <label>Video</label>
+                    <input id="tutorial_video"
+                           type="file"
+                           accept="video/*">
+                </div>
 
+                <div class="full">
+                    <label>Short Description</label>
+                    <textarea id="tutorial_description"
+                    placeholder="Short tutorial description"></textarea>
+                </div>
 
-<div>
+                <div class="full">
+                    <label>Tutorial Content</label>
+                    <textarea id="tutorial_content"
+                    placeholder="Full tutorial content"></textarea>
+                </div>
 
-<label>Telegram Group</label>
+            </div>
 
-<input
-id="telegram_group"
-placeholder="https://t.me/group">
+            <button class="btn" id="addTutorial">
+                Add Tutorial
+            </button>
 
-</div>
+            <div id="tutorialStatus" class="status"></div>
 
+            <h3>Existing Tutorials</h3>
 
-<div>
+            <div id="tutorialList"></div>
 
-<label>Telegram Channel</label>
+        </div>
 
-<input
-id="telegram_channel"
-placeholder="https://t.me/channel">
 
-</div>
+        <!-- ADMIN INFORMATION -->
+        <div class="card">
 
+            <h2>Admin Information</h2>
 
-<div>
+            <p class="small">
+                Your Member ID and administrator authorization are controlled by the system.
+                Regular users will not be able to change administrator settings.
+            </p>
 
-<label>Facebook</label>
+        </div>
 
-<input
-id="facebook"
-placeholder="https://facebook.com/...">
-
-</div>
-
-
-<div>
-
-<label>YouTube</label>
-
-<input
-id="youtube"
-placeholder="https://youtube.com/...">
-
-</div>
-
-
-<div>
-
-<label>Twitter / X</label>
-
-<input
-id="twitter"
-placeholder="https://x.com/...">
-
-</div>
-
-
-<div>
-
-<label>Instagram</label>
-
-<input
-id="instagram"
-placeholder="https://instagram.com/...">
-
-</div>
-
-</div>
-
-
-<button onclick="saveSettings()">
-Save Website Settings
-</button>
-
-</div>
-
-
-<!-- TUTORIAL -->
-
-<div class="card">
-
-<h2>Add Tutorial / Video</h2>
-
-<label>Title</label>
-
-<input
-id="tutorial_title"
-placeholder="Tutorial Title">
-
-
-<label>Description</label>
-
-<textarea
-id="tutorial_description"
-placeholder="Tutorial সম্পর্কে লিখুন..."></textarea>
-
-
-<label>Thumbnail Image URL</label>
-
-<input
-id="tutorial_thumbnail"
-placeholder="https://...">
-
-
-<label>Video URL</label>
-
-<input
-id="tutorial_video"
-placeholder="https://youtube.com/...">
-
-
-<label>Tutorial Content</label>
-
-<textarea
-id="tutorial_content"
-placeholder="Tutorial Content"></textarea>
-
-
-<button onclick="addTutorial()">
-Add Tutorial
-</button>
-
-</div>
-
-
-<!-- TUTORIAL LIST -->
-
-<div class="card">
-
-<h2>Existing Tutorials</h2>
-
-<div id="tutorialList">
-Loading...
-</div>
-
-</div>
-
-</section>
+    </div>
 
 </div>
 
 
 <script>
 
-/* SUPABASE */
-
 const SUPABASE_URL =
 "https://wxqstcpjlzqdsgmovkey.supabase.co";
 
-const SUPABASE_KEY =
+const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
 
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const supabase =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
 );
 
-let settingsId=null;
+
+let settingsRow = null;
+let otherSocials = [];
 
 
-/* STATUS */
-
-function showStatus(id,message){
-
-const box=document.getElementById(id);
-
-box.textContent=message;
-
-box.classList.add("show");
-
+function $(id){
+    return document.getElementById(id);
 }
 
 
-/* LOGIN */
-
-async function login(){
-
-const email=
-document.getElementById("email").value.trim();
-
-const password=
-document.getElementById("password").value;
-
-if(!email || !password){
-
-showStatus(
-"loginStatus",
-"Email এবং Password দিন।"
-);
-
-return;
+function status(id,message){
+    if($(id)){
+        $(id).textContent = message;
+    }
 }
 
 
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
+/* =========================
+   LOGIN
+========================= */
 
-email:email,
-password:password
+$("loginBtn").onclick = async function(){
 
-});
+    const email = $("loginEmail").value.trim();
+    const password = $("loginPassword").value;
+
+    if(!email || !password){
+        status("loginStatus","Please enter email and password.");
+        return;
+    }
+
+    status("loginStatus","Signing in...");
+
+    const {data,error} =
+        await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+
+    if(error){
+        status("loginStatus",error.message);
+        return;
+    }
+
+    await checkAdmin(data.user);
+};
 
 
-if(error){
+async function checkAdmin(user){
 
-showStatus(
-"loginStatus",
-"Login হয়নি: "+error.message
-);
+    if(!user){
+        return;
+    }
 
-return;
+    const {data:admin,error} =
+        await supabase
+        .from("admins")
+        .select("user_id")
+        .eq("user_id",user.id)
+        .maybeSingle();
+
+    if(error){
+        status("loginStatus",error.message);
+        return;
+    }
+
+    if(!admin){
+
+        status(
+            "loginStatus",
+            "This account is not authorized as an administrator."
+        );
+
+        await supabase.auth.signOut();
+        return;
+    }
+
+    $("loginSection").classList.add("hidden");
+    $("adminSection").classList.remove("hidden");
+
+    await loadSettings();
+    await loadTutorials();
 }
 
 
-if(data.user){
+/* =========================
+   LOGOUT
+========================= */
 
-await checkAdmin(
-data.user.id
-);
+$("logoutBtn").onclick = async function(){
 
-}
+    await supabase.auth.signOut();
 
-}
+    $("adminSection").classList.add("hidden");
+    $("loginSection").classList.remove("hidden");
 
+    $("loginPassword").value = "";
 
-/* ADMIN CHECK */
-
-async function checkAdmin(userId){
-
-const {data,error}=
-await supabaseClient
-.from("admins")
-.select("user_id")
-.eq("user_id",userId)
-.maybeSingle();
+};
 
 
-if(error){
-
-showStatus(
-"loginStatus",
-"Admin check error: "+error.message
-);
-
-await supabaseClient.auth.signOut();
-
-return;
-}
-
-
-if(!data){
-
-showStatus(
-"loginStatus",
-"এই account Admin হিসেবে অনুমোদিত নয়।"
-);
-
-await supabaseClient.auth.signOut();
-
-return;
-}
-
-
-document.getElementById("loginSection")
-.style.display="none";
-
-document.getElementById("adminSection")
-.style.display="block";
-
-document.getElementById("logoutBtn")
-.style.display="block";
-
-
-await loadSettings();
-
-await loadTutorials();
-
-}
-
-
-/* LOAD SETTINGS */
+/* =========================
+   LOAD SETTINGS
+========================= */
 
 async function loadSettings(){
 
-const {data,error}=
-await supabaseClient
-.from("site_settings")
-.select("*")
-.limit(1)
-.maybeSingle();
+    const {data,error} =
+        await supabase
+        .from("site_settings")
+        .select("*")
+        .order("id",{ascending:true})
+        .limit(1)
+        .maybeSingle();
 
+    if(error){
+        console.log(error);
+        return;
+    }
 
-if(error){
+    settingsRow = data;
 
-showStatus(
-"adminStatus",
-"Settings load হয়নি: "+error.message
-);
+    if(!data){
+        return;
+    }
 
-return;
+    $("site_name").value =
+        data.site_name || "";
+
+    $("hero_intro").value =
+        data.hero_intro || "";
+
+    $("about_text").value =
+        data.about_text || "";
+
+    $("whatsapp_number").value =
+        data.whatsapp_number ||
+        data.whatsapp ||
+        "";
+
+    $("contact_number").value =
+        data.contact_number || "";
+
+    $("telegram_personal").value =
+        data.telegram_personal || "";
+
+    $("tiktok").value =
+        data.tiktok || "";
+
+    $("telegram_social").value =
+        data.telegram_social || "";
+
+    $("instagram").value =
+        data.instagram || "";
+
+    $("twitter").value =
+        data.twitter || "";
+
+    $("youtube").value =
+        data.youtube || "";
+
+    $("facebook").value =
+        data.facebook || "";
+
+    $("members_count").value =
+        data.members_count ?? 1000000;
+
+    $("online_count").value =
+        data.online_count ?? 0;
+
+    $("learning_count").value =
+        data.learning_count ?? 0;
+
+    if(data.other_social){
+        try{
+            otherSocials =
+                typeof data.other_social === "string"
+                ? JSON.parse(data.other_social)
+                : data.other_social;
+        }catch(e){
+            otherSocials = [];
+        }
+    }
+
+    renderOtherSocials();
+
 }
 
 
-if(!data)return;
+/* =========================
+   SAVE WEBSITE
+========================= */
 
-settingsId=data.id;
+$("saveWebsite").onclick = async function(){
 
+    if(!settingsRow?.id){
+        status(
+            "websiteStatus",
+            "Website settings row was not found."
+        );
+        return;
+    }
 
-document.getElementById("site_name").value=
-data.site_name||"";
+    const update = {
+        site_name:$("site_name").value.trim(),
+        hero_intro:$("hero_intro").value.trim(),
+        about_text:$("about_text").value.trim()
+    };
 
-document.getElementById("logo_url").value=
-data.logo_url||"";
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
 
-document.getElementById("profile_image_url").value=
-data.profile_image_url||"";
+    if(error){
+        status("websiteStatus",error.message);
+        return;
+    }
 
-document.getElementById("about_text").value=
-data.about_text||"";
+    status(
+        "websiteStatus",
+        "Website settings saved successfully."
+    );
 
-document.getElementById("whatsapp").value=
-data.whatsapp||"";
-
-document.getElementById("contact_number").value=
-data.contact_number||"";
-
-document.getElementById("telegram_personal").value=
-data.telegram_personal||"";
-
-document.getElementById("telegram_group").value=
-data.telegram_group||"";
-
-document.getElementById("telegram_channel").value=
-data.telegram_channel||"";
-
-document.getElementById("facebook").value=
-data.facebook||"";
-
-document.getElementById("youtube").value=
-data.youtube||"";
-
-document.getElementById("twitter").value=
-data.twitter||"";
-
-document.getElementById("instagram").value=
-data.instagram||"";
-
-}
+    await loadSettings();
+};
 
 
-/* SAVE SETTINGS */
+/* =========================
+   SAVE CONTACT
+========================= */
 
-async function saveSettings(){
+$("saveContact").onclick = async function(){
 
-const values={
+    if(!settingsRow?.id){
+        status(
+            "contactStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
 
-site_name:
-document.getElementById("site_name").value.trim(),
+    const whatsapp =
+        $("whatsapp_number").value.trim();
 
-logo_url:
-document.getElementById("logo_url").value.trim(),
+    const update = {
+        whatsapp_number:whatsapp,
+        whatsapp:whatsapp,
+        contact_number:
+            $("contact_number").value.trim(),
+        telegram_personal:
+            $("telegram_personal").value.trim()
+    };
 
-profile_image_url:
-document.getElementById("profile_image_url").value.trim(),
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
 
-about_text:
-document.getElementById("about_text").value.trim(),
+    if(error){
+        status("contactStatus",error.message);
+        return;
+    }
 
-whatsapp:
-document.getElementById("whatsapp").value.trim(),
+    status(
+        "contactStatus",
+        "Contact information saved successfully."
+    );
 
-contact_number:
-document.getElementById("contact_number").value.trim(),
+    await loadSettings();
+};
 
-telegram_personal:
-document.getElementById("telegram_personal").value.trim(),
 
-telegram_group:
-document.getElementById("telegram_group").value.trim(),
+/* =========================
+   OTHER SOCIAL MEDIA
+========================= */
 
-telegram_channel:
-document.getElementById("telegram_channel").value.trim(),
+$("addOther").onclick = function(){
 
-facebook:
-document.getElementById("facebook").value.trim(),
+    const platform =
+        $("other_platform").value.trim();
 
-youtube:
-document.getElementById("youtube").value.trim(),
+    const username =
+        $("other_username").value.trim();
 
-twitter:
-document.getElementById("twitter").value.trim(),
+    if(!platform || !username){
+        status(
+            "socialStatus",
+            "Enter both platform name and username/ID."
+        );
+        return;
+    }
 
-instagram:
-document.getElementById("instagram").value.trim(),
+    otherSocials.push({
+        platform,
+        username
+    });
 
-updated_at:
-new Date().toISOString()
+    $("other_platform").value = "";
+    $("other_username").value = "";
+
+    renderOtherSocials();
 
 };
 
 
-let result;
+function renderOtherSocials(){
 
-if(settingsId){
+    const box = $("otherList");
 
-result=
-await supabaseClient
-.from("site_settings")
-.update(values)
-.eq("id",settingsId);
+    box.innerHTML = "";
 
-}else{
+    otherSocials.forEach((item,index)=>{
 
-result=
-await supabaseClient
-.from("site_settings")
-.insert(values);
+        const div =
+            document.createElement("div");
 
-}
+        div.className = "social-item";
 
+        div.innerHTML = `
+            <strong>${escapeHtml(item.platform)}</strong>
+            <div>${escapeHtml(item.username)}</div>
+            <button class="remove"
+                    onclick="removeOther(${index})">
+                Remove
+            </button>
+        `;
 
-if(result.error){
+        box.appendChild(div);
 
-showStatus(
-"adminStatus",
-"Save হয়নি: "+result.error.message
-);
-
-return;
-}
-
-
-showStatus(
-"adminStatus",
-"✅ Website Settings Save হয়েছে।"
-);
+    });
 
 }
 
 
-/* LANGUAGE */
+window.removeOther = function(index){
 
-async function saveLanguage(){
+    otherSocials.splice(index,1);
 
-const language=
-document.getElementById("language").value;
-
-
-/*
-language column না থাকলে
-settings save হবে না।
-তাই আপাতত browser/local setting রাখা হচ্ছে।
-*/
-
-localStorage.setItem(
-"site_language",
-language
-);
-
-
-showStatus(
-"adminStatus",
-language==="bn"
-?"🇧🇩 বাংলা Language selected."
-:"🇬🇧 English Language selected."
-);
-
-}
-
-
-/* ADD TUTORIAL */
-
-async function addTutorial(){
-
-const title=
-document.getElementById("tutorial_title")
-.value.trim();
-
-
-if(!title){
-
-showStatus(
-"adminStatus",
-"Tutorial Title দিন।"
-);
-
-return;
-}
-
-
-const tutorial={
-
-title:title,
-
-description:
-document.getElementById("tutorial_description")
-.value.trim(),
-
-thumbnail_url:
-document.getElementById("tutorial_thumbnail")
-.value.trim(),
-
-video_url:
-document.getElementById("tutorial_video")
-.value.trim(),
-
-content:
-document.getElementById("tutorial_content")
-.value.trim(),
-
-published:true
+    renderOtherSocials();
 
 };
 
 
-const {error}=
-await supabaseClient
-.from("tutorials")
-.insert(tutorial);
+/* =========================
+   SAVE SOCIAL MEDIA
+========================= */
+
+$("saveSocial").onclick = async function(){
+
+    if(!settingsRow?.id){
+        status(
+            "socialStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
+
+    const update = {
+
+        tiktok:
+            $("tiktok").value.trim(),
+
+        telegram_social:
+            $("telegram_social").value.trim(),
+
+        instagram:
+            $("instagram").value.trim(),
+
+        twitter:
+            $("twitter").value.trim(),
+
+        youtube:
+            $("youtube").value.trim(),
+
+        facebook:
+            $("facebook").value.trim(),
+
+        other_social:
+            JSON.stringify(otherSocials)
+
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("socialStatus",error.message);
+        return;
+    }
+
+    status(
+        "socialStatus",
+        "Social media settings saved successfully."
+    );
+
+    await loadSettings();
+};
 
 
-if(error){
+/* =========================
+   SAVE STATISTICS
+========================= */
 
-showStatus(
-"adminStatus",
-"Tutorial add হয়নি: "+error.message
-);
+$("saveStats").onclick = async function(){
 
-return;
-}
+    if(!settingsRow?.id){
+        status(
+            "statsStatus",
+            "Settings row was not found."
+        );
+        return;
+    }
+
+    const update = {
+
+        members_count:
+            Number($("members_count").value) || 0,
+
+        online_count:
+            Number($("online_count").value) || 0,
+
+        learning_count:
+            Number($("learning_count").value) || 0
+
+    };
+
+    const {error} =
+        await supabase
+        .from("site_settings")
+        .update(update)
+        .eq("id",settingsRow.id);
+
+    if(error){
+        status("statsStatus",error.message);
+        return;
+    }
+
+    status(
+        "statsStatus",
+        "Community statistics saved successfully."
+    );
+
+    await loadSettings();
+};
 
 
-document.getElementById("tutorial_title").value="";
-document.getElementById("tutorial_description").value="";
-document.getElementById("tutorial_thumbnail").value="";
-document.getElementById("tutorial_video").value="";
-document.getElementById("tutorial_content").value="";
+/* =========================
+   TUTORIALS
+========================= */
+
+$("addTutorial").onclick = async function(){
+
+    const title =
+        $("tutorial_title").value.trim();
+
+    const category =
+        $("tutorial_category").value.trim();
+
+    const description =
+        $("tutorial_description").value.trim();
+
+    const content =
+        $("tutorial_content").value.trim();
+
+    if(!title){
+        status(
+            "tutorialStatus",
+            "Tutorial title is required."
+        );
+        return;
+    }
+
+    const insert = {
+
+        title,
+        category,
+        description,
+        content,
+        thumbnail_url:"",
+        video_url:"",
+        published:true,
+        featured:false
+
+    };
+
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .insert(insert);
+
+    if(error){
+        status("tutorialStatus",error.message);
+        return;
+    }
+
+    status(
+        "tutorialStatus",
+        "Tutorial added successfully."
+    );
+
+    $("tutorial_title").value = "";
+    $("tutorial_category").value = "";
+    $("tutorial_description").value = "";
+    $("tutorial_content").value = "";
+    $("tutorial_thumbnail").value = "";
+    $("tutorial_video").value = "";
+
+    await loadTutorials();
+
+};
 
 
-showStatus(
-"adminStatus",
-"✅ Tutorial সফলভাবে Add হয়েছে।"
-);
-
-
-await loadTutorials();
-
-}
-
-
-/* LOAD TUTORIALS */
+/* =========================
+   LOAD TUTORIALS
+========================= */
 
 async function loadTutorials(){
 
-const box=
-document.getElementById("tutorialList");
+    const {data,error} =
+        await supabase
+        .from("tutorials")
+        .select("*")
+        .order("id",{ascending:false});
 
+    if(error){
+        console.log(error);
+        return;
+    }
 
-const {data,error}=
-await supabaseClient
-.from("tutorials")
-.select("*")
-.order("created_at",{ascending:false});
+    const box = $("tutorialList");
 
+    box.innerHTML = "";
 
-if(error){
+    if(!data || data.length === 0){
 
-box.innerHTML=
-"Tutorial load হয়নি: "+
-escapeHtml(error.message);
+        box.innerHTML =
+            `<div class="status">
+                No tutorials found.
+            </div>`;
 
-return;
-}
+        return;
+    }
 
+    data.forEach(t=>{
 
-if(!data || data.length===0){
+        const div =
+            document.createElement("div");
 
-box.innerHTML=
-'<p class="small">এখনো কোনো Tutorial নেই।</p>';
+        div.className = "tutorial";
 
-return;
-}
+        div.innerHTML = `
+            <strong>${escapeHtml(t.title || "Untitled Tutorial")}</strong>
 
+            <div class="small">
+                Category:
+                ${escapeHtml(t.category || "General")}
+            </div>
 
-box.innerHTML="";
+            <p>
+                ${escapeHtml(t.description || "")}
+            </p>
 
+            <div class="row">
 
-data.forEach(item=>{
+                <button class="btn secondary"
+                        onclick="toggleTutorial(${t.id},${t.published ? "false" : "true"})">
+                    ${t.published ? "Unpublish" : "Publish"}
+                </button>
 
-const div=
-document.createElement("div");
+                <button class="btn danger"
+                        onclick="deleteTutorial(${t.id})">
+                    Delete
+                </button>
 
-div.className="tutorial";
+            </div>
+        `;
 
+        box.appendChild(div);
 
-div.innerHTML=`
-
-<h3>${escapeHtml(item.title)}</h3>
-
-<p class="small">
-${item.published?"Published":"Hidden"}
-</p>
-
-${
-item.description
-?`<p>${escapeHtml(item.description)}</p>`
-:""
-}
-
-<button
-class="danger"
-onclick="deleteTutorial(${item.id})">
-Delete
-</button>
-
-`;
-
-
-box.appendChild(div);
-
-});
+    });
 
 }
 
 
-/* DELETE */
+window.toggleTutorial = async function(id,value){
 
-async function deleteTutorial(id){
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .update({
+            published:value
+        })
+        .eq("id",id);
 
-if(!confirm(
-"এই Tutorial Delete করবেন?"
-))return;
+    if(error){
+        alert(error.message);
+        return;
+    }
 
+    await loadTutorials();
 
-const {error}=
-await supabaseClient
-.from("tutorials")
-.delete()
-.eq("id",id);
-
-
-if(error){
-
-showStatus(
-"adminStatus",
-"Delete হয়নি: "+error.message
-);
-
-return;
-}
+};
 
 
-showStatus(
-"adminStatus",
-"✅ Tutorial Delete হয়েছে।"
-);
+window.deleteTutorial = async function(id){
+
+    const ok =
+        confirm(
+            "Are you sure you want to delete this tutorial?"
+        );
+
+    if(!ok){
+        return;
+    }
+
+    const {error} =
+        await supabase
+        .from("tutorials")
+        .delete()
+        .eq("id",id);
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    await loadTutorials();
+
+};
 
 
-await loadTutorials();
-
-}
-
-
-/* LOGOUT */
-
-async function logout(){
-
-await supabaseClient.auth.signOut();
-
-document.getElementById("adminSection")
-.style.display="none";
-
-document.getElementById("loginSection")
-.style.display="block";
-
-document.getElementById("logoutBtn")
-.style.display="none";
-
-document.getElementById("password").value="";
-
-}
-
-
-/* ESCAPE */
+/* =========================
+   SECURITY HELPERS
+========================= */
 
 function escapeHtml(value){
 
-return String(value||"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* EXISTING SESSION */
+/* =========================
+   SESSION CHECK
+========================= */
 
-async function start(){
+async function checkSession(){
 
-const {data}=
-await supabaseClient.auth.getSession();
+    const {data} =
+        await supabase.auth.getSession();
 
-if(data && data.session){
+    if(data.session?.user){
 
-await checkAdmin(
-data.session.user.id
-);
+        await checkAdmin(data.session.user);
+
+    }
 
 }
 
-}
 
-start();
+checkSession();
 
 </script>
 
 </body>
-  </html>
+</html>
