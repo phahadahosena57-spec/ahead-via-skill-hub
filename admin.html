@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHEAD VIA SKILL HUB - Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#050b16;
+color:#fff;
+}
+
+header{
+background:#0b1628;
+border-bottom:1px solid #203452;
+padding:16px;
+}
+
+.header{
+max-width:1000px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.brand{
+color:#38bdf8;
+font-weight:800;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:25px 15px 50px;
+}
+
+.card{
+background:#0d1b2e;
+border:1px solid #203452;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+}
+
+h1,h2,h3{margin-top:0}
+h2,h3{color:#38bdf8}
+
+label{
+display:block;
+color:#b8c6d8;
+font-size:14px;
+margin:12px 0 6px;
+}
+
+input,textarea,select{
+width:100%;
+padding:13px;
+border-radius:10px;
+border:1px solid #29415f;
+background:#07111f;
+color:white;
+outline:none;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+select{
+cursor:pointer;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+button{
+border:0;
+border-radius:10px;
+padding:12px 16px;
+color:white;
+font-weight:700;
+cursor:pointer;
+margin-top:12px;
+background:linear-gradient(135deg,#38bdf8,#8b5cf6);
+}
+
+.secondary{
+background:#17283e;
+}
+
+.danger{
+background:#9f1239;
+}
+
+.status{
+display:none;
+padding:12px;
+margin:12px 0;
+border-radius:10px;
+background:#132640;
+color:#e4eef9;
+}
+
+.status.show{
+display:block;
+}
+
+#adminSection{
+display:none;
+}
+
+.tutorial{
+border:1px solid #29415f;
+border-radius:14px;
+padding:16px;
+margin-top:12px;
+}
+
+.small{
+color:#91a4bb;
+font-size:13px;
+}
+
+hr{
+border:0;
+border-top:1px solid #203452;
+margin:28px 0;
+}
+
+@media(max-width:700px){
+.grid{
+grid-template-columns:1fr;
+}
+.full{
+grid-column:auto;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header">
+
+<div class="brand">
+AHEAD VIA SKILL HUB — ADMIN
+</div>
+
+<button id="logoutBtn"
+class="secondary"
+style="display:none"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+</header>
+
+
+<div class="container">
+
+<!-- LOGIN -->
+
+<section id="loginSection" class="card">
+
+<h1>Admin Login</h1>
+
+<p class="small">
+শুধুমাত্র অনুমোদিত Admin account দিয়ে প্রবেশ করুন।
+</p>
+
+<div id="loginStatus" class="status"></div>
+
+<label>Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="Admin Email"
+autocomplete="email">
+
+
+<label>Password</label>
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+autocomplete="current-password">
+
+
+<button onclick="login()">
+Login
+</button>
+
+</section>
+
+
+<!-- ADMIN PANEL -->
+
+<section id="adminSection">
+
+<div class="card">
+
+<h1>Admin Panel</h1>
+
+<p class="small">
+এখান থেকে Website-এর তথ্য পরিবর্তন করতে পারবেন।
+</p>
+
+<div id="adminStatus" class="status"></div>
+
+</div>
+
+
+<!-- LANGUAGE -->
+
+<div class="card">
+
+<h2>Website Language</h2>
+
+<label>Choose Language</label>
+
+<select id="language">
+
+<option value="bn">
+🇧🇩 বাংলা
+</option>
+
+<option value="en">
+🇬🇧 English
+</option>
+
+</select>
+
+<button onclick="saveLanguage()">
+Save Language
+</button>
+
+</div>
+
+
+<!-- WEBSITE SETTINGS -->
+
+<div class="card">
+
+<h2>Website Settings</h2>
+
+<div class="grid">
+
+<div class="full">
+
+<label>Website Name</label>
+
+<input
+id="site_name"
+placeholder="AHEAD VIA SKILL HUB">
+
+</div>
+
+
+<div class="full">
+
+<label>Logo Image URL</label>
+
+<input
+id="logo_url"
+placeholder="https://...">
+
+</div>
+
+
+<div class="full">
+
+<label>Profile Image URL</label>
+
+<input
+id="profile_image_url"
+placeholder="https://...">
+
+</div>
+
+
+<div class="full">
+
+<label>About / Who I Am / What I Do</label>
+
+<textarea
+id="about_text"
+placeholder="আপনার সম্পর্কে লিখুন..."></textarea>
+
+</div>
+
+
+<div>
+
+<label>WhatsApp Number</label>
+
+<input
+id="whatsapp"
+placeholder="8801XXXXXXXXX">
+
+</div>
+
+
+<div>
+
+<label>Contact Number</label>
+
+<input
+id="contact_number"
+placeholder="+8801XXXXXXXXX">
+
+</div>
+
+
+<div>
+
+<label>Telegram Personal</label>
+
+<input
+id="telegram_personal"
+placeholder="https://t.me/username">
+
+</div>
+
+
+<div>
+
+<label>Telegram Group</label>
+
+<input
+id="telegram_group"
+placeholder="https://t.me/group">
+
+</div>
+
+
+<div>
+
+<label>Telegram Channel</label>
+
+<input
+id="telegram_channel"
+placeholder="https://t.me/channel">
+
+</div>
+
+
+<div>
+
+<label>Facebook</label>
+
+<input
+id="facebook"
+placeholder="https://facebook.com/...">
+
+</div>
+
+
+<div>
+
+<label>YouTube</label>
+
+<input
+id="youtube"
+placeholder="https://youtube.com/...">
+
+</div>
+
+
+<div>
+
+<label>Twitter / X</label>
+
+<input
+id="twitter"
+placeholder="https://x.com/...">
+
+</div>
+
+
+<div>
+
+<label>Instagram</label>
+
+<input
+id="instagram"
+placeholder="https://instagram.com/...">
+
+</div>
+
+</div>
+
+
+<button onclick="saveSettings()">
+Save Website Settings
+</button>
+
+</div>
+
+
+<!-- TUTORIAL -->
+
+<div class="card">
+
+<h2>Add Tutorial / Video</h2>
+
+<label>Title</label>
+
+<input
+id="tutorial_title"
+placeholder="Tutorial Title">
+
+
+<label>Description</label>
+
+<textarea
+id="tutorial_description"
+placeholder="Tutorial সম্পর্কে লিখুন..."></textarea>
+
+
+<label>Thumbnail Image URL</label>
+
+<input
+id="tutorial_thumbnail"
+placeholder="https://...">
+
+
+<label>Video URL</label>
+
+<input
+id="tutorial_video"
+placeholder="https://youtube.com/...">
+
+
+<label>Tutorial Content</label>
+
+<textarea
+id="tutorial_content"
+placeholder="Tutorial Content"></textarea>
+
+
+<button onclick="addTutorial()">
+Add Tutorial
+</button>
+
+</div>
+
+
+<!-- TUTORIAL LIST -->
+
+<div class="card">
+
+<h2>Existing Tutorials</h2>
+
+<div id="tutorialList">
+Loading...
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* SUPABASE */
+
+const SUPABASE_URL =
+"https://wxqstcpjlzqdsgmovkey.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_NclT-va4nSEGCTUfUnVe3A_eizbM8vt";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let settingsId=null;
+
+
+/* STATUS */
+
+function showStatus(id,message){
+
+const box=document.getElementById(id);
+
+box.textContent=message;
+
+box.classList.add("show");
+
+}
+
+
+/* LOGIN */
+
+async function login(){
+
+const email=
+document.getElementById("email").value.trim();
+
+const password=
+document.getElementById("password").value;
+
+if(!email || !password){
+
+showStatus(
+"loginStatus",
+"Email এবং Password দিন।"
+);
+
+return;
+}
+
+
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+
+if(error){
+
+showStatus(
+"loginStatus",
+"Login হয়নি: "+error.message
+);
+
+return;
+}
+
+
+if(data.user){
+
+await checkAdmin(
+data.user.id
+);
+
+}
+
+}
+
+
+/* ADMIN CHECK */
+
+async function checkAdmin(userId){
+
+const {data,error}=
+await supabaseClient
+.from("admins")
+.select("user_id")
+.eq("user_id",userId)
+.maybeSingle();
+
+
+if(error){
+
+showStatus(
+"loginStatus",
+"Admin check error: "+error.message
+);
+
+await supabaseClient.auth.signOut();
+
+return;
+}
+
+
+if(!data){
+
+showStatus(
+"loginStatus",
+"এই account Admin হিসেবে অনুমোদিত নয়।"
+);
+
+await supabaseClient.auth.signOut();
+
+return;
+}
+
+
+document.getElementById("loginSection")
+.style.display="none";
+
+document.getElementById("adminSection")
+.style.display="block";
+
+document.getElementById("logoutBtn")
+.style.display="block";
+
+
+await loadSettings();
+
+await loadTutorials();
+
+}
+
+
+/* LOAD SETTINGS */
+
+async function loadSettings(){
+
+const {data,error}=
+await supabaseClient
+.from("site_settings")
+.select("*")
+.limit(1)
+.maybeSingle();
+
+
+if(error){
+
+showStatus(
+"adminStatus",
+"Settings load হয়নি: "+error.message
+);
+
+return;
+}
+
+
+if(!data)return;
+
+settingsId=data.id;
+
+
+document.getElementById("site_name").value=
+data.site_name||"";
+
+document.getElementById("logo_url").value=
+data.logo_url||"";
+
+document.getElementById("profile_image_url").value=
+data.profile_image_url||"";
+
+document.getElementById("about_text").value=
+data.about_text||"";
+
+document.getElementById("whatsapp").value=
+data.whatsapp||"";
+
+document.getElementById("contact_number").value=
+data.contact_number||"";
+
+document.getElementById("telegram_personal").value=
+data.telegram_personal||"";
+
+document.getElementById("telegram_group").value=
+data.telegram_group||"";
+
+document.getElementById("telegram_channel").value=
+data.telegram_channel||"";
+
+document.getElementById("facebook").value=
+data.facebook||"";
+
+document.getElementById("youtube").value=
+data.youtube||"";
+
+document.getElementById("twitter").value=
+data.twitter||"";
+
+document.getElementById("instagram").value=
+data.instagram||"";
+
+}
+
+
+/* SAVE SETTINGS */
+
+async function saveSettings(){
+
+const values={
+
+site_name:
+document.getElementById("site_name").value.trim(),
+
+logo_url:
+document.getElementById("logo_url").value.trim(),
+
+profile_image_url:
+document.getElementById("profile_image_url").value.trim(),
+
+about_text:
+document.getElementById("about_text").value.trim(),
+
+whatsapp:
+document.getElementById("whatsapp").value.trim(),
+
+contact_number:
+document.getElementById("contact_number").value.trim(),
+
+telegram_personal:
+document.getElementById("telegram_personal").value.trim(),
+
+telegram_group:
+document.getElementById("telegram_group").value.trim(),
+
+telegram_channel:
+document.getElementById("telegram_channel").value.trim(),
+
+facebook:
+document.getElementById("facebook").value.trim(),
+
+youtube:
+document.getElementById("youtube").value.trim(),
+
+twitter:
+document.getElementById("twitter").value.trim(),
+
+instagram:
+document.getElementById("instagram").value.trim(),
+
+updated_at:
+new Date().toISOString()
+
+};
+
+
+let result;
+
+if(settingsId){
+
+result=
+await supabaseClient
+.from("site_settings")
+.update(values)
+.eq("id",settingsId);
+
+}else{
+
+result=
+await supabaseClient
+.from("site_settings")
+.insert(values);
+
+}
+
+
+if(result.error){
+
+showStatus(
+"adminStatus",
+"Save হয়নি: "+result.error.message
+);
+
+return;
+}
+
+
+showStatus(
+"adminStatus",
+"✅ Website Settings Save হয়েছে।"
+);
+
+}
+
+
+/* LANGUAGE */
+
+async function saveLanguage(){
+
+const language=
+document.getElementById("language").value;
+
+
+/*
+language column না থাকলে
+settings save হবে না।
+তাই আপাতত browser/local setting রাখা হচ্ছে।
+*/
+
+localStorage.setItem(
+"site_language",
+language
+);
+
+
+showStatus(
+"adminStatus",
+language==="bn"
+?"🇧🇩 বাংলা Language selected."
+:"🇬🇧 English Language selected."
+);
+
+}
+
+
+/* ADD TUTORIAL */
+
+async function addTutorial(){
+
+const title=
+document.getElementById("tutorial_title")
+.value.trim();
+
+
+if(!title){
+
+showStatus(
+"adminStatus",
+"Tutorial Title দিন।"
+);
+
+return;
+}
+
+
+const tutorial={
+
+title:title,
+
+description:
+document.getElementById("tutorial_description")
+.value.trim(),
+
+thumbnail_url:
+document.getElementById("tutorial_thumbnail")
+.value.trim(),
+
+video_url:
+document.getElementById("tutorial_video")
+.value.trim(),
+
+content:
+document.getElementById("tutorial_content")
+.value.trim(),
+
+published:true
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("tutorials")
+.insert(tutorial);
+
+
+if(error){
+
+showStatus(
+"adminStatus",
+"Tutorial add হয়নি: "+error.message
+);
+
+return;
+}
+
+
+document.getElementById("tutorial_title").value="";
+document.getElementById("tutorial_description").value="";
+document.getElementById("tutorial_thumbnail").value="";
+document.getElementById("tutorial_video").value="";
+document.getElementById("tutorial_content").value="";
+
+
+showStatus(
+"adminStatus",
+"✅ Tutorial সফলভাবে Add হয়েছে।"
+);
+
+
+await loadTutorials();
+
+}
+
+
+/* LOAD TUTORIALS */
+
+async function loadTutorials(){
+
+const box=
+document.getElementById("tutorialList");
+
+
+const {data,error}=
+await supabaseClient
+.from("tutorials")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(error){
+
+box.innerHTML=
+"Tutorial load হয়নি: "+
+escapeHtml(error.message);
+
+return;
+}
+
+
+if(!data || data.length===0){
+
+box.innerHTML=
+'<p class="small">এখনো কোনো Tutorial নেই।</p>';
+
+return;
+}
+
+
+box.innerHTML="";
+
+
+data.forEach(item=>{
+
+const div=
+document.createElement("div");
+
+div.className="tutorial";
+
+
+div.innerHTML=`
+
+<h3>${escapeHtml(item.title)}</h3>
+
+<p class="small">
+${item.published?"Published":"Hidden"}
+</p>
+
+${
+item.description
+?`<p>${escapeHtml(item.description)}</p>`
+:""
+}
+
+<button
+class="danger"
+onclick="deleteTutorial(${item.id})">
+Delete
+</button>
+
+`;
+
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* DELETE */
+
+async function deleteTutorial(id){
+
+if(!confirm(
+"এই Tutorial Delete করবেন?"
+))return;
+
+
+const {error}=
+await supabaseClient
+.from("tutorials")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+showStatus(
+"adminStatus",
+"Delete হয়নি: "+error.message
+);
+
+return;
+}
+
+
+showStatus(
+"adminStatus",
+"✅ Tutorial Delete হয়েছে।"
+);
+
+
+await loadTutorials();
+
+}
+
+
+/* LOGOUT */
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+document.getElementById("adminSection")
+.style.display="none";
+
+document.getElementById("loginSection")
+.style.display="block";
+
+document.getElementById("logoutBtn")
+.style.display="none";
+
+document.getElementById("password").value="";
+
+}
+
+
+/* ESCAPE */
+
+function escapeHtml(value){
+
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* EXISTING SESSION */
+
+async function start(){
+
+const {data}=
+await supabaseClient.auth.getSession();
+
+if(data && data.session){
+
+await checkAdmin(
+data.session.user.id
+);
+
+}
+
+}
+
+start();
+
+</script>
+
+</body>
+  </html>
